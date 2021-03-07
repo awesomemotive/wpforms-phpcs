@@ -20,6 +20,7 @@ class EmptyLineAfterFunctionDeclarationTest extends TestCase {
 	public function test_process() {
 
 		$phpcsFile = $this->process( new EmptyLineAfterFunctionDeclarationSniff() );
+
 		$this->fileHasErrors( $phpcsFile, 'AddEmptyLineAfterFunctionDeclaration', [ 71, 82, 98, 109 ] );
 	}
 }

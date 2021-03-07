@@ -20,6 +20,7 @@ class EmptyLineAfterAssigmentVariablesTest extends TestCase {
 	public function test_process() {
 
 		$phpcsFile = $this->process( new EmptyLineAfterAssigmentVariablesSniff() );
+
 		$this->fileHasErrors( $phpcsFile, 'AddEmptyLine', [ 106, 122, 128, 134 ] );
 	}
 }
