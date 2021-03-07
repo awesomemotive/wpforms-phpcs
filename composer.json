@@ -1,0 +1,25 @@
+{
+	"name": "awesomemotive/wpforms-phpcs",
+	"description": "A set of phpcs sniffs for the WPForms.",
+	"type": "phpcodesniffer-standard",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "WPPunk",
+			"email": "i@wp-punk.com"
+		}
+	],
+	"require": {},
+	"require-dev": {
+		"squizlabs/php_codesniffer": "^3.5",
+		"phpunit/phpunit": "^4.0 || ^5.0 || ^6.0 || ^7.0"
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"WPForms\\": "WPForms/"
+		}
+	},
+	"scripts": {
+		"unit": "vendor/bin/phpunit --configuration ./WPForms/Tests/phpunit.xml"
+	}
+}
