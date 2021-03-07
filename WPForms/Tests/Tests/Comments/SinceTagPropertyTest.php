@@ -3,14 +3,14 @@
 namespace WPForms\Tests\Comments;
 
 use WPForms\Tests\TestCase;
-use WPForms\Sniffs\Comments\SinceTagPropertiesSniff;
+use WPForms\Sniffs\Comments\SinceTagPropertySniff;
 
 /**
  * Class SinceTagPropertiesTest.
  *
  * @since 1.0.0
  */
-class SinceTagPropertiesTest extends TestCase {
+class SinceTagPropertyTest extends TestCase {
 
 	/**
 	 * Test process.
@@ -19,7 +19,7 @@ class SinceTagPropertiesTest extends TestCase {
 	 */
 	public function test_process() {
 
-		$phpcsFile = $this->process( new SinceTagPropertiesSniff() );
+		$phpcsFile = $this->process( new SinceTagPropertySniff() );
 
 		$this->fileHasErrors( $phpcsFile, 'MissingPhpDoc', [ 125, 132 ] );
 		$this->fileHasErrors( $phpcsFile, 'MissingSinceVersion', [ 83, 92 ] );

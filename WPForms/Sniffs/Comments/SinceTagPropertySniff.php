@@ -12,7 +12,7 @@ use WPForms\Sniffs\PropertyBaseSniff;
  *
  * @since 1.0.0
  */
-class SinceTagPropertiesSniff extends PropertyBaseSniff {
+class SinceTagPropertySniff extends PropertyBaseSniff {
 
 	use Version;
 	use CommentTag;
