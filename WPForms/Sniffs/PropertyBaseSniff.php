@@ -8,14 +8,14 @@ use PHP_CodeSniffer\Sniffs\AbstractVariableSniff;
 /**
  * Class BaseSniff.
  *
- * @since 1.2.0
+ * @since 1.0.0
  */
 abstract class PropertyBaseSniff extends AbstractVariableSniff {
 
 	/**
 	 * Called to process normal member vars.
 	 *
-	 * @since 1.2.0
+	 * @since 1.0.0
 	 *
 	 * @param File $phpcsFile The PHP_CodeSniffer file where this token was found.
 	 * @param int  $stackPtr  The position where the token was found.
@@ -34,7 +34,7 @@ abstract class PropertyBaseSniff extends AbstractVariableSniff {
 	 * Note that there may be more than one variable in the string, which will
 	 * result only in one call for the string or one call per line for heredocs.
 	 *
-	 * @since 1.2.0
+	 * @since 1.0.0
 	 *
 	 * @param File $phpcsFile The PHP_CodeSniffer file where this token was found.
 	 * @param int  $stackPtr  The position where the double quoted string was found.

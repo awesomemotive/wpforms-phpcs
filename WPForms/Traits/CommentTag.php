@@ -5,14 +5,14 @@ namespace WPForms\Traits;
 /**
  * Trait CommentTag.
  *
- * @since 1.2.0
+ * @since 1.0.0
  */
 trait CommentTag {
 
 	/**
 	 * Find tag in PHPDoc.
 	 *
-	 * @since 1.2.0
+	 * @since 1.0.0
 	 *
 	 * @param string $tag           Tag name.
 	 * @param int    $comment_start PHPDoc start position.
@@ -39,7 +39,7 @@ trait CommentTag {
 	/**
 	 * Has Empty Line after tag in this comment.
 	 *
-	 * @since 1.2.0
+	 * @since 1.0.0
 	 *
 	 * @param array $tag    Tag information.
 	 * @param array $tokens List of tokens.
@@ -56,7 +56,7 @@ trait CommentTag {
 	/**
 	 * Is last tag.
 	 *
-	 * @since 1.2.0
+	 * @since 1.0.0
 	 *
 	 * @param array $tag    Tag information.
 	 * @param array $tokens List of tokens.

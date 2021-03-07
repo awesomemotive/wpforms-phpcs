@@ -2,7 +2,7 @@
 /**
  * Valid function.
  *
- * @since 1.2.0
+ * @since 1.0.0
  *
  * @return int
  */
@@ -18,7 +18,7 @@ function valid() {
 /**
  * Valid function.
  *
- * @since 1.2.0
+ * @since 1.0.0
  *
  * @return array
  */
@@ -37,7 +37,7 @@ function valid2() {
 /**
  * Valid function.
  *
- * @since 1.2.0
+ * @since 1.0.0
  */
 function valid3() {
 
@@ -64,7 +64,7 @@ for ( $i = gmdate( 'y' ); $i < 50; $i++ ) {
 /**
  * Valid function.
  *
- * @since 1.2.0
+ * @since 1.0.0
  *
  * @param string $arg Argument 1.
  */
@@ -97,7 +97,7 @@ $doc_link = sprintf(
 /**
  * Invalid function.
  *
- * @since 1.2.0
+ * @since 1.0.0
  *
  * @return int
  */
@@ -112,7 +112,7 @@ function invalid() {
 /**
  * Invalid function.
  *
- * @since 1.2.0
+ * @since 1.0.0
  *
  * @return int
  */

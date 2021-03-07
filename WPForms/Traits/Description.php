@@ -7,14 +7,14 @@ use PHP_CodeSniffer\Files\File;
 /**
  * Trait Description.
  *
- * @since 1.2.0
+ * @since 1.0.0
  */
 trait Description {
 
 	/**
 	 * Find first line in description.
 	 *
-	 * @since 1.2.0
+	 * @since 1.0.0
 	 *
 	 * @param File $phpcsFile     The PHP_CodeSniffer file where the token was found.
 	 * @param int  $comment_start Position of comment start.
@@ -29,7 +29,7 @@ trait Description {
 	/**
 	 * Find last line in description.
 	 *
-	 * @since 1.2.0
+	 * @since 1.0.0
 	 *
 	 * @param File  $phpcsFile              The PHP_CodeSniffer file where the token was found.
 	 * @param int   $first_description_line Position of first description line.
@@ -58,7 +58,7 @@ trait Description {
 	/**
 	 * Line has a stop symbol.
 	 *
-	 * @since 1.2.0
+	 * @since 1.0.0
 	 *
 	 * @param int   $last   Position of last line.
 	 * @param array $tokens Token stack for this file.

@@ -7,14 +7,14 @@ use PHP_CodeSniffer\Files\File;
 /**
  * Trait GetEntityName.
  *
- * @since 1.2.0
+ * @since 1.0.0
  */
 trait GetEntityName {
 
 	/**
 	 * Get entity name.
 	 *
-	 * @since 1.2.0
+	 * @since 1.0.0
 	 *
 	 * @param File  $phpcsFile The PHP_CodeSniffer file where the token was found.
 	 * @param int   $stackPtr  Current position.
@@ -35,7 +35,7 @@ trait GetEntityName {
 	/**
 	 * Get element suffix.
 	 *
-	 * @since 1.2.0
+	 * @since 1.0.0
 	 *
 	 * @param int $code Code for current element.
 	 *

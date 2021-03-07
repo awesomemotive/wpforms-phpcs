@@ -5,14 +5,14 @@ namespace WPForms\Traits;
 /**
  * Trait Version.
  *
- * @since 1.2.0
+ * @since 1.0.0
  */
 trait Version {
 
 	/**
 	 * Tag has version.
 	 *
-	 * @since 1.2.0
+	 * @since 1.0.0
 	 *
 	 * @param array $tag    Tag information.
 	 * @param array $tokens List of tokens.
@@ -29,7 +29,7 @@ trait Version {
 	/**
 	 * Is valid version.
 	 *
-	 * @since 1.2.0
+	 * @since 1.0.0
 	 *
 	 * @param array $tag    Tag information.
 	 * @param array $tokens List of tokens.
