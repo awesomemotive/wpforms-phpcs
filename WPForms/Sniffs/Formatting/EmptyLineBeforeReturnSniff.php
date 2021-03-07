@@ -2,6 +2,7 @@
 
 namespace WPForms\Sniffs\Formatting;
 
+use WPForms\Sniffs\BaseSniff;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Util\Tokens;
 use PHP_CodeSniffer\Sniffs\Sniff;
@@ -11,7 +12,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
  *
  * @since 1.0.0
  */
-class EmptyLineBeforeReturnSniff implements Sniff {
+class EmptyLineBeforeReturnSniff extends BaseSniff implements Sniff {
 
 	/**
 	 * Returns an array of tokens this test wants to listen for.
