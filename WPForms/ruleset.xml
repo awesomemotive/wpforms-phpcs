@@ -1,4 +1,106 @@
 <?xml version="1.0"?>
-<ruleset name="WPPunk">
-	<description>WPPunk standard.</description>
+<ruleset name="WPForms">
+	<description>The code standard for WPForms.</description>
+	<exclude-pattern>\.packages/*</exclude-pattern>
+	<exclude-pattern>\.vendor/*</exclude-pattern>
+	<exclude-pattern>\.codeception/*</exclude-pattern>
+	<exclude-pattern>wpforms/libs/*</exclude-pattern>
+	<arg name="colors"/>
+	<arg name="parallel" value="100"/>
+	<arg name="extensions" value="php"/>
+	<config name="installed_paths" value="../../../.vendor/wp-coding-standards/wpcs,../../../.vendor/phpcompatibility/php-compatibility"/>
+	<config name="testVersion" value="5.5-"/>
+	<config name="minimum_supported_wp_version" value="4.9"/>
+
+	<!-- Rules: Check PHP version compatibility. -->
+	<rule ref="PHPCompatibility">
+		<!-- Rules: WordPress polyfills. -->
+		<exclude name="PHPCompatibility.FunctionUse.NewFunctions.hash_equalsFound"/> <!-- @since WP 3.2.0 -->
+
+		<!-- Rules: WPForms polyfills. -->
+		<exclude name="PHPCompatibility.FunctionUse.NewFunctions.hrtimeFound"/>
+		<exclude name="PHPCompatibility.FunctionUse.NewFunctions.array_key_firstFound"/>
+		<exclude name="PHPCompatibility.FunctionUse.NewFunctions.array_key_lastFound"/>
+		<exclude name="PHPCompatibility.FunctionUse.NewFunctions.mb_ordFound"/>
+		<exclude name="PHPCompatibility.FunctionUse.NewFunctions.mb_chrFound"/>
+		<exclude name="PHPCompatibility.FunctionUse.NewFunctions.mb_scrubFound"/>
+		<exclude name="PHPCompatibility.FunctionUse.NewFunctions.mb_str_splitFound"/>
+
+		<!-- Whitelist the WP Core mysql_to_rfc3339() function. -->
+		<rule ref="PHPCompatibility.Extensions.RemovedExtensions">
+			<properties>
+				<!-- Contained in /wp-includes/functions.php. -->
+				<property name="functionWhitelist" type="array" value="mysql_to_rfc3339"/>
+			</properties>
+		</rule>
+	</rule>
+
+	<rule ref="WordPress">
+		<!-- Allow less strict indenting and spacing. -->
+		<exclude name="Generic.WhiteSpace.ScopeIndent.Incorrect"/>
+		<exclude name="Generic.WhiteSpace.ScopeIndent.IncorrectExact"/>
+		<exclude name="Generic.WhiteSpace.DisallowSpaceIndent.SpacesUsed"/>
+		<exclude name="Generic.Functions.FunctionCallArgumentSpacing"/>
+		<exclude name="WordPress.WhiteSpace.PrecisionAlignment.Found"/>
+		<!-- Don't make comment formatting quite as strict. -->
+		<exclude name="Squiz.Commenting.InlineComment.SpacingAfter"/>
+		<exclude name="Squiz.Commenting.FileComment.Missing"/>
+		<exclude name="Squiz.Commenting.FileComment.MissingPackageTag"/>
+		<exclude name="Squiz.Commenting.FileComment.SpacingAfterComment"/>
+		<exclude name="Squiz.Commenting.FileComment.WrongStyle"/>
+		<!-- Less strict enqueueing rules. -->
+		<exclude name="WordPress.WP.EnqueuedResourceParameters.NoExplicitVersion"/>
+		<exclude name="WordPress.WP.EnqueuedResourceParameters.NotInFooter"/>
+		<exclude name="WordPress.WP.EnqueuedResourceParameters.MissingVersion"/>
+		<!-- Database specific rules. -->
+		<exclude name="WordPress.DB.DirectDatabaseQuery.DirectQuery"/>
+		<!-- PSR4 yo. -->
+		<exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
+		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
+		<!-- Misc. -->
+		<exclude name="WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents"/>
+		<exclude name="WordPress.PHP.YodaConditions.NotYoda"/>
+		<exclude name="Generic.Arrays.DisallowShortArraySyntax.Found"/>
+	</rule>
+
+	<!-- Re-enable certain sniffs that were disabled by WordPress* standards. -->
+	<rule ref="Squiz.Commenting.FunctionComment.ParamCommentNotCapital">
+		<severity>5</severity>
+	</rule>
+	<rule ref="Squiz.Commenting.FunctionComment.SpacingAfterParamName">
+		<severity>5</severity>
+	</rule>
+	<rule ref="Generic.Commenting.DocComment.NonParamGroup">
+		<severity>5</severity>
+	</rule>
+	<rule ref="Generic.Arrays.DisallowLongArraySyntax.Found"/>
+
+	<rule ref="WordPress.Security.EscapeOutput">
+		<properties>
+			<property name="customEscapingFunctions" type="array">
+				<element value="wpforms_html_attributes"/>
+				<element value="wpforms_sanitize_amount"/>
+				<element value="wpforms_sanitize_array_combine"/>
+				<element value="wpforms_sanitize_classes"/>
+				<element value="wpforms_sanitize_error"/>
+				<element value="wpforms_sanitize_hex_color"/>
+				<element value="wpforms_sanitize_key"/>
+				<element value="wpforms_sanitize_textarea_field"/>
+				<element value="wpforms_sanitize_text_deeply"/>
+			</property>
+		</properties>
+	</rule>
+
+	<rule ref="Generic.Metrics.CyclomaticComplexity">
+		<properties>
+			<property name="complexity" value="6"/>
+			<property name="absoluteComplexity" value="10"/>
+		</properties>
+	</rule>
+
+	<rule ref="Generic.Metrics.NestingLevel">
+		<properties>
+			<property name="absoluteNestingLevel" value="3"/>
+		</properties>
+	</rule>
 </ruleset>
