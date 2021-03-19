@@ -12,7 +12,7 @@ jobs:
               run: composer validate
 
             - name: Install dependencies
-              run: composer install]
+              run: composer install
 
             - name: WPCS validate
               run: composer cs
