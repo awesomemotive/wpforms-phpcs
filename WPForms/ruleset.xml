@@ -8,7 +8,6 @@
 	<arg name="colors"/>
 	<arg name="parallel" value="100"/>
 	<arg name="extensions" value="php"/>
-	<config name="installed_paths" value="../../../.vendor/wp-coding-standards/wpcs,../../../.vendor/phpcompatibility/php-compatibility"/>
 	<config name="testVersion" value="5.5-"/>
 	<config name="minimum_supported_wp_version" value="4.9"/>
 
