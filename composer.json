@@ -4,6 +4,7 @@
 	"type": "phpcodesniffer-standard",
 	"license": "MIT",
 	"require": {
+		"php": "^5.6|^7.0",
 		"phpcompatibility/php-compatibility": "^9.3",
 		"squizlabs/php_codesniffer": "^3.5",
 		"wp-coding-standards/wpcs": "^2.3",
