@@ -1,0 +1,5 @@
+.github export-ignore
+WPForms/Tests export-ignore
+.gitignore export-ignore
+.phpcs.xml export-ignore
+composer.lock export-ignore
