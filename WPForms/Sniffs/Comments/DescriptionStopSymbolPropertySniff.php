@@ -51,6 +51,7 @@ class DescriptionStopSymbolPropertySniff extends PropertyBaseSniff implements Sn
 		}
 
 		$last = $this->findLastDescriptionLIne( $phpcsFile, $first_description_line, $tokens );
+
 		if ( ! $this->hasStopSymbol( $last, $tokens ) ) {
 			$phpcsFile->addError(
 				sprintf(

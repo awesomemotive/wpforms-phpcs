@@ -17,7 +17,7 @@ abstract class BaseSniff {
 	protected function log() {
 
 		foreach ( func_get_args() as $var ) {
-			echo print_r( $var, true ) . PHP_EOL;
+			echo print_r( $var, true ) . PHP_EOL; // phpcs:ignore
 		}
 	}
 }

@@ -25,6 +25,7 @@ trait GetEntityName {
 	protected function getEntityName( $phpcsFile, $stackPtr, $tokens ) {
 
 		$suffix = $this->getSuffix( $tokens[ $stackPtr ]['code'] );
+
 		if ( $tokens[ $stackPtr ]['code'] === T_CONST ) {
 			return $tokens[ $stackPtr + 2 ]['content'] . $suffix;
 		}

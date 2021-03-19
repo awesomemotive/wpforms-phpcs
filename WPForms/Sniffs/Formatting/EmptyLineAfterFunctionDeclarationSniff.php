@@ -44,11 +44,11 @@ class EmptyLineAfterFunctionDeclarationSniff extends BaseSniff implements Sniff 
 		$open_bracket = $phpcsFile->findNext( T_OPEN_CURLY_BRACKET, $stackPtr + 1 );
 		$first_line   = $phpcsFile->findNext( Tokens::$emptyTokens, $open_bracket + 1, null, true );
 
-		if ( T_CLOSE_CURLY_BRACKET === $tokens[ $first_line ]['code'] ) {
+		if ( $tokens[ $first_line ]['code'] === T_CLOSE_CURLY_BRACKET ) {
 			return;
 		}
 
-		if ( T_CLOSE_TAG === $tokens [ $first_line ]['code'] ) {
+		if ( $tokens [ $first_line ]['code'] === T_CLOSE_TAG ) {
 			$first_line = $phpcsFile->findNext( Tokens::$emptyTokens, $first_line + 1, null, true );
 		}
 

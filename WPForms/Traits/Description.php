@@ -40,12 +40,14 @@ trait Description {
 	protected function findLastDescriptionLIne( $phpcsFile, $first_description_line, $tokens ) {
 
 		$last_description_line = $first_description_line;
+
 		do {
 			$last = $phpcsFile->findNext( [ T_DOC_COMMENT_WHITESPACE, T_DOC_COMMENT_STAR ], $last_description_line + 1, null, true );
+
 			if (
-				1 !== $tokens[ $last ]['line'] - $tokens[ $last_description_line ]['line'] ||
-				T_DOC_COMMENT_TAG === $tokens[ $last ]['code'] ||
-				T_DOC_COMMENT_CLOSE_TAG === $tokens[ $last ]['code']
+				$tokens[ $last ]['line'] - $tokens[ $last_description_line ]['line'] !== 1 ||
+				$tokens[ $last ]['code'] === T_DOC_COMMENT_TAG ||
+				$tokens[ $last ]['code'] === T_DOC_COMMENT_CLOSE_TAG
 			) {
 				return $last_description_line;
 			}

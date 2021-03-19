@@ -47,26 +47,27 @@ class ConditionsYodaDisableSniff extends BaseSniff implements Sniff {
 		$before_compare = $phpcsFile->findPrevious( Tokens::$emptyTokens, ( $stackPtr - 1 ), null, true );
 		$after_compare  = $phpcsFile->findNext( Tokens::$emptyTokens, ( $stackPtr + 1 ), null, true );
 
-		if ( T_VARIABLE === $tokens[ $before_compare ]['code'] || T_CLOSE_SQUARE_BRACKET === $tokens[ $before_compare ]['code'] ) {
+		if ( in_array( $tokens[ $before_compare ]['code'], [ T_VARIABLE, T_CLOSE_SQUARE_BRACKET ], true ) ) {
 			return;
 		}
 
 		// Skip if after not variable.
-		if ( T_VARIABLE !== $tokens[ $after_compare ]['code'] ) {
+		if ( $tokens[ $after_compare ]['code'] !== T_VARIABLE ) {
 			return;
 		}
 
 		// Skip if before method.
-		if ( T_CLOSE_PARENTHESIS === $tokens[ $before_compare ]['code'] ) {
+		if ( $tokens[ $before_compare ]['code'] === T_CLOSE_PARENTHESIS ) {
 			$open_parenthesis = $phpcsFile->findPrevious( T_OPEN_PARENTHESIS, $before_compare - 1 );
 			$name             = $phpcsFile->findPrevious( Tokens::$emptyTokens, $open_parenthesis - 1, null, true );
-			if ( T_STRING === $tokens[ $name ]['code'] ) {
+
+			if ( $tokens[ $name ]['code'] === T_STRING ) {
 				return;
 			}
 		}
 
 		// Allow properties.
-		if ( T_STRING === $tokens[ $before_compare ]['code'] && T_OBJECT_OPERATOR === $tokens[ $before_compare - 1 ]['code'] ) {
+		if ( $tokens[ $before_compare ]['code'] === T_STRING && $tokens[ $before_compare - 1 ]['code'] === T_OBJECT_OPERATOR ) {
 			return;
 		}
 

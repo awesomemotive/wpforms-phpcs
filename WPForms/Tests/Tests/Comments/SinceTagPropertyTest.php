@@ -25,6 +25,6 @@ class SinceTagPropertyTest extends TestCase {
 		$this->fileHasErrors( $phpcsFile, 'MissingSinceVersion', [ 83, 92 ] );
 		$this->fileHasErrors( $phpcsFile, 'InvalidSinceVersion', [ 137, 146, 155 ] );
 		$this->fileHasErrors( $phpcsFile, 'EmptyLineBetweenSinceAndDeprecated', [ 101, 112 ] );
-		$this->fileHasErrors( $phpcsFile, 'MissingEmptyLineAfterDeprecated', [ 164 ] );
+		$this->fileHasErrors( $phpcsFile, 'MissingEmptyLineAfterSince', [ 164 ] );
 	}
 }

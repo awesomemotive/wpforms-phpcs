@@ -23,7 +23,7 @@ trait Version {
 
 		$version = $tokens[ ( $tag['tag'] + 2 ) ]['content'];
 
-		return ! empty( $version ) && T_DOC_COMMENT_STRING === $tokens[ ( $tag['tag'] + 2 ) ]['code'];
+		return ! empty( $version ) && $tokens[ ( $tag['tag'] + 2 ) ]['code'] === T_DOC_COMMENT_STRING;
 	}
 
 	/**
@@ -40,6 +40,6 @@ trait Version {
 
 		$version = $tokens[ ( $tag['tag'] + 2 ) ]['content'];
 
-		return (bool) preg_match( '/^([0-9.]+[0-9]|{VERSION})$/', $version );
+		return (bool) preg_match( '/^([\d.]+[\d]|{VERSION})$/', $version );
 	}
 }

@@ -55,15 +55,66 @@ class EmptyLineAfterAssigmentVariablesSniff extends BaseSniff implements Sniff {
 			return;
 		}
 
+		$next_line_tokens = $this->getTokenNextLine( $phpcsFile, $semicolon );
+
+		// If next line is empty line.
+		if ( empty( $next_line_tokens ) ) {
+			return;
+		}
+
+		if ( in_array( $next_line_tokens[0]['code'], $this->getAllowedTokensAfterAssigment(), true ) ) {
+			return;
+		}
+
+		$phpcsFile->addError(
+			'Add empty line after assigment statement.',
+			$stackPtr,
+			'AddEmptyLine'
+		);
+	}
+
+	/**
+	 * Get list of tokens that allowed in next line after assigment.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return array
+	 */
+	private function getAllowedTokensAfterAssigment() {
+
+		return array_merge(
+			[
+				T_CLOSE_CURLY_BRACKET,
+				T_CLOSE_TAG,
+			],
+			Tokens::$phpcsCommentTokens
+		);
+	}
+
+	/**
+	 * Get tokens in last line.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param File $phpcsFile The PHP_CodeSniffer file where the token was found.
+	 * @param int  $semicolon Semicolon position.
+	 *
+	 * @return array
+	 */
+	private function getTokenNextLine( $phpcsFile, $semicolon ) {
+
+		$tokens           = $phpcsFile->getTokens();
 		$next_line        = $tokens[ $semicolon ]['line'] + 1;
 		$next_line_tokens = [];
+		$count            = count( $tokens );
 
-		for ( $i = $semicolon; $i < count( $tokens ); $i ++ ) {
+		for ( $i = $semicolon; $i < $count; $i ++ ) {
 			if ( $tokens[ $i ]['line'] > $next_line ) {
 				break;
 			}
 
-			if ( $tokens[ $i ]['line'] !== $next_line ) {
+			// Skip current line.
+			if ( $tokens[ $i ]['line'] !== $next_line || in_array( $tokens[ $i ]['code'], Tokens::$emptyTokens, true ) ) {
 				continue;
 			}
 
@@ -75,41 +126,12 @@ class EmptyLineAfterAssigmentVariablesSniff extends BaseSniff implements Sniff {
 
 			// Skip if it next line is also assignment statement.
 			if ( in_array( $tokens[ $i ]['code'], Tokens::$assignmentTokens, true ) ) {
-				return;
-			}
-
-			// Skip spaces and closed curly brackets.
-			if ( in_array( $tokens[ $i ]['code'], [ T_WHITESPACE ], true ) ) {
-				continue;
+				return [];
 			}
 
 			$next_line_tokens[] = $tokens[ $i ];
 		}
 
-		// If next line is empty line.
-		if ( empty( $next_line_tokens ) ) {
-			return;
-		}
-
-		// Skip if the first element is a closed curly bracket.
-		if ( $next_line_tokens[0]['code'] === T_CLOSE_CURLY_BRACKET ) {
-			return;
-		}
-
-		// Allow phpcs comments.
-		if ( in_array( $next_line_tokens[0]['code'], Tokens::$phpcsCommentTokens, true ) ) {
-			return;
-		}
-
-		// Allow closed PHP tag.
-		if ( T_CLOSE_TAG === $next_line_tokens[0]['code'] ) {
-			return;
-		}
-
-		$phpcsFile->addError(
-			'Add empty line after assigment statement.',
-			$stackPtr,
-			'AddEmptyLine'
-		);
+		return $next_line_tokens;
 	}
 }

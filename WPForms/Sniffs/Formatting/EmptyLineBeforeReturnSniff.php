@@ -21,7 +21,7 @@ class EmptyLineBeforeReturnSniff extends BaseSniff implements Sniff {
 	 *
 	 * @return array
 	 */
-	public function register(): array {
+	public function register() {
 
 		return [
 			T_RETURN,
@@ -47,7 +47,7 @@ class EmptyLineBeforeReturnSniff extends BaseSniff implements Sniff {
 
 		// Don't allow empty line for statements with only return in a body.
 		if (
-			T_OPEN_CURLY_BRACKET === $tokens[ $previous ]['code'] &&
+			$tokens[ $previous ]['code'] === T_OPEN_CURLY_BRACKET &&
 			! in_array( $tokens[ $statement ]['code'], $important_line_after, true )
 		) {
 			if ( $tokens[ $stackPtr ]['line'] - $tokens[ $previous ]['line'] > 1 ) {
