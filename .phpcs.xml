@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<ruleset name="WPForms CS">
+	<description>The code standard for WPForms Coding Standards.</description>
+	<exclude-pattern>WPForms/Tests/TestedFiles/*</exclude-pattern>
+	<rule ref="WPForms"/>
+	<rule ref="WordPress">
+		<exclude name="WordPress.NamingConventions"/>
+	</rule>
+</ruleset>
