@@ -70,6 +70,7 @@ class TestCase extends \PHPUnit\Framework\TestCase {
 	protected function fileHasErrors( LocalFile $phpcsFile, $name, $lines ) { // phpcs:ignore Generic.Metrics.NestingLevel.MaxExceeded
 
 		$errors = [];
+
 		foreach ( $phpcsFile->getErrors() as $line => $groupErrors ) {
 			foreach ( $groupErrors as $sniffErrors ) {
 				foreach ( $sniffErrors as $error ) {

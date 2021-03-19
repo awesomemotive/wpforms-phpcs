@@ -18,7 +18,7 @@ class ValidateDomainSniff extends BaseSniff implements Sniff {
 	 *
 	 * @since 1.0.0
 	 */
-	const TRANSLATE_FUNCTIONS = [
+	const TRANSLATE_FUNCTIONS = [ // phpcs:ignore PHPCompatibility.InitialValue.NewConstantArraysUsingConst.Found
 		'__',
 		'_e',
 		'_x',
