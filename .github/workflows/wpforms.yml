@@ -1,0 +1,21 @@
+name: GitHub Actions
+
+on: [push]
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+
+            - name: Validate composer.json and composer.lock
+              run: composer validate
+
+            - name: Install dependencies
+              run: composer install]
+
+            - name: WPCS validate
+              run: composer cs
+
+            - name: Tests
+              run: composer unit
