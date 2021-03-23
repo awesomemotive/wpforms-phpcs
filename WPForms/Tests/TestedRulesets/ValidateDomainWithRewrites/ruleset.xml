@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<ruleset name="WPForms Tested CS">
+	<description>WPForms Tested CS.</description>
+	<rule ref="Generic.Metrics.NestingLevel"/>
+	<rule ref="WPForms.PHP.ValidateDomain">
+		<properties>
+			<property name="multi_domains" value="true"/>
+			<property name="wpforms-lite" value="WPForms/"/>
+		</properties>
+	</rule>
+</ruleset>

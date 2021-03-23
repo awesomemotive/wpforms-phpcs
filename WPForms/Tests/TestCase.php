@@ -21,13 +21,14 @@ class TestCase extends \PHPUnit\Framework\TestCase {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param Sniff $className Class name.
+	 * @param Sniff  $className   Class name.
+	 * @param string $rulesetName Ruleset name from the Tests/TestedRulesets directory.
 	 *
 	 * @return LocalFile
 	 *
 	 * @throws RuntimeException Tested file doesn't exists.
 	 */
-	protected function process( Sniff $className ) {
+	protected function process( Sniff $className, $rulesetName = '' ) {
 
 		$class     = new ReflectionClass( $className );
 		$localFile = WPFORMS_TESTED_FILES_PATH . str_replace( 'Sniff.php', '.php', str_replace( WPFORMS_SNIFFS_PATH, '', $class->getFileName() ) );
@@ -41,8 +42,9 @@ class TestCase extends \PHPUnit\Framework\TestCase {
 			);
 		}
 
-		$config  = new Config( [ '--standard=WordPress' ] );
-		$ruleset = new Ruleset( $config );
+		$rulesetName = $rulesetName ? 'WPForms/Tests/TestedRulesets/' . $rulesetName . '/ruleset.xml' : 'WPForms/Tests/TestedRulesets/Default/ruleset.xml';
+		$config      = new Config( [ '--standard=' . $rulesetName ] );
+		$ruleset     = new Ruleset( $config );
 
 		$ruleset->registerSniffs( [ $class->getFileName() ], [], [] );
 		$ruleset->populateTokenListeners();

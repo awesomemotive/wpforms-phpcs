@@ -102,4 +102,12 @@
 			<property name="absoluteNestingLevel" value="3"/>
 		</properties>
 	</rule>
+
+	<rule ref="WPForms.PHP.ValidateDomain">
+		<properties>
+			<property name="multi_domains" value="true"/>
+			<property name="wpforms-lite" value="wpforms"/>
+			<property name="wpforms" value="wpforms/pro/,wpforms/src/Pro/"/>
+		</properties>
+	</rule>
 </ruleset>

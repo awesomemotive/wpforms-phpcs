@@ -1,0 +1,5 @@
+<?xml version="1.0"?>
+<ruleset name="WPForms Tested CS">
+	<description>WPForms Tested CS.</description>
+	<rule ref="Generic.Metrics.NestingLevel" />
+</ruleset>
