@@ -1,6 +1,6 @@
 # WPForms Coding Standards for PHP_CodeSniffer
 
-Coding standards for WPForms team then allow keeping code strict and consistently high quality. WPForms coding standards based on the WordPress Coding Standards and the PHPCompatibility Coding Standards.
+Coding standards for WPForms team then allow keeping code strict and consistently high quality. WPForms coding standards based on the [WordPress Coding Standards](https://github.com/WordPress/WordPress-Coding-Standards) and the [PHPCompatibility Coding Standards](https://github.com/PHPCompatibility/PHPCompatibility).
 
 ## Installation
 
