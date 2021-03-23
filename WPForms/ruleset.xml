@@ -8,8 +8,6 @@
 	<arg name="colors"/>
 	<arg name="parallel" value="100"/>
 	<arg name="extensions" value="php"/>
-	<config name="testVersion" value="5.5-"/>
-	<config name="minimum_supported_wp_version" value="4.9"/>
 
 	<!-- Rules: Check PHP version compatibility. -->
 	<rule ref="PHPCompatibility">
@@ -74,22 +72,6 @@
 	</rule>
 	<rule ref="Generic.Arrays.DisallowLongArraySyntax.Found"/>
 
-	<rule ref="WordPress.Security.EscapeOutput">
-		<properties>
-			<property name="customEscapingFunctions" type="array">
-				<element value="wpforms_html_attributes"/>
-				<element value="wpforms_sanitize_amount"/>
-				<element value="wpforms_sanitize_array_combine"/>
-				<element value="wpforms_sanitize_classes"/>
-				<element value="wpforms_sanitize_error"/>
-				<element value="wpforms_sanitize_hex_color"/>
-				<element value="wpforms_sanitize_key"/>
-				<element value="wpforms_sanitize_textarea_field"/>
-				<element value="wpforms_sanitize_text_deeply"/>
-			</property>
-		</properties>
-	</rule>
-
 	<rule ref="Generic.Metrics.CyclomaticComplexity">
 		<properties>
 			<property name="complexity" value="6"/>
@@ -100,14 +82,6 @@
 	<rule ref="Generic.Metrics.NestingLevel">
 		<properties>
 			<property name="absoluteNestingLevel" value="3"/>
-		</properties>
-	</rule>
-
-	<rule ref="WPForms.PHP.ValidateDomain">
-		<properties>
-			<property name="multi_domains" value="true"/>
-			<property name="wpforms-lite" value="wpforms"/>
-			<property name="wpforms" value="wpforms/pro/,wpforms/src/Pro/"/>
 		</properties>
 	</rule>
 </ruleset>
