@@ -2,18 +2,18 @@
 
 // phpcs:disable WordPress.Security.EscapeOutput.UnsafePrintingFunction
 
-__( 'Valid', 'phpcs-wpforms' );
-_e( 'Valid', 'phpcs-wpforms' );
-_x( 'Valid', 'context', 'phpcs-wpforms' );
-esc_html__( 'Valid', 'phpcs-wpforms' );
-esc_html_e( 'Valid', 'phpcs-wpforms' );
-esc_html_x( 'Valid', 'context', 'phpcs-wpforms' );
-esc_attr__( 'Valid', 'phpcs-wpforms' );
-esc_attr_e( 'Valid', 'phpcs-wpforms' );
-esc_attr_x( 'Valid', 'context', 'phpcs-wpforms' );
-_n( 'Valid', 'Valid', 10, 'phpcs-wpforms' );
-_ex( 'Valid', 'Valid', 'phpcs-wpforms' );
-_nx( 'Valid', 'Valid', 10, 'Valid', 'phpcs-wpforms' );
+__( 'Valid', 'wpforms-phpcs' );
+_e( 'Valid', 'wpforms-phpcs' );
+_x( 'Valid', 'context', 'wpforms-phpcs' );
+esc_html__( 'Valid', 'wpforms-phpcs' );
+esc_html_e( 'Valid', 'wpforms-phpcs' );
+esc_html_x( 'Valid', 'context', 'wpforms-phpcs' );
+esc_attr__( 'Valid', 'wpforms-phpcs' );
+esc_attr_e( 'Valid', 'wpforms-phpcs' );
+esc_attr_x( 'Valid', 'context', 'wpforms-phpcs' );
+_n( 'Valid', 'Valid', 10, 'wpforms-phpcs' );
+_ex( 'Valid', 'Valid', 'wpforms-phpcs' );
+_nx( 'Valid', 'Valid', 10, 'Valid', 'wpforms-phpcs' );
 
 
 __( 'Invalid', 'wpforms' );
