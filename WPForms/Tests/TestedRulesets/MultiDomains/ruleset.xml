@@ -2,9 +2,5 @@
 <ruleset name="WPForms Tested CS">
 	<description>WPForms Tested CS.</description>
 	<config name="multi_domains" value="true"/>
-	<rule ref="WPForms.PHP.ValidateDomain">
-		<properties>
-			<property name="wpforms-lite" value="WPForms/"/>
-		</properties>
-	</rule>
+	<rule ref="WPForms.PHP.ValidateDomain"/>
 </ruleset>

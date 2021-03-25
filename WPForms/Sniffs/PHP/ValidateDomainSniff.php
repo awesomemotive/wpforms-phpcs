@@ -2,6 +2,7 @@
 
 namespace WPForms\Sniffs\PHP;
 
+use PHP_CodeSniffer\Config;
 use WPForms\Sniffs\BaseSniff;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
@@ -21,15 +22,6 @@ class ValidateDomainSniff extends BaseSniff implements Sniff {
 	 * @var array
 	 */
 	private $domains = [];
-
-	/**
-	 * Multi-domains mode. The current domain is the directory name that next after project root.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @var bool
-	 */
-	public $multi_domains = false;
 
 	/**
 	 * List of translate functions.
@@ -57,7 +49,6 @@ class ValidateDomainSniff extends BaseSniff implements Sniff {
 	 * Example:
 	 * <rule ref="WPForms.PHP.ValidateDomain">
 	 *      <properties>
-	 *          <property name="multi_domains" value="true"/>
 	 *          <property name="wpforms-lite" value="wpforms"/>
 	 *          <property name="wpforms" value="wpforms/pro/,wpforms/src/Pro/"/>
 	 *      </properties>
@@ -70,15 +61,9 @@ class ValidateDomainSniff extends BaseSniff implements Sniff {
 	 */
 	public function __set( $name, $value ) {
 
-		if ( $name !== 'multi_domains' ) {
-			$value = explode( ',', $value );
+		$value = explode( ',', $value );
 
-			$this->domains[ strtolower( $name ) ] = $value;
-
-			return;
-		}
-
-		$this->{$name} = (bool) $value;
+		$this->domains[ strtolower( $name ) ] = $value;
 	}
 
 	/**
@@ -169,34 +154,22 @@ class ValidateDomainSniff extends BaseSniff implements Sniff {
 	 */
 	private function getExpectedDomain( $phpcsFile ) {
 
-		if (
-			empty( $phpcsFile->ruleset ) ||
-			empty( $phpcsFile->ruleset->paths[0] )
-		) {
-			return '';
-		}
-
-		$path      = realpath( $phpcsFile->ruleset->paths[0] );
-		$file_path = realpath( $phpcsFile->path );
-		$root      = 'ruleset.xml' === basename( $path ) ?
-			$this->getRootDirectory( $path ) :
-			dirname( $path );
-
-		$file_path = str_replace( $root, '', $file_path );
+		$filePath = $this->getRelatedPath( $phpcsFile );
+		$root     = $this->getRootDirectory( $phpcsFile );
 
 		if ( ! empty( $this->domains ) ) {
-			$current_domain = $this->findDomainByProperty( $file_path );
+			$currentDomain = $this->findDomainByProperty( $filePath );
 		}
 
-		if ( ! empty( $current_domain ) ) {
-			return strtolower( $current_domain );
+		if ( ! empty( $currentDomain ) ) {
+			return strtolower( $currentDomain );
 		}
 
-		if ( ! $this->multi_domains ) {
+		if ( ! Config::getConfigData( 'multi_domains' ) ) {
 			return basename( $root );
 		}
 
-		preg_match( '/([\w.-]+)/', $file_path, $domain );
+		preg_match( '/([\w.-]+)/', $filePath, $domain );
 
 		return ! empty( $domain[0] ) ? strtolower( $domain[0] ) : '';
 	}
@@ -228,35 +201,5 @@ class ValidateDomainSniff extends BaseSniff implements Sniff {
 		}
 
 		return $current_domain;
-	}
-
-	/**
-	 * Get project root directory.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param string $filePath File path.
-	 *
-	 * @return string
-	 */
-	private function getRootDirectory( $filePath ) {
-
-		foreach (
-			[
-				'.vendor',
-				'vendor',
-				'.packages',
-				'packages',
-				'WPForms', // For tests.
-			] as $dir
-		) {
-			if ( false !== stripos( $filePath, $dir ) ) {
-				preg_match( '/(.*[\/\\\][\w.-]+[\/\\\])' . $dir . '[\/\\\]/u', $filePath, $root_path );
-
-				return ! empty( $root_path[1] ) ? $root_path[1] : '';
-			}
-		}
-
-		return '';
 	}
 }

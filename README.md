@@ -21,13 +21,13 @@ Create the `.phpcs.xml` or `phpcs.xml` file at the root of your project:
 	<exclude-pattern>\.github/*</exclude-pattern>
 
 	<config name="testVersion" value="5.5-"/>
+	<config name="multi_domains" value="true"/>
 	<config name="minimum_supported_wp_version" value="4.9"/>
     
 	<rule ref="WPForms"/>
 
 	<rule ref="WPForms.PHP.ValidateDomain">
 		<properties>
-			<property name="multi_domains" value="true"/>
 			<property name="wpforms-lite" value="wpforms"/>
 			<property name="wpforms" value="wpforms/pro/,wpforms/src/Pro/"/>
 		</properties>
@@ -58,12 +58,9 @@ In your config you should enable the `multi_domains` property:
 ```xml
 <?xml version="1.0"?>
 <ruleset name="WPForms CS">
-    <!-- ... -->
-	<rule ref="WPForms.PHP.ValidateDomain">
-		<properties>
-			<property name="multi_domains" value="true"/>
-		</properties>
-	</rule>
+	<!-- ... -->
+	<config name="multi_domains" value="true"/>
+	<!-- ... -->
 </ruleset>
 ```
 
@@ -84,14 +81,15 @@ In your config, you should set the property with the `name` as a domain name and
 ```xml
 <?xml version="1.0"?>
 <ruleset name="WPForms CS">
-    <!-- ... -->
+	<!-- ... -->
+	<config name="multi_domains" value="true"/>
 	<rule ref="WPForms.PHP.ValidateDomain">
 		<properties>
-			<property name="multi_domains" value="true"/>
 			<property name="wpforms-lite" value="wpforms"/>
 			<property name="wpforms" value="wpforms/pro/,wpforms/src/Pro/"/>
 		</properties>
 	</rule>
+	<!-- ... -->
 </ruleset>
 ```
 
