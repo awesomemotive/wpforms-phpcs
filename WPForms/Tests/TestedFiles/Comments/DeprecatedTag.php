@@ -1,5 +1,4 @@
 <?php
-// phpcs:disable Generic.Files.OneObjectStructurePerFile.MultipleFound
 
 /**
  * Class A.
@@ -9,8 +8,6 @@
 class A {
 
 }
-
-
 
 /**
  * Class B.
@@ -61,10 +58,10 @@ class E {
 }
 
 /**
- * Class E is invalid.
+ * Class F is invalid.
  *
  * @since      1.0.0
- * @deprecated {VER}
+ * @deprecated
  *
  * @package    Deprecate
  */
@@ -72,4 +69,14 @@ class F {
 
 }
 
-// phpcs:enable Generic.Files.OneObjectStructurePerFile.MultipleFound
+/**
+ * Class G is invalid.
+ *
+ * @since      1.0.0
+ * @deprecated {VER}
+ *
+ * @package    Deprecate
+ */
+class G {
+
+}

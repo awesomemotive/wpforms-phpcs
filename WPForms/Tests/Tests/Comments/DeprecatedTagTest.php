@@ -6,7 +6,7 @@ use WPForms\Tests\TestCase;
 use WPForms\Sniffs\Comments\DeprecatedTagSniff;
 
 /**
- * Class DescriptionStopSymbolTest.
+ * Class DeprecatedTagTest.
  *
  * @since 1.0.0
  */
@@ -21,7 +21,8 @@ class DeprecatedTagTest extends TestCase {
 
 		$phpcsFile = $this->process( new DeprecatedTagSniff() );
 
-		$this->fileHasErrors( $phpcsFile, 'InvalidDeprecatedVersion', [ 67 ] );
-		$this->fileHasErrors( $phpcsFile, 'MissingEmptyLineAfterDeprecated', [ 44 ] );
+		$this->fileHasErrors( $phpcsFile, 'MissDeprecatedVersion', [ 64 ] );
+		$this->fileHasErrors( $phpcsFile, 'InvalidDeprecatedVersion', [ 76 ] );
+		$this->fileHasErrors( $phpcsFile, 'MissingEmptyLineAfterDeprecated', [ 41 ] );
 	}
 }

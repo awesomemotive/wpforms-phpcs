@@ -58,7 +58,20 @@ class DeprecatedTagSniff extends BaseSniff implements Sniff {
 			return;
 		}
 
-		if ( $this->hasVersion( $deprecated, $tokens ) && ! $this->isValidVersion( $deprecated, $tokens ) ) {
+		if ( ! $this->hasVersion( $deprecated, $tokens ) ) {
+			$phpcsFile->addError(
+				sprintf(
+					'Missing version for @deprecated tag in a comment for the %s hook.',
+					$tokens[ $stackPtr ]['content']
+				),
+				$deprecated['tag'],
+				'MissDeprecatedVersion'
+			);
+
+			return;
+		}
+
+		if ( ! $this->isValidVersion( $deprecated, $tokens ) ) {
 			$phpcsFile->addError(
 				sprintf(
 					'Invalid version for @deprecated tag in a comment for %s.',
