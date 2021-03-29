@@ -55,14 +55,14 @@ class EmptyLineAfterAssigmentVariablesSniff extends BaseSniff implements Sniff {
 			return;
 		}
 
-		$next_line_tokens = $this->getTokenNextLine( $phpcsFile, $semicolon );
+		$nextLineTokens = $this->getTokenNextLine( $phpcsFile, $semicolon );
 
 		// If next line is empty line.
-		if ( empty( $next_line_tokens ) ) {
+		if ( empty( $nextLineTokens ) ) {
 			return;
 		}
 
-		if ( in_array( $next_line_tokens[0]['code'], $this->getAllowedTokensAfterAssigment(), true ) ) {
+		if ( in_array( $nextLineTokens[0]['code'], $this->getAllowedTokensAfterAssigment(), true ) ) {
 			return;
 		}
 
@@ -103,23 +103,23 @@ class EmptyLineAfterAssigmentVariablesSniff extends BaseSniff implements Sniff {
 	 */
 	private function getTokenNextLine( $phpcsFile, $semicolon ) {
 
-		$tokens           = $phpcsFile->getTokens();
-		$next_line        = $tokens[ $semicolon ]['line'] + 1;
-		$next_line_tokens = [];
-		$count            = count( $tokens );
+		$tokens         = $phpcsFile->getTokens();
+		$nextLine       = $tokens[ $semicolon ]['line'] + 1;
+		$nextLineTokens = [];
+		$count          = count( $tokens );
 
 		for ( $i = $semicolon; $i < $count; $i ++ ) {
-			if ( $tokens[ $i ]['line'] > $next_line ) {
+			if ( $tokens[ $i ]['line'] > $nextLine ) {
 				break;
 			}
 
 			// Skip current line.
-			if ( $tokens[ $i ]['line'] !== $next_line || in_array( $tokens[ $i ]['code'], Tokens::$emptyTokens, true ) ) {
+			if ( $tokens[ $i ]['line'] !== $nextLine || in_array( $tokens[ $i ]['code'], Tokens::$emptyTokens, true ) ) {
 				continue;
 			}
 
 			if ( in_array( $tokens[ $i ]['code'], Tokens::$parenthesisOpeners, true ) ) {
-				$next_line_tokens[] = $tokens[ $i ];
+				$nextLineTokens[] = $tokens[ $i ];
 
 				break;
 			}
@@ -129,9 +129,9 @@ class EmptyLineAfterAssigmentVariablesSniff extends BaseSniff implements Sniff {
 				return [];
 			}
 
-			$next_line_tokens[] = $tokens[ $i ];
+			$nextLineTokens[] = $tokens[ $i ];
 		}
 
-		return $next_line_tokens;
+		return $nextLineTokens;
 	}
 }

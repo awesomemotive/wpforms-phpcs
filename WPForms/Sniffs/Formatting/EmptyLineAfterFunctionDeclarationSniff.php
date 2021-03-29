@@ -40,19 +40,19 @@ class EmptyLineAfterFunctionDeclarationSniff extends BaseSniff implements Sniff 
 	 */
 	public function process( File $phpcsFile, $stackPtr ) {
 
-		$tokens       = $phpcsFile->getTokens();
-		$open_bracket = $phpcsFile->findNext( T_OPEN_CURLY_BRACKET, $stackPtr + 1 );
-		$first_line   = $phpcsFile->findNext( Tokens::$emptyTokens, $open_bracket + 1, null, true );
+		$tokens      = $phpcsFile->getTokens();
+		$openBracket = $phpcsFile->findNext( T_OPEN_CURLY_BRACKET, $stackPtr + 1 );
+		$firstLine   = $phpcsFile->findNext( Tokens::$emptyTokens, $openBracket + 1, null, true );
 
-		if ( $tokens[ $first_line ]['code'] === T_CLOSE_CURLY_BRACKET ) {
+		if ( $tokens[ $firstLine ]['code'] === T_CLOSE_CURLY_BRACKET ) {
 			return;
 		}
 
-		if ( $tokens [ $first_line ]['code'] === T_CLOSE_TAG ) {
-			$first_line = $phpcsFile->findNext( Tokens::$emptyTokens, $first_line + 1, null, true );
+		if ( $tokens [ $firstLine ]['code'] === T_CLOSE_TAG ) {
+			$firstLine = $phpcsFile->findNext( Tokens::$emptyTokens, $firstLine + 1, null, true );
 		}
 
-		if ( $tokens[ $first_line ]['line'] - $tokens[ $open_bracket ]['line'] > 1 ) {
+		if ( $tokens[ $firstLine ]['line'] - $tokens[ $openBracket ]['line'] > 1 ) {
 			return;
 		}
 

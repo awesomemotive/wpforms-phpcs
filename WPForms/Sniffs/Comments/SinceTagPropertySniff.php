@@ -33,13 +33,13 @@ class SinceTagPropertySniff extends PropertyBaseSniff {
 	protected function processMemberVar( File $phpcsFile, $stackPtr ) {
 
 		$tokens        = $phpcsFile->getTokens();
-		$comment_start = $phpcsFile->findPrevious( T_DOC_COMMENT_OPEN_TAG, $stackPtr );
+		$commentStart = $phpcsFile->findPrevious( T_DOC_COMMENT_OPEN_TAG, $stackPtr );
 
-		if ( ! $comment_start ) {
+		if ( ! $commentStart ) {
 			return;
 		}
 
-		$since = $this->findTag( '@since', $comment_start, $tokens );
+		$since = $this->findTag( '@since', $commentStart, $tokens );
 
 		if ( empty( $since ) ) {
 			$phpcsFile->addError(
@@ -98,8 +98,8 @@ class SinceTagPropertySniff extends PropertyBaseSniff {
 
 		$tokens          = $phpcsFile->getTokens();
 		$next_annotation = $phpcsFile->findNext( T_DOC_COMMENT_TAG, $since['tag'] + 1 );
-		$comment_end     = $phpcsFile->findPrevious( T_DOC_COMMENT_CLOSE_TAG, $stackPtr );
-		$next_annotation = $next_annotation && $tokens[ $comment_end ]['line'] > $tokens[ $next_annotation ]['line'] ? $next_annotation : false;
+		$commentEnd     = $phpcsFile->findPrevious( T_DOC_COMMENT_CLOSE_TAG, $stackPtr );
+		$next_annotation = $next_annotation && $tokens[ $commentEnd ]['line'] > $tokens[ $next_annotation ]['line'] ? $next_annotation : false;
 
 		if ( $next_annotation && $tokens[ $next_annotation ]['content'] === '@deprecated' || $tokens[ $next_annotation ]['content'] === '@since' ) {
 			if ( $this->hasEmptyLineAfterInComment( $since, $tokens ) ) {

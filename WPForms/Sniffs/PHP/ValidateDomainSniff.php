@@ -98,22 +98,22 @@ class ValidateDomainSniff extends BaseSniff implements Sniff {
 			return;
 		}
 
-		$current_domain  = $this->getCurrentDomains( $phpcsFile, $stackPtr );
-		$expected_domain = $this->getExpectedDomain( $phpcsFile );
+		$currentDomain  = $this->getCurrentDomains( $phpcsFile, $stackPtr );
+		$expectedDomain = $this->getExpectedDomain( $phpcsFile );
 
-		if ( ! $expected_domain ) {
+		if ( ! $expectedDomain ) {
 			return;
 		}
 
-		if ( $current_domain === $expected_domain ) {
+		if ( $currentDomain === $expectedDomain ) {
 			return;
 		}
 
 		$phpcsFile->addError(
 			sprintf(
 				'You are using invalid domain name. Use %s instead of %s',
-				$expected_domain,
-				$current_domain
+				$expectedDomain,
+				$currentDomain
 			),
 			$stackPtr,
 			'InvalidDomain'
@@ -185,21 +185,21 @@ class ValidateDomainSniff extends BaseSniff implements Sniff {
 	 */
 	private function findDomainByProperty( $filePath ) {
 
-		$current_domain = '';
-		$current_path   = '';
+		$currentDomain = '';
+		$currentPath   = '';
 
 		foreach ( $this->domains as $domain => $paths ) {
 			foreach ( $paths as $path ) {
 				if (
 					0 === strpos( $filePath, $path ) &&
-					strlen( $path ) > strlen( $current_path )
+					strlen( $path ) > strlen( $currentPath )
 				) {
-					$current_domain = $domain;
-					$current_path   = $path;
+					$currentDomain = $domain;
+					$currentPath   = $path;
 				}
 			}
 		}
 
-		return $current_domain;
+		return $currentDomain;
 	}
 }

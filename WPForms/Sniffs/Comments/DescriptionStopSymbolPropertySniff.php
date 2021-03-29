@@ -33,24 +33,24 @@ class DescriptionStopSymbolPropertySniff extends PropertyBaseSniff implements Sn
 	 */
 	protected function processMemberVar( File $phpcsFile, $stackPtr ) {
 
-		$tokens                 = $phpcsFile->getTokens();
-		$comment_start          = $phpcsFile->findPrevious( T_DOC_COMMENT_OPEN_TAG, $stackPtr );
-		$first_description_line = $this->findFirstDescriptionLine( $phpcsFile, $comment_start );
+		$tokens               = $phpcsFile->getTokens();
+		$commentStart         = $phpcsFile->findPrevious( T_DOC_COMMENT_OPEN_TAG, $stackPtr );
+		$firstDescriptionLine = $this->findFirstDescriptionLine( $phpcsFile, $commentStart );
 
-		if ( $tokens[ $comment_start ]['line'] - $tokens[ $first_description_line ]['line'] === 0 ) {
+		if ( $tokens[ $commentStart ]['line'] - $tokens[ $firstDescriptionLine ]['line'] === 0 ) {
 			$phpcsFile->addError(
 				sprintf(
 					'Move comment description for %s to the next line.',
 					$tokens[ $stackPtr ]['content']
 				),
-				$comment_start,
+				$commentStart,
 				'MissDescription'
 			);
 
 			return;
 		}
 
-		$last = $this->findLastDescriptionLIne( $phpcsFile, $first_description_line, $tokens );
+		$last = $this->findLastDescriptionLIne( $phpcsFile, $firstDescriptionLine, $tokens );
 
 		if ( ! $this->hasStopSymbol( $last, $tokens ) ) {
 			$phpcsFile->addError(

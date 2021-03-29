@@ -48,30 +48,30 @@ class DescriptionStopSymbolSniff extends BaseSniff implements Sniff {
 	 */
 	public function process( File $phpcsFile, $stackPtr ) {
 
-		$tokens        = $phpcsFile->getTokens();
-		$comment_start = $phpcsFile->findPrevious( T_DOC_COMMENT_OPEN_TAG, $stackPtr );
+		$tokens       = $phpcsFile->getTokens();
+		$commentStart = $phpcsFile->findPrevious( T_DOC_COMMENT_OPEN_TAG, $stackPtr );
 
-		if ( ! $comment_start ) {
+		if ( ! $commentStart ) {
 			return;
 		}
 
-		$first_description_line = $this->findFirstDescriptionLine( $phpcsFile, $comment_start );
-		$entity                 = $this->getEntityName( $phpcsFile, $stackPtr, $tokens );
+		$firstDescriptionLine = $this->findFirstDescriptionLine( $phpcsFile, $commentStart );
+		$entity               = $this->getEntityName( $phpcsFile, $stackPtr, $tokens );
 
-		if ( $tokens[ $comment_start ]['line'] - $tokens[ $first_description_line ]['line'] === 0 ) {
+		if ( $tokens[ $commentStart ]['line'] - $tokens[ $firstDescriptionLine ]['line'] === 0 ) {
 			$phpcsFile->addError(
 				sprintf(
 					'Move comment description for %s to the next line.',
 					$entity
 				),
-				$comment_start,
+				$commentStart,
 				'MissDescription'
 			);
 
 			return;
 		}
 
-		$last = $this->findLastDescriptionLIne( $phpcsFile, $first_description_line, $tokens );
+		$last = $this->findLastDescriptionLIne( $phpcsFile, $firstDescriptionLine, $tokens );
 
 		if ( ! $this->hasStopSymbol( $last, $tokens ) ) {
 			$phpcsFile->addError(

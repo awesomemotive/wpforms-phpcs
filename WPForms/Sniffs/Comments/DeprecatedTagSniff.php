@@ -50,9 +50,9 @@ class DeprecatedTagSniff extends BaseSniff implements Sniff {
 	 */
 	public function process( File $phpcsFile, $stackPtr ) {
 
-		$tokens        = $phpcsFile->getTokens();
-		$comment_start = $phpcsFile->findPrevious( T_DOC_COMMENT_OPEN_TAG, $stackPtr );
-		$deprecated    = $this->findTag( '@deprecated', $comment_start, $tokens );
+		$tokens       = $phpcsFile->getTokens();
+		$commentStart = $phpcsFile->findPrevious( T_DOC_COMMENT_OPEN_TAG, $stackPtr );
+		$deprecated   = $this->findTag( '@deprecated', $commentStart, $tokens );
 
 		if ( empty( $deprecated ) ) {
 			return;

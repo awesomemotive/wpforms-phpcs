@@ -40,15 +40,15 @@ class EmptyLineBeforeReturnSniff extends BaseSniff implements Sniff {
 	 */
 	public function process( File $phpcsFile, $stackPtr ) {
 
-		$tokens               = $phpcsFile->getTokens();
-		$previous             = $phpcsFile->findPrevious( Tokens::$emptyTokens, $stackPtr - 1, null, true );
-		$statement            = $phpcsFile->findStartOfStatement( $previous - 1 );
-		$important_line_after = array_merge( [ T_FUNCTION, T_STATIC ], Tokens::$scopeModifiers );
+		$tokens             = $phpcsFile->getTokens();
+		$previous           = $phpcsFile->findPrevious( Tokens::$emptyTokens, $stackPtr - 1, null, true );
+		$statement          = $phpcsFile->findStartOfStatement( $previous - 1 );
+		$importantLineAfter = array_merge( [ T_FUNCTION, T_STATIC ], Tokens::$scopeModifiers );
 
 		// Don't allow empty line for statements with only return in a body.
 		if (
 			$tokens[ $previous ]['code'] === T_OPEN_CURLY_BRACKET &&
-			! in_array( $tokens[ $statement ]['code'], $important_line_after, true )
+			! in_array( $tokens[ $statement ]['code'], $importantLineAfter, true )
 		) {
 			if ( $tokens[ $stackPtr ]['line'] - $tokens[ $previous ]['line'] > 1 ) {
 				$phpcsFile->addError(

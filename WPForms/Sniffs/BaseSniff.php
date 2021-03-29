@@ -57,9 +57,9 @@ abstract class BaseSniff {
 			] as $dir
 		) {
 			if ( false !== stripos( $filePath, $dir ) ) {
-				preg_match( '/(.*[\/\\\][\w.-]+[\/\\\])' . $dir . '[\/\\\]/u', $filePath, $root_path );
+				preg_match( '/(.*[\/\\\][\w.-]+[\/\\\])' . $dir . '[\/\\\]/u', $filePath, $rootPath );
 
-				return ! empty( $root_path[1] ) ? $root_path[1] : '';
+				return ! empty( $rootPath[1] ) ? $rootPath[1] : '';
 			}
 		}
 
@@ -77,9 +77,9 @@ abstract class BaseSniff {
 	 */
 	protected function getRelatedPath( $phpcsFile ) {
 
-		$file_path = realpath( $phpcsFile->path );
-		$root      = $this->getRootDirectory( $phpcsFile );
+		$filePath = realpath( $phpcsFile->path );
+		$root     = $this->getRootDirectory( $phpcsFile );
 
-		return str_replace( $root, '', $file_path );
+		return str_replace( $root, '', $filePath );
 	}
 }

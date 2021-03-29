@@ -17,7 +17,7 @@ class EmptyLineAfterFunctionDeclarationTest extends TestCase {
 	 *
 	 * @since 1.0.0
 	 */
-	public function test_process() {
+	public function testProcess() {
 
 		$phpcsFile = $this->process( new EmptyLineAfterFunctionDeclarationSniff() );
 

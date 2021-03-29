@@ -43,22 +43,22 @@ class ConditionsYodaDisableSniff extends BaseSniff implements Sniff {
 	 */
 	public function process( File $phpcsFile, $stackPtr ) {
 
-		$tokens         = $phpcsFile->getTokens();
-		$before_compare = $phpcsFile->findPrevious( Tokens::$emptyTokens, ( $stackPtr - 1 ), null, true );
-		$after_compare  = $phpcsFile->findNext( Tokens::$emptyTokens, ( $stackPtr + 1 ), null, true );
+		$tokens        = $phpcsFile->getTokens();
+		$beforeCompare = $phpcsFile->findPrevious( Tokens::$emptyTokens, ( $stackPtr - 1 ), null, true );
+		$afterCompare  = $phpcsFile->findNext( Tokens::$emptyTokens, ( $stackPtr + 1 ), null, true );
 
-		if ( in_array( $tokens[ $before_compare ]['code'], [ T_VARIABLE, T_CLOSE_SQUARE_BRACKET ], true ) ) {
+		if ( in_array( $tokens[ $beforeCompare ]['code'], [ T_VARIABLE, T_CLOSE_SQUARE_BRACKET ], true ) ) {
 			return;
 		}
 
 		// Skip if after not variable.
-		if ( $tokens[ $after_compare ]['code'] !== T_VARIABLE ) {
+		if ( $tokens[ $afterCompare ]['code'] !== T_VARIABLE ) {
 			return;
 		}
 
 		// Skip if before method.
-		if ( $tokens[ $before_compare ]['code'] === T_CLOSE_PARENTHESIS ) {
-			$open_parenthesis = $phpcsFile->findPrevious( T_OPEN_PARENTHESIS, $before_compare - 1 );
+		if ( $tokens[ $beforeCompare ]['code'] === T_CLOSE_PARENTHESIS ) {
+			$open_parenthesis = $phpcsFile->findPrevious( T_OPEN_PARENTHESIS, $beforeCompare - 1 );
 			$name             = $phpcsFile->findPrevious( Tokens::$emptyTokens, $open_parenthesis - 1, null, true );
 
 			if ( $tokens[ $name ]['code'] === T_STRING ) {
@@ -67,7 +67,7 @@ class ConditionsYodaDisableSniff extends BaseSniff implements Sniff {
 		}
 
 		// Allow properties.
-		if ( $tokens[ $before_compare ]['code'] === T_STRING && $tokens[ $before_compare - 1 ]['code'] === T_OBJECT_OPERATOR ) {
+		if ( $tokens[ $beforeCompare ]['code'] === T_STRING && $tokens[ $beforeCompare - 1 ]['code'] === T_OBJECT_OPERATOR ) {
 			return;
 		}
 

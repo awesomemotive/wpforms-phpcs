@@ -51,9 +51,9 @@ class NoSpacesAfterParamTagSniff extends BaseSniff implements Sniff {
 	 */
 	public function process( File $phpcsFile, $stackPtr ) {
 
-		$tokens        = $phpcsFile->getTokens();
-		$comment_start = $phpcsFile->findPrevious( T_DOC_COMMENT_OPEN_TAG, $stackPtr );
-		$tag           = $this->findTag( $this->tag, $comment_start, $tokens );
+		$tokens       = $phpcsFile->getTokens();
+		$commentStart = $phpcsFile->findPrevious( T_DOC_COMMENT_OPEN_TAG, $stackPtr );
+		$tag          = $this->findTag( $this->tag, $commentStart, $tokens );
 
 		if ( empty( $tag ) ) {
 			return;

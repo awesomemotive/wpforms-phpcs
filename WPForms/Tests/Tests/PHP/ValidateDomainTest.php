@@ -17,7 +17,7 @@ class ValidateDomainTest extends TestCase {
 	 *
 	 * @since 1.0.0
 	 */
-	public function test_process() {
+	public function testProcess() {
 
 		$phpcsFile = $this->process( new ValidateDomainSniff() );
 
@@ -29,7 +29,7 @@ class ValidateDomainTest extends TestCase {
 	 *
 	 * @since 1.0.0
 	 */
-	public function test_process_with_multi_domains() {
+	public function testProcessWithMultiDomains() {
 
 		$phpcsFile = $this->process( new ValidateDomainSniff(), 'MultiDomains' );
 
@@ -41,7 +41,7 @@ class ValidateDomainTest extends TestCase {
 	 *
 	 * @since 1.0.0
 	 */
-	public function test_process_with_rewritten_paths() {
+	public function testProcessWithRewrittenPaths() {
 
 		$phpcsFile = $this->process( new ValidateDomainSniff(), 'ValidateDomainWithRewrites' );
 
