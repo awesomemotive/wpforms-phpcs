@@ -2,6 +2,8 @@
 
 namespace WPForms\Traits;
 
+use PHP_CodeSniffer\Files\File;
+
 /**
  * Trait CommentTag.
  *
@@ -14,26 +16,54 @@ trait CommentTag {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param string $tag           Tag name.
-	 * @param int    $comment_start PHPDoc start position.
-	 * @param array  $tokens        List of tokens.
+	 * @param string $tagName      Tag name.
+	 * @param int    $commentStart PHPDoc start position.
+	 * @param array  $tokens       List of tokens.
 	 *
-	 * @return array|mixed
+	 * @return array
 	 */
-	protected function findTag( $tag, $comment_start, $tokens ) {
+	protected function findTag( $tagName, $commentStart, $tokens ) {
 
-		$comment_tags = ! empty( $tokens[ $comment_start ]['comment_tags'] ) ? $tokens[ $comment_start ]['comment_tags'] : [];
+		$commentTags = ! empty( $tokens[ $commentStart ]['comment_tags'] ) ? $tokens[ $commentStart ]['comment_tags'] : [];
 
-		foreach ( $comment_tags as $comment_tag ) {
-			if ( $tokens[ $comment_tag ]['content'] === $tag ) {
-				$since        = $tokens[ $comment_tag ];
-				$since['tag'] = $comment_tag;
+		foreach ( $commentTags as $commentTag ) {
+			if ( $tokens[ $commentTag ]['content'] === $tagName ) {
+				$tag        = $tokens[ $commentTag ];
+				$tag['tag'] = $commentTag;
 
-				return $since;
+				return $tag;
 			}
 		}
 
 		return [];
+	}
+
+	/**
+	 * Find tags in PHPDoc.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $tagName      Tag name.
+	 * @param int    $commentStart PHPDoc start position.
+	 * @param array  $tokens       List of tokens.
+	 *
+	 * @return array
+	 */
+	protected function findTags( $tagName, $commentStart, $tokens ) {
+
+		$commentTags = ! empty( $tokens[ $commentStart ]['comment_tags'] ) ? $tokens[ $commentStart ]['comment_tags'] : [];
+		$tags        = [];
+
+		foreach ( $commentTags as $commentTag ) {
+			if ( $tokens[ $commentTag ]['content'] === $tagName ) {
+				$tag        = $tokens[ $commentTag ];
+				$tag['tag'] = $commentTag;
+
+				$tags[] = $tag;
+			}
+		}
+
+		return $tags;
 	}
 
 	/**
@@ -58,13 +88,16 @@ trait CommentTag {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $tag    Tag information.
-	 * @param array $tokens List of tokens.
+	 * @param File  $phpcsFile The PHP_CodeSniffer file where the token was found.
+	 * @param array $tag       Tag information.
 	 *
 	 * @return bool
 	 */
-	protected function isLastTag( $tag, $tokens ) {
+	protected function isLastTag( $phpcsFile, $tag ) {
 
-		return $tokens[ $tag['tag'] + 5 ]['type'] === 'T_DOC_COMMENT_CLOSE_TAG';
+		$tokens       = $phpcsFile->getTokens();
+		$closeComment = $phpcsFile->findNext( T_DOC_COMMENT_CLOSE_TAG, $tag['tag'] );
+
+		return $tag['line'] === $tokens[ $closeComment ]['line'] - 1;
 	}
 }

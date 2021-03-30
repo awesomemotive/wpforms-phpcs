@@ -50,7 +50,7 @@ class SinceTagSniff extends BaseSniff implements Sniff {
 	 */
 	public function process( File $phpcsFile, $stackPtr ) {
 
-		$tokens        = $phpcsFile->getTokens();
+		$tokens       = $phpcsFile->getTokens();
 		$commentStart = $phpcsFile->findPrevious( T_DOC_COMMENT_OPEN_TAG, $stackPtr );
 
 		if ( empty( $commentStart ) ) {
@@ -124,7 +124,7 @@ class SinceTagSniff extends BaseSniff implements Sniff {
 		$tokens          = $phpcsFile->getTokens();
 		$entity          = $this->getEntityName( $phpcsFile, $stackPtr, $tokens );
 		$next_annotation = $phpcsFile->findNext( T_DOC_COMMENT_TAG, $since['tag'] + 1 );
-		$commentEnd     = $phpcsFile->findPrevious( T_DOC_COMMENT_CLOSE_TAG, $stackPtr );
+		$commentEnd      = $phpcsFile->findPrevious( T_DOC_COMMENT_CLOSE_TAG, $stackPtr );
 		$next_annotation = $next_annotation && $tokens[ $commentEnd ]['line'] > $tokens[ $next_annotation ]['line'] ? $next_annotation : false;
 
 		if ( $next_annotation && $tokens[ $next_annotation ]['content'] === '@deprecated' || $tokens[ $next_annotation ]['content'] === '@since' ) {
@@ -142,7 +142,7 @@ class SinceTagSniff extends BaseSniff implements Sniff {
 			return;
 		}
 
-		if ( ! $this->isLastTag( $since, $tokens ) && ! $this->hasEmptyLineAfterInComment( $since, $tokens ) ) {
+		if ( ! $this->isLastTag( $phpcsFile, $since ) && ! $this->hasEmptyLineAfterInComment( $since, $tokens ) ) {
 			$phpcsFile->addError(
 				sprintf(
 					'Add empty line after @since tag for %s.',

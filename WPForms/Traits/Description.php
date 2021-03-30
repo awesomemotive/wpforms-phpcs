@@ -39,22 +39,22 @@ trait Description {
 	 */
 	protected function findLastDescriptionLIne( $phpcsFile, $first_description_line, $tokens ) {
 
-		$last_description_line = $first_description_line;
+		$lastDescriptionLine = $first_description_line;
 
 		do {
-			$last = $phpcsFile->findNext( [ T_DOC_COMMENT_WHITESPACE, T_DOC_COMMENT_STAR ], $last_description_line + 1, null, true );
+			$last = $phpcsFile->findNext( [ T_DOC_COMMENT_WHITESPACE, T_DOC_COMMENT_STAR ], $lastDescriptionLine + 1, null, true );
 
 			if (
-				$tokens[ $last ]['line'] - $tokens[ $last_description_line ]['line'] !== 1 ||
+				$tokens[ $last ]['line'] - $tokens[ $lastDescriptionLine ]['line'] !== 1 ||
 				$tokens[ $last ]['code'] === T_DOC_COMMENT_TAG ||
 				$tokens[ $last ]['code'] === T_DOC_COMMENT_CLOSE_TAG
 			) {
-				return $last_description_line;
+				return $lastDescriptionLine;
 			}
-			$last_description_line = $last;
+			$lastDescriptionLine = $last;
 		} while ( $last );
 
-		return $last_description_line;
+		return $lastDescriptionLine;
 	}
 
 	/**
@@ -69,8 +69,8 @@ trait Description {
 	 */
 	protected function hasStopSymbol( $last, $tokens ) {
 
-		$last_symbol = $tokens[ $last ]['content'][ strlen( $tokens[ $last ]['content'] ) - 1 ];
+		$lastSymbol = $tokens[ $last ]['content'][ strlen( $tokens[ $last ]['content'] ) - 1 ];
 
-		return in_array( $last_symbol, [ '.', '!', '?' ], true );
+		return in_array( $lastSymbol, [ '.', '!', '?' ], true );
 	}
 }
