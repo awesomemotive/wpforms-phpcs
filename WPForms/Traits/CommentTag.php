@@ -71,16 +71,26 @@ trait CommentTag {
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param array $tag    Tag information.
-	 * @param array $tokens List of tokens.
+	 * @param File  $phpcsFile The PHP_CodeSniffer file where the token was found.
+	 * @param array $tag       Tag information.
 	 *
 	 * @return bool
 	 */
-	protected function hasEmptyLineAfterInComment( $tag, $tokens ) {
+	protected function hasEmptyLineAfterInComment( $phpcsFile, $tag ) {
 
-		return $tokens[ $tag['tag'] + 5 ]['code'] === T_DOC_COMMENT_STAR &&
-		       $tokens[ $tag['tag'] + 6 ]['code'] === T_DOC_COMMENT_WHITESPACE &&
-		       $tokens[ $tag['tag'] + 7 ]['code'] === T_DOC_COMMENT_WHITESPACE;
+		$tokens = $phpcsFile->getTokens();
+
+		$star = $phpcsFile->findNext( T_DOC_COMMENT_STAR, $tag['tag'] );
+
+		if ( ! $star ) {
+			return false;
+		}
+
+		if ( $tokens[ $star ]['line'] !== $tag['line'] + 1 ) {
+			return false;
+		}
+
+		return $tokens[ $star ]['code'] === T_DOC_COMMENT_STAR && $tokens[ $star + 1 ]['code'] === T_DOC_COMMENT_WHITESPACE && $tokens[ $star + 2 ]['code'] === T_DOC_COMMENT_WHITESPACE;
 	}
 
 	/**
