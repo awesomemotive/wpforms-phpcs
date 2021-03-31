@@ -15,7 +15,8 @@
 	},
 	"autoload-dev": {
 		"psr-4": {
-			"WPForms\\": "WPForms/"
+			"WPForms\\": "WPForms/",
+			"WPForms\\Tests\\Tests\\": "WPForms/Tests"
 		}
 	},
 	"scripts": {
