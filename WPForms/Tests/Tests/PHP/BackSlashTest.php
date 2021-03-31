@@ -3,7 +3,7 @@
 namespace WPForms\Tests\PHP;
 
 use WPForms\Tests\TestCase;
-use WPForms\Sniffs\PHP\BackslashSniff;
+use WPForms\Sniffs\PHP\BackSlashSniff;
 
 /**
  * Class BackSlashTest.
