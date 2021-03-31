@@ -21,6 +21,6 @@ class UseStatementTest extends TestCase {
 
 		$phpcsFile = $this->process( new UseStatementSniff() );
 
-		$this->fileHasErrors( $phpcsFile, 'UnusedUseStatement', [ 7, 8, 11 ] );
+		$this->fileHasErrors( $phpcsFile, 'UnusedUseStatement', [ 12, 13, 16 ] );
 	}
 }

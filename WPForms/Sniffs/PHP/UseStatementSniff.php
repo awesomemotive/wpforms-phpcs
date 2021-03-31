@@ -39,24 +39,40 @@ class UseStatementSniff extends BaseSniff implements Sniff {
 	 */
 	public function process( File $phpcsFile, $stackPtr ) {
 
+		$tokens = $phpcsFile->getTokens();
+
+		if ( $tokens[ $stackPtr ]['level'] !== 0 ) {
+			return;
+		}
+
 		$entity = $phpcsFile->findPrevious( T_STRING, $phpcsFile->findNext( T_SEMICOLON, $stackPtr ) );
 
-		if ( $this->findElement( $phpcsFile, $entity ) ) {
+		if ( $this->hasEntity( $phpcsFile, $entity ) ) {
+			return;
+		}
+
+		if ( $this->hasEntityInDoc( $phpcsFile, $entity ) ) {
 			return;
 		}
 
 		$phpcsFile->addError(
-			'',
+			'Remove unneeded use statement',
 			$stackPtr,
 			'UnusedUseStatement'
 		);
 	}
 
 	/**
+	 * Find function/objects/class with namespace in the code.
+	 *
+	 * @since 1.0.0
+	 *
 	 * @param File $phpcsFile The PHP_CodeSniffer file where the token was found.
-	 * @param      $entity
+	 * @param int  $entity    Function/objects/class position that have namespace.
+	 *
+	 * @return bool
 	 */
-	private function findElement( $phpcsFile, $entity ) {
+	private function hasEntity( $phpcsFile, $entity ) {
 
 		$tokens  = $phpcsFile->getTokens();
 		$element = $phpcsFile->findNext( T_STRING, $entity + 1, null, false, $tokens[ $entity ]['content'] );
@@ -65,10 +81,70 @@ class UseStatementSniff extends BaseSniff implements Sniff {
 			return false;
 		}
 
-		if ( ! in_array( $tokens[ $element + 1 ]['code'], [ T_OPEN_PARENTHESIS, T_DOUBLE_COLON ], true ) ) {
-			return $this->findElement( $phpcsFile, $element );
+		if ( $tokens[ $element ]['level'] === 0 && $tokens[ $element + 1 ]['code'] === T_SEMICOLON ) {
+			return $this->hasEntity( $phpcsFile, $element );
 		}
 
 		return true;
+	}
+
+	/**
+	 * Find function/objects/class with namespace in the PHPDoc.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param File $phpcsFile The PHP_CodeSniffer file where the token was found.
+	 * @param int  $entity    Function/objects/class position that have namespace.
+	 *
+	 * @return bool
+	 */
+	private function hasEntityInDoc( $phpcsFile, $entity ) {
+
+		$tokens     = $phpcsFile->getTokens();
+		$entityName = $tokens[ $entity ]['content'];
+		$element    = $phpcsFile->findNext( T_DOC_COMMENT_STRING, $entity + 1, null, false, $entityName );
+
+		if ( ! empty( $element ) ) {
+			return true;
+		}
+
+		return $this->findInParamsDescription( $phpcsFile, $entityName, $entity );
+	}
+
+	/**
+	 * Find function/objects/class with namespace in the PHPDoc.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param File   $phpcsFile  The PHP_CodeSniffer file where the token was found.
+	 * @param string $entityName Function/objects/class name.
+	 * @param int    $element    Last search position.
+	 *
+	 * @return bool
+	 */
+	private function findInParamsDescription( $phpcsFile, $entityName, $element ) {
+
+		$tokens  = $phpcsFile->getTokens();
+		$element = $phpcsFile->findNext( T_DOC_COMMENT_TAG, $element + 1 );
+
+		if ( empty( $element ) ) {
+			return false;
+		}
+
+		if ( $tokens[ $element ]['content'] !== '@param' ) {
+			return $this->findInParamsDescription( $phpcsFile, $entityName, $element );
+		}
+
+		$paramDescription = $element + 2;
+
+		if ( $tokens[ $paramDescription ]['code'] !== T_DOC_COMMENT_STRING ) {
+			return $this->findInParamsDescription( $phpcsFile, $entityName, $element );
+		}
+
+		if ( 0 === strpos( $tokens[ $paramDescription ]['content'], $entityName ) ) {
+			return true;
+		}
+
+		return $this->findInParamsDescription( $phpcsFile, $entityName, $element );
 	}
 }
