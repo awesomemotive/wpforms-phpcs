@@ -15,7 +15,10 @@ class ValidateHooksTest extends TestCase {
 	/**
 	 * Test process.
 	 *
-	 * @since 1.0.0
+	 * @since               1.0.0
+	 *
+	 * @runInSeparateProcess
+	 * @preserveGlobalState disabled
 	 */
 	public function testProcess() {
 
@@ -27,7 +30,10 @@ class ValidateHooksTest extends TestCase {
 	/**
 	 * Test process with multi domains.
 	 *
-	 * @since 1.0.0
+	 * @since               1.0.0
+	 *
+	 * @runInSeparateProcess
+	 * @preserveGlobalState disabled
 	 */
 	public function testProcessWithMultiDomains() {
 
