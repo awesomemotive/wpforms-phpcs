@@ -7,6 +7,11 @@
 		 convertWarningsToExceptions="true"
 		 xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd"
 >
+	<filter>
+		<whitelist>
+			<directory suffix=".php">../Sniffs</directory>
+		</whitelist>
+	</filter>
 	<testsuites>
 		<testsuite name="WPForms-tests">
 			<directory suffix=".php">./Tests/</directory>
