@@ -15,6 +15,8 @@ class HooksMethodSniff extends BaseSniff implements Sniff {
 
 	/**
 	 * Functions that allow adding callback for hooks.
+	 *
+	 * @since 1.0.0
 	 */
 	const ADD_HOOKS_FUNCTIONS = [
 		'add_action',
@@ -25,6 +27,8 @@ class HooksMethodSniff extends BaseSniff implements Sniff {
 
 	/**
 	 * Method name.
+	 *
+	 * @since 1.0.0
 	 */
 	const METHOD_NAME = 'hooks';
 
@@ -62,7 +66,7 @@ class HooksMethodSniff extends BaseSniff implements Sniff {
 
 		$function = $phpcsFile->findNext( T_STRING, $phpcsFile->findPrevious( T_FUNCTION, $stackPtr ) );
 
-		if ( self::METHOD_NAME === $tokens[ $function ]['content'] ) {
+		if ( $tokens[ $function ]['content'] === self::METHOD_NAME ) {
 			return;
 		}
 
