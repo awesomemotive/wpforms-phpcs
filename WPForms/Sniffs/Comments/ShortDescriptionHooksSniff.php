@@ -76,7 +76,7 @@ class ShortDescriptionHooksSniff extends BaseSniff implements Sniff {
 			return;
 		}
 
-		$shortDescription = $phpcsFile->findNext( [ T_DOC_COMMENT_TAG, T_DOC_COMMENT_STRING ], $commentStart );
+		$shortDescription = $phpcsFile->findNext( [ T_DOC_COMMENT_TAG, T_DOC_COMMENT_STRING ], $commentStart, $commentEnd );
 
 		if ( empty( $shortDescription ) || $tokens[ $shortDescription ]['code'] === T_DOC_COMMENT_TAG ) {
 			$phpcsFile->addError(
