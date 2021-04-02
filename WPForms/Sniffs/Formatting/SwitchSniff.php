@@ -74,6 +74,12 @@ class SwitchSniff extends BaseSniff implements Sniff {
 			$this->addEmptyLineError( $phpcsFile, $stackPtr );
 		}
 
+		$beforeClose = $phpcsFile->findPrevious( T_WHITESPACE, $tokens[ $stackPtr ]['scope_closer'] - 1, null, true );
+
+		if ( $tokens[ $tokens[ $stackPtr ]['scope_closer'] ]['line'] - $tokens[ $beforeClose ]['line'] !== 1 ) {
+			$this->removeEmptyLineError( $phpcsFile, $tokens[ $stackPtr ]['scope_closer'] );
+		}
+
 		$next = $phpcsFile->findNext( T_WHITESPACE, $tokens[ $stackPtr ]['scope_closer'] + 1, null, true );
 
 		if ( $tokens[ $next ]['code'] === T_CLOSE_CURLY_BRACKET ) {
@@ -101,7 +107,32 @@ class SwitchSniff extends BaseSniff implements Sniff {
 		$previous          = $phpcsFile->findPrevious( T_WHITESPACE, $stackPtr - 1, null, true );
 		$previousStatement = $phpcsFile->findFirstOnLine( [ T_SWITCH, T_CASE, T_DEFAULT, T_BREAK ], $previous );
 
-		if ( ! empty( $previousStatement ) && $tokens[ $stackPtr ]['line'] - $tokens[ $previous ]['line'] > 1 ) {
+		if (
+			! empty( $previousStatement ) &&
+			$tokens[ $previousStatement ]['code'] === T_SWITCH &&
+			$tokens[ $previousStatement ]['line'] !== $tokens[ $stackPtr ]['line'] - 1
+		) {
+			$this->removeEmptyLineError( $phpcsFile, $stackPtr );
+
+			return;
+		}
+
+		if (
+			empty( $previousStatement ) ||
+			(
+				$tokens[ $previousStatement ]['code'] === T_BREAK &&
+				$tokens[ $stackPtr ]['line'] - $tokens[ $previousStatement ]['line'] === 1
+			)
+		) {
+			$this->addEmptyLineError( $phpcsFile, $stackPtr );
+
+			return;
+		}
+
+		if (
+			$tokens[ $stackPtr ]['line'] - $tokens[ $previousStatement ]['line'] !== 1 &&
+			in_array( $tokens[ $previousStatement ]['code'], [ T_CASE, T_DEFAULT ], true )
+		) {
 			$this->removeEmptyLineError( $phpcsFile, $stackPtr );
 
 			return;

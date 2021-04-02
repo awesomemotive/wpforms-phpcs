@@ -11,13 +11,16 @@ class GoodExample {
 				example( $args );
 
 				break;
+
 			case 'b':
 			case 'c':
 				$value = 2;
 
 				break;
+
 			case 'd':
 				break;
+
 			default:
 				$value = 3;
 		}
@@ -30,11 +33,13 @@ class GoodExample {
 				example( $args );
 
 				break;
+
 			case 'b':
 			case 'c':
 				$value = 2;
 
 				break;
+
 			default:
 				$value = 3;
 		}
