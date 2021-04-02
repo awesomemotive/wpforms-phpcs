@@ -60,7 +60,7 @@ class BackSlashSniff extends BaseSniff implements Sniff {
 		}
 
 		$phpcsFile->addError(
-			'We prefer a short syntax, so the `use` statement instead',
+			'We prefer imports with `use` statement instead of FQDN',
 			$stackPtr,
 			'UseShortSyntax'
 		);

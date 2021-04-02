@@ -56,7 +56,7 @@ class UseStatementSniff extends BaseSniff implements Sniff {
 		}
 
 		$phpcsFile->addError(
-			'Remove unneeded use statement',
+			'Remove unneeded the `use` statement',
 			$stackPtr,
 			'UnusedUseStatement'
 		);
@@ -141,7 +141,7 @@ class UseStatementSniff extends BaseSniff implements Sniff {
 			return $this->findInParamsDescription( $phpcsFile, $entityName, $element );
 		}
 
-		if ( 0 === strpos( $tokens[ $paramDescription ]['content'], $entityName ) ) {
+		if ( strpos( $tokens[ $paramDescription ]['content'], $entityName ) === 0 ) {
 			return true;
 		}
 
