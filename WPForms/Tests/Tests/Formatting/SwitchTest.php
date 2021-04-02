@@ -1,9 +1,9 @@
 <?php
 
-namespace WPForms\Tests\PHP;
+namespace WPForms\Tests\Formatting;
 
 use WPForms\Tests\TestCase;
-use WPForms\Sniffs\PHP\SwitchSniff;
+use WPForms\Sniffs\Formatting\SwitchSniff;
 
 /**
  * Class SwitchTest.
@@ -21,7 +21,7 @@ class SwitchTest extends TestCase {
 
 		$phpcsFile = $this->process( new SwitchSniff() );
 
-		$this->fileHasErrors( $phpcsFile, 'AddEmptyLineBefore', [ 46, 64, 51, 57, 61 ] );
-		$this->fileHasErrors( $phpcsFile, 'RemoveEmptyLineBefore', [ 47, 50 ] );
+		$this->fileHasErrors( $phpcsFile, 'AddEmptyLineBefore', [ 59, 63, 68, 89, 81, 85 ] );
+		$this->fileHasErrors( $phpcsFile, 'RemoveEmptyLineBefore', [ 61, 66, 70 ] );
 	}
 }

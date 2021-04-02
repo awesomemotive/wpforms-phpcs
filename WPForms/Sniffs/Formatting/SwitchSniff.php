@@ -1,6 +1,6 @@
 <?php
 
-namespace WPForms\Sniffs\PHP;
+namespace WPForms\Sniffs\Formatting;
 
 use WPForms\Sniffs\BaseSniff;
 use PHP_CodeSniffer\Files\File;
@@ -100,13 +100,7 @@ class SwitchSniff extends BaseSniff implements Sniff {
 
 		$tokens            = $phpcsFile->getTokens();
 		$previous          = $phpcsFile->findPrevious( T_WHITESPACE, $stackPtr - 1, null, true );
-		$previousStatement = $phpcsFile->findFirstOnLine( [ T_SWITCH, T_CASE, T_DEFAULT ], $previous );
-
-		if ( empty( $previousStatement ) && $tokens[ $stackPtr ]['line'] - $tokens[ $previous ]['line'] === 1 ) {
-			$this->addEmptyLineError( $phpcsFile, $stackPtr );
-
-			return;
-		}
+		$previousStatement = $phpcsFile->findFirstOnLine( [ T_SWITCH, T_CASE, T_DEFAULT, T_BREAK ], $previous );
 
 		if ( ! empty( $previousStatement ) && $tokens[ $stackPtr ]['line'] - $tokens[ $previous ]['line'] > 1 ) {
 			$this->removeEmptyLineError( $phpcsFile, $stackPtr );
@@ -128,8 +122,14 @@ class SwitchSniff extends BaseSniff implements Sniff {
 		$tokens   = $phpcsFile->getTokens();
 		$previous = $phpcsFile->findPrevious( T_WHITESPACE, $stackPtr - 1, null, true );
 
-		if ( $tokens[ $stackPtr ]['line'] - $tokens[ $previous ]['line'] > 1 ) {
-			$this->removeEmptyLineError( $phpcsFile, $stackPtr );
+		if ( $tokens[ $previous ]['code'] === T_OPEN_CURLY_BRACKET ) {
+			return;
+		}
+
+		$previousStatement = $phpcsFile->findFirstOnLine( [ T_CASE, T_DEFAULT ], $previous );
+
+		if ( empty( $previousStatement ) && $tokens[ $stackPtr ]['line'] - $tokens[ $previous ]['line'] !== 2 ) {
+			$this->addEmptyLineError( $phpcsFile, $stackPtr );
 
 			return;
 		}
