@@ -6,4 +6,8 @@
 	<rule ref="WordPress">
 		<exclude name="WordPress.NamingConventions"/>
 	</rule>
+	<rule ref="Squiz.NamingConventions.ValidVariableName">
+		<exclude name="Squiz.NamingConventions.ValidVariableName.PrivateNoUnderscore"/>
+	</rule>
+	<rule ref="PSR1.Methods.CamelCapsMethodName"/>
 </ruleset>

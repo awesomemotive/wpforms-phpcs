@@ -38,20 +38,20 @@ class EmptyLineAfterAssigmentVariablesSniff extends BaseSniff implements Sniff {
 	 */
 	public function process( File $phpcsFile, $stackPtr ) {
 
-		$tokens                   = $phpcsFile->getTokens();
-		$first_open_curly_bracket = $phpcsFile->findNext( [ T_OPEN_CURLY_BRACKET ], $stackPtr + 1 );
+		$tokens                = $phpcsFile->getTokens();
+		$firstOpenCurlyBracket = $phpcsFile->findNext( [ T_OPEN_CURLY_BRACKET ], $stackPtr + 1 );
 
 		// Skip default values for function/methods arguments.
-		if ( $first_open_curly_bracket && $tokens[ $first_open_curly_bracket ]['line'] === $tokens[ $stackPtr ]['line'] ) {
+		if ( $firstOpenCurlyBracket && $tokens[ $firstOpenCurlyBracket ]['line'] === $tokens[ $stackPtr ]['line'] ) {
 			return;
 		}
 
 		// Detect the last ";" for detect end of this operation for multiline expressions.
-		$semicolon            = $phpcsFile->findNext( [ T_SEMICOLON ], $stackPtr + 1 );
-		$next_after_semicolon = $phpcsFile->findNext( Tokens::$emptyTokens, $semicolon + 1, null, true );
+		$semicolon          = $phpcsFile->findNext( [ T_SEMICOLON ], $stackPtr + 1 );
+		$nextAfterSemicolon = $phpcsFile->findNext( Tokens::$emptyTokens, $semicolon + 1, null, true );
 
 		// Skip conditions and loops.
-		if ( $next_after_semicolon && $tokens[ $semicolon ]['line'] === $tokens[ $next_after_semicolon ]['line'] ) {
+		if ( $nextAfterSemicolon && $tokens[ $semicolon ]['line'] === $tokens[ $nextAfterSemicolon ]['line'] ) {
 			return;
 		}
 

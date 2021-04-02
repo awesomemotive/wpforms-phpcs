@@ -20,7 +20,7 @@
 		}
 	},
 	"scripts": {
-		"cs": "vendor/bin/phpcs --standard=.phpcs.xml ./WPForms/",
+		"cs": "vendor/bin/phpcs --standard=.phpcs.xml ./WPForms/ -s",
 		"unit": "vendor/bin/phpunit --configuration ./WPForms/Tests/phpunit.xml"
 	}
 }

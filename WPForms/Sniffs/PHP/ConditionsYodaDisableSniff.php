@@ -58,8 +58,8 @@ class ConditionsYodaDisableSniff extends BaseSniff implements Sniff {
 
 		// Skip if before method.
 		if ( $tokens[ $beforeCompare ]['code'] === T_CLOSE_PARENTHESIS ) {
-			$open_parenthesis = $phpcsFile->findPrevious( T_OPEN_PARENTHESIS, $beforeCompare - 1 );
-			$name             = $phpcsFile->findPrevious( Tokens::$emptyTokens, $open_parenthesis - 1, null, true );
+			$openParenthesis = $phpcsFile->findPrevious( T_OPEN_PARENTHESIS, $beforeCompare - 1 );
+			$name            = $phpcsFile->findPrevious( Tokens::$emptyTokens, $openParenthesis - 1, null, true );
 
 			if ( $tokens[ $name ]['code'] === T_STRING ) {
 				return;

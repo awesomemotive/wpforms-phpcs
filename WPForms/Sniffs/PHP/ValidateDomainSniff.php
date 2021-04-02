@@ -132,14 +132,14 @@ class ValidateDomainSniff extends BaseSniff implements Sniff {
 	 */
 	private function getCurrentDomains( $phpcsFile, $stackPtr ) {
 
-		$tokens        = $phpcsFile->getTokens();
-		$last_argument = $phpcsFile->findPrevious(
+		$tokens       = $phpcsFile->getTokens();
+		$lastArgument = $phpcsFile->findPrevious(
 			T_CONSTANT_ENCAPSED_STRING,
 			$phpcsFile->findNext( T_CLOSE_PARENTHESIS, $stackPtr )
 		);
 
 		return strtolower(
-			preg_replace( '/[\'\"]/', '', $tokens [ $last_argument ]['content'] )
+			preg_replace( '/[\'\"]/', '', $tokens [ $lastArgument ]['content'] )
 		);
 	}
 
