@@ -56,7 +56,7 @@ class UseStatementSniff extends BaseSniff implements Sniff {
 		}
 
 		$phpcsFile->addError(
-			'Remove unneeded the `use` statement',
+			'Remove unneeded `use` statement',
 			$stackPtr,
 			'UnusedUseStatement'
 		);
