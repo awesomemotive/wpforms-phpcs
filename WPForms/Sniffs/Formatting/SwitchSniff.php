@@ -42,8 +42,7 @@ class SwitchSniff extends BaseSniff implements Sniff {
 	 */
 	public function process( File $phpcsFile, $stackPtr ) {
 
-		$tokens   = $phpcsFile->getTokens();
-		$previous = $phpcsFile->findPrevious( T_WHITESPACE, $stackPtr - 1, null, true );
+		$tokens = $phpcsFile->getTokens();
 
 		if ( $tokens[ $stackPtr ]['code'] === T_SWITCH ) {
 			$this->processSwitch( $phpcsFile, $stackPtr );
