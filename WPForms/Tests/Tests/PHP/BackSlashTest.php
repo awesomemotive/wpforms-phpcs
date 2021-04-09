@@ -21,7 +21,7 @@ class BackSlashTest extends TestCase {
 
 		$phpcsFile = $this->process( new BackSlashSniff() );
 
-		$this->fileHasErrors( $phpcsFile, 'RemoveBackslash', [ 17, 19 ] );
-		$this->fileHasErrors( $phpcsFile, 'UseShortSyntax', [ 18, 20, 21 ] );
+		$this->fileHasErrors( $phpcsFile, 'RemoveBackslash', [ 25, 27, 40, 42 ] );
+		$this->fileHasErrors( $phpcsFile, 'UseShortSyntax', [ 26, 28, 29, 33, 35 ] );
 	}
 }
