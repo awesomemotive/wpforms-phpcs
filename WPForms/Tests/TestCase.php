@@ -30,8 +30,9 @@ class TestCase extends \PHPUnit\Framework\TestCase {
 	 */
 	protected function process( Sniff $className, $rulesetName = '' ) {
 
-		$class     = new ReflectionClass( $className );
-		$localFile = WPFORMS_TESTED_FILES_PATH . str_replace( 'Sniff.php', '.php', str_replace( WPFORMS_SNIFFS_PATH, '', $class->getFileName() ) );
+		$class         = new ReflectionClass( $className );
+		$classFileName = $this->normalizeFilename( $class->getFileName() );
+		$localFile     = WPFORMS_TESTED_FILES_PATH . str_replace( 'Sniff.php', '.php', str_replace( WPFORMS_SNIFFS_PATH, '', $classFileName ) );
 
 		if ( ! file_exists( $localFile ) ) {
 			throw new RuntimeException(
@@ -42,11 +43,12 @@ class TestCase extends \PHPUnit\Framework\TestCase {
 			);
 		}
 
-		$rulesetName = $rulesetName ? 'WPForms/Tests/TestedRulesets/' . $rulesetName . '/ruleset.xml' : 'WPForms/Tests/TestedRulesets/Default/ruleset.xml';
+		$rulesetName = $rulesetName ? 'TestedRulesets/' . $rulesetName . '/ruleset.xml' : 'TestedRulesets/Default/ruleset.xml';
+		$rulesetName = realpath( $this->normalizeFilename( WPFORMS_TESTS_PATH . $rulesetName ) );
 		$config      = new Config( [ '--standard=' . $rulesetName ] );
 		$ruleset     = new Ruleset( $config );
 
-		$ruleset->registerSniffs( [ $class->getFileName() ], [], [] );
+		$ruleset->registerSniffs( [ $classFileName ], [], [] );
 		$ruleset->populateTokenListeners();
 
 		$phpcsFile = new LocalFile(
@@ -84,5 +86,19 @@ class TestCase extends \PHPUnit\Framework\TestCase {
 		}
 
 		self::assertEquals( $errors, $lines );
+	}
+
+	/**
+	 * Return filename with current OS directory separators.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $filename Filename.
+	 *
+	 * @return string
+	 */
+	private function normalizeFilename( $filename ) {
+
+		return str_replace( '/', DIRECTORY_SEPARATOR, $filename );
 	}
 }
