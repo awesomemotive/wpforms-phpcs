@@ -1,4 +1,11 @@
-# WPForms Coding Standards for PHP_CodeSniffer
+# WPForms Coding Standards
+
+Maintainers: WPForms team
+
+License: GPLv2 or later, at your option  
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+##Description
 
 WPForms coding standards help create strict and high-quality code. WPForms coding standards are based on the [WordPress Coding Standards](https://github.com/WordPress/WordPress-Coding-Standards) and the [PHPCompatibility Coding Standards](https://github.com/PHPCompatibility/PHPCompatibility).
 
