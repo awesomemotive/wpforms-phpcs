@@ -4,7 +4,6 @@ namespace WPForms\Sniffs\Comments;
 
 use WPForms\Traits\Version;
 use WPForms\Sniffs\BaseSniff;
-use WPForms\Traits\CommentTag;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
 use WPForms\Traits\GetEntityName;
@@ -22,7 +21,7 @@ class DeprecatedTagHooksSniff extends BaseSniff implements Sniff {
 	use DuplicateHook;
 
 	/**
-	 * List of functions which required deprecated tag.
+	 * List of functions which require deprecated tag.
 	 *
 	 * @since 1.0.0
 	 */
@@ -193,8 +192,6 @@ class DeprecatedTagHooksSniff extends BaseSniff implements Sniff {
 	 * @param array  $deprecated Deprecated tag data.
 	 */
 	private function processLines( $phpcsFile, $hookName, $deprecated ) {
-
-		$tokens = $phpcsFile->getTokens();
 
 		if (
 			$this->isLastTag( $phpcsFile, $deprecated ) ||

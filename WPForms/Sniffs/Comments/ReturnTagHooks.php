@@ -28,7 +28,7 @@ class ReturnTagHooks extends BaseSniff implements Sniff {
 	];
 
 	/**
-	 * List of hook functions that non required `@return` type.
+	 * List of hook functions that do not require `@return` type.
 	 *
 	 * @since 1.0.0
 	 */

@@ -4,7 +4,6 @@ namespace WPForms\Tests\Comments;
 
 use WPForms\Tests\TestCase;
 use WPForms\Sniffs\Comments\ReturnTagHooks;
-use WPForms\Sniffs\Comments\PHPDocHooksSniff;
 
 /**
  * Class ReturnTagHooksTest.
