@@ -12,12 +12,26 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Checkout
       - uses: actions/checkout@v2
+
+      - name: Get Composer cache directory
+        id: composer-cache
+        run: echo "::set-output name=dir::$(composer config cache-files-dir)"
+
+      - name: Setup Composer caching
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-composer-dependencies
+        with:
+          path: ${{ steps.composer-cache.outputs.dir }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
 
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-          tools: pecl
           php-version: ${{ matrix.php-versions }}
 
       - name: Validate composer.json and composer.lock
@@ -26,8 +40,8 @@ jobs:
       - name: Install dependencies
         run: composer install
 
-      - name: WPCS validate
+      - name: Run code sniffer
         run: composer cs
 
-      - name: Tests
+      - name: Run phpunit tests
         run: composer unit
