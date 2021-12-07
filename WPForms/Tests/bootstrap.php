@@ -1,4 +1,7 @@
 <?php
+/**
+ * Bootstrap file for phpunit tests.
+ */
 
 /**
  * Path to tests.
