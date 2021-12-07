@@ -98,7 +98,7 @@ class ValidateHooksSniff extends BaseSniff implements Sniff {
 		$filePath   = $this->getRelatedPath( $phpcsFile );
 		$hookPieces = array_filter(
 			explode(
-				'/',
+				DIRECTORY_SEPARATOR,
 				strtolower(
 					sprintf(
 						'%s_%s',

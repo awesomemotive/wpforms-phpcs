@@ -61,7 +61,7 @@ class ValidateDomainSniff extends BaseSniff implements Sniff {
 	 */
 	public function __set( $name, $value ) {
 
-		$value = explode( ',', $value );
+		$value = explode( ',', $this->normalizeFilename( $value ) );
 
 		$this->domains[ strtolower( $name ) ] = $value;
 	}
