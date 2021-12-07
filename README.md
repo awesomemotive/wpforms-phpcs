@@ -1,11 +1,18 @@
-# WPForms Coding Standards for PHP_CodeSniffer
+# WPForms Coding Standards
 
-Coding standards for WPForms team then allow keeping code strict and consistently high quality. WPForms coding standards based on the [WordPress Coding Standards](https://github.com/WordPress/WordPress-Coding-Standards) and the [PHPCompatibility Coding Standards](https://github.com/PHPCompatibility/PHPCompatibility).
+Maintainers: WPForms team
+
+License: GPLv2 or later, at your option  
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+
+##Description
+
+WPForms coding standards help create strict and high-quality code. WPForms coding standards are based on the [WordPress Coding Standards](https://github.com/WordPress/WordPress-Coding-Standards) and the [PHPCompatibility Coding Standards](https://github.com/PHPCompatibility/PHPCompatibility).
 
 ## Installation
 
 ```
-composer require ... --dev
+composer require wpforms-phpcs --dev
 ```
 
 ## Configuration
@@ -37,15 +44,13 @@ Create the `.phpcs.xml` or `phpcs.xml` file at the root of your project:
 
 ## Sniffs detail
 
-### Validate Domain Sniff
+### Validate Text Domain Sniff
 
-The `WPForms.PHP.ValidateDomain` sniff validate that you're using the correct domain for i18n functions such as `__()`, `_e()`, `_n()`, etc.
+The `WPForms.PHP.ValidateDomain` sniff validates that you are using the correct text domain for `i18n` functions such as `__()`, `_e()`, `_n()`, etc.
 
-This sniff has a lot of settings. By default, it works for 1 domain-based project. We get a directory name where based on the `vendor` directory or the `phpcs.xml`/`.phpcs.xml` file.
+By default, this sniff works for one domain in the project. We get a directory name based on the `vendor` directory or the location of the `phpcs.xml`/`.phpcs.xml` file.
 
-Also, you can install our package to the plugins directory and enable the multi-domain mode.
-
-Also, you can install our package to the `plugins` directory and enable the multi-domain mode. Then domain will the next folder name in the path. Structure:
+You can install our package to the `plugins` directory and enable the multi-domain mode. in this case, the text domain will be the next folder name in the path. Structure:
 
 ```
 ../wp-content/plugins/          # → Root
@@ -64,8 +69,7 @@ In your config you should enable the `multi_domains` property:
 </ruleset>
 ```
 
-The next point if you have different domains for some directories (for example, for free and paid versions) inside your project and going to rewrite the domain for some paths:
-
+If you have different domains for directories inside your project (for example, for free and paid versions) and want to redefine the text domain for some paths:
 ```
 ../wp-content/plugins/          # → Root
 ├── wpforms/                    # → `wpforms-lite` domain.
@@ -76,7 +80,7 @@ The next point if you have different domains for some directories (for example, 
 └── wpforms-stripe/             # → `wpforms-stripe` domain.
 ```
 
-In your config, you should set the property with the `name` as a domain name and the `value` as a path. If this domain has a few paths, then pass them throw a comma.
+In this case, you should add to the config file the property with `name` as a text domain and `value` as a path. If a domain has several paths, then list them via commas.
 
 ```xml
 <?xml version="1.0"?>
@@ -92,4 +96,3 @@ In your config, you should set the property with the `name` as a domain name and
 	<!-- ... -->
 </ruleset>
 ```
-
