@@ -15,7 +15,10 @@ class ValidateDomainTest extends TestCase {
 	/**
 	 * Test process without options.
 	 *
-	 * @since 1.0.0
+	 * @since               1.0.0
+	 *
+	 * @runInSeparateProcess
+	 * @preserveGlobalState disabled
 	 */
 	public function testProcess() {
 
@@ -27,7 +30,10 @@ class ValidateDomainTest extends TestCase {
 	/**
 	 * Test process with multi-domains.
 	 *
-	 * @since 1.0.0
+	 * @since               1.0.0
+	 *
+	 * @runInSeparateProcess
+	 * @preserveGlobalState disabled
 	 */
 	public function testProcessWithMultiDomains() {
 
@@ -39,7 +45,10 @@ class ValidateDomainTest extends TestCase {
 	/**
 	 * Test process with rewrites.
 	 *
-	 * @since 1.0.0
+	 * @since               1.0.0
+	 *
+	 * @runInSeparateProcess
+	 * @preserveGlobalState disabled
 	 */
 	public function testProcessWithRewrittenPaths() {
 

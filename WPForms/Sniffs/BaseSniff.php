@@ -82,4 +82,18 @@ abstract class BaseSniff {
 
 		return str_replace( $root, '', $filePath );
 	}
+
+	/**
+	 * Return filename with current OS directory separators.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param string $filename Filename.
+	 *
+	 * @return string
+	 */
+	protected function normalizeFilename( $filename ) {
+
+		return str_replace( '/', DIRECTORY_SEPARATOR, $filename );
+	}
 }
