@@ -96,8 +96,6 @@ class ShortDescriptionHooksSniff extends BaseSniff implements Sniff {
 				$last,
 				'AddStopSymbol'
 			);
-
-			return;
 		}
 	}
 }

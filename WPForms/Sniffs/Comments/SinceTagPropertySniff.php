@@ -25,10 +25,10 @@ class SinceTagPropertySniff extends PropertyBaseSniff {
 	 * @param File $phpcsFile The PHP_CodeSniffer file where this token was found.
 	 * @param int  $stackPtr  The position where the token was found.
 	 *
-	 * @return void|int Optionally returns a stack pointer. The sniff will not be
-	 *                  called again on the current file until the returned stack
-	 *                  pointer is reached. Return ($phpcsFile->numTokens + 1) to skip
-	 *                  the rest of the file.
+	 * @return void Optionally returns a stack pointer. The sniff will not be
+	 *              called again on the current file until the returned stack
+	 *              pointer is reached. Return ($phpcsFile->numTokens + 1) to skip
+	 *              the rest of the file.
 	 */
 	protected function processMemberVar( File $phpcsFile, $stackPtr ) {
 

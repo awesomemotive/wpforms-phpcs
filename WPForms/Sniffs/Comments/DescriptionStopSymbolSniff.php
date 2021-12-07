@@ -82,8 +82,6 @@ class DescriptionStopSymbolSniff extends BaseSniff implements Sniff {
 				$last,
 				'AddStopSymbol'
 			);
-
-			return;
 		}
 	}
 }

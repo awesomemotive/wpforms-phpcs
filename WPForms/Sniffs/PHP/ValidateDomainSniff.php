@@ -58,6 +58,8 @@ class ValidateDomainSniff extends BaseSniff implements Sniff {
 	 *
 	 * @param string $name  Property name.
 	 * @param mixed  $value Value.
+	 *
+	 * @noinspection MagicMethodsValidityInspection
 	 */
 	public function __set( $name, $value ) {
 

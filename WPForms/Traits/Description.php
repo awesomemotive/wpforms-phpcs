@@ -19,7 +19,7 @@ trait Description {
 	 * @param File $phpcsFile    The PHP_CodeSniffer file where the token was found.
 	 * @param int  $commentStart Position of comment start.
 	 *
-	 * @return mixed
+	 * @return false|int
 	 */
 	protected function findFirstDescriptionLine( $phpcsFile, $commentStart ) {
 

@@ -127,8 +127,6 @@ class SinceTagHooksSniff extends BaseSniff implements Sniff {
 				$since['tag'],
 				'InvalidSinceVersion'
 			);
-
-			return;
 		}
 	}
 

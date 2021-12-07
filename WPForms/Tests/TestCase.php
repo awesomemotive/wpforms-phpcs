@@ -26,7 +26,7 @@ class TestCase extends \PHPUnit\Framework\TestCase {
 	 *
 	 * @return LocalFile
 	 *
-	 * @throws RuntimeException Tested file doesn't exists.
+	 * @throws RuntimeException Tested file doesn't exist.
 	 */
 	protected function process( Sniff $className, $rulesetName = '' ) {
 
@@ -37,7 +37,7 @@ class TestCase extends \PHPUnit\Framework\TestCase {
 		if ( ! file_exists( $localFile ) ) {
 			throw new RuntimeException(
 				sprintf(
-					'The %s file doesn\'t exist',
+					'The %s file does not exist',
 					$localFile
 				)
 			);

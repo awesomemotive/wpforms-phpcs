@@ -69,8 +69,6 @@ class TranslatorsSniff extends BaseSniff implements Sniff {
 				$stackPtr,
 				'InvalidCommentTag'
 			);
-
-			return;
 		}
 	}
 

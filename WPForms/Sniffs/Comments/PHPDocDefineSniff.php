@@ -81,8 +81,6 @@ class PHPDocDefineSniff extends BaseSniff implements Sniff {
 				$last,
 				'AddStopSymbol'
 			);
-
-			return;
 		}
 	}
 }

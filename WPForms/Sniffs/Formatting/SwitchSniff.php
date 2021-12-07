@@ -134,8 +134,6 @@ class SwitchSniff extends BaseSniff implements Sniff {
 			in_array( $tokens[ $previousStatement ]['code'], [ T_CASE, T_DEFAULT ], true )
 		) {
 			$this->removeEmptyLineError( $phpcsFile, $stackPtr );
-
-			return;
 		}
 	}
 
@@ -160,8 +158,6 @@ class SwitchSniff extends BaseSniff implements Sniff {
 
 		if ( empty( $previousStatement ) && $tokens[ $stackPtr ]['line'] - $tokens[ $previous ]['line'] !== 2 ) {
 			$this->addEmptyLineError( $phpcsFile, $stackPtr );
-
-			return;
 		}
 	}
 
