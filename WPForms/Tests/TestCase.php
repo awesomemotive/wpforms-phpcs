@@ -85,6 +85,8 @@ class TestCase extends \PHPUnit\Framework\TestCase {
 			}
 		}
 
+		sort( $errors );
+
 		self::assertEquals( $lines, $errors );
 	}
 
