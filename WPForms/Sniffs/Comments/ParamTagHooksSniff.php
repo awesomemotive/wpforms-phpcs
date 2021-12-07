@@ -158,8 +158,6 @@ class ParamTagHooksSniff extends BaseSniff implements Sniff {
 
 			if ( ! empty( $tokens[ $currentPosition + 3 ]['parenthesis_closer'] ) ) {
 				$currentPosition = $tokens[ $currentPosition + 3 ]['parenthesis_closer'] + 1;
-
-				continue;
 			}
 		}
 
@@ -212,7 +210,7 @@ class ParamTagHooksSniff extends BaseSniff implements Sniff {
 	 * @param File  $phpcsFile The PHP_CodeSniffer file where the token was found.
 	 * @param array $param     List of params tags.
 	 *
-	 * @return mixed
+	 * @return array
 	 */
 	private function processParamTag( $phpcsFile, $param ) {
 

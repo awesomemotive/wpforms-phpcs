@@ -104,8 +104,6 @@ class BackSlashSniff extends BaseSniff implements Sniff {
 
 		if ( preg_match( '~^[\\\]\w+~', $tokens[ $stackPtr ]['content'] ) ) {
 			$this->removeBackslashMessage( $phpcsFile, $stackPtr );
-
-			return;
 		}
 	}
 

@@ -124,27 +124,27 @@ class UseStatementSniff extends BaseSniff implements Sniff {
 	 */
 	private function findInParamsDescription( $phpcsFile, $entityName, $element ) {
 
-		$tokens  = $phpcsFile->getTokens();
-		$element = $phpcsFile->findNext( T_DOC_COMMENT_TAG, $element + 1 );
+		$tokens      = $phpcsFile->getTokens();
+		$nextElement = $phpcsFile->findNext( T_DOC_COMMENT_TAG, $element + 1 );
 
-		if ( empty( $element ) ) {
+		if ( empty( $nextElement ) ) {
 			return false;
 		}
 
-		if ( $tokens[ $element ]['content'] !== '@param' ) {
-			return $this->findInParamsDescription( $phpcsFile, $entityName, $element );
+		if ( $tokens[ $nextElement ]['content'] !== '@param' ) {
+			return $this->findInParamsDescription( $phpcsFile, $entityName, $nextElement );
 		}
 
-		$paramDescription = $element + 2;
+		$paramDescription = $nextElement + 2;
 
 		if ( $tokens[ $paramDescription ]['code'] !== T_DOC_COMMENT_STRING ) {
-			return $this->findInParamsDescription( $phpcsFile, $entityName, $element );
+			return $this->findInParamsDescription( $phpcsFile, $entityName, $nextElement );
 		}
 
 		if ( strpos( $tokens[ $paramDescription ]['content'], $entityName ) === 0 ) {
 			return true;
 		}
 
-		return $this->findInParamsDescription( $phpcsFile, $entityName, $element );
+		return $this->findInParamsDescription( $phpcsFile, $entityName, $nextElement );
 	}
 }

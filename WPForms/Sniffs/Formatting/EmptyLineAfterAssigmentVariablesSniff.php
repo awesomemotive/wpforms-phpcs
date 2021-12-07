@@ -124,7 +124,7 @@ class EmptyLineAfterAssigmentVariablesSniff extends BaseSniff implements Sniff {
 				break;
 			}
 
-			// Skip if it next line is also assignment statement.
+			// Skip if the next line is also assignment statement.
 			if ( in_array( $tokens[ $i ]['code'], Tokens::$assignmentTokens, true ) ) {
 				return [];
 			}
