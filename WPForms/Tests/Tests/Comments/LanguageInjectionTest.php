@@ -21,8 +21,8 @@ class LanguageInjectionTest extends TestCase {
 
 		$phpcsFile = $this->process( new LanguageInjectionSniff(), 'LanguageInjection' );
 
-		$this->fileHasErrors( $phpcsFile, 'SpacingBefore', [ 6 ] );
 		$this->fileHasErrors( $phpcsFile, 'InvalidEndChar', [ 6 ] );
+		$this->fileHasErrors( $phpcsFile, 'SpacingBefore', [ 6 ] );
 		$this->fileHasErrors( $phpcsFile, 'MissingShort', [ 11 ] );
 	}
 }

@@ -47,8 +47,11 @@ class TestCase extends \PHPUnit\Framework\TestCase {
 		$rulesetName = realpath( $this->normalizeFilename( WPFORMS_TESTS_PATH . $rulesetName ) );
 		$config      = new Config( [ '--standard=' . $rulesetName ] );
 		$ruleset     = new Ruleset( $config );
+		$sniffs      = $ruleset->sniffs;
 
 		$ruleset->registerSniffs( [ $classFileName ], [], [] );
+		$ruleset->sniffs = array_merge( $ruleset->sniffs, $sniffs );
+
 		$ruleset->populateTokenListeners();
 
 		$phpcsFile = new LocalFile(

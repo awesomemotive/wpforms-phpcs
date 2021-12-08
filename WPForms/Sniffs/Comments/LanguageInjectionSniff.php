@@ -43,24 +43,29 @@ class LanguageInjectionSniff extends BaseSniff implements Sniff {
 		$tokens = $phpcsFile->getTokens();
 
 		// Allow `// language=` language injection comment.
-		if ( $tokens[ $stackPtr ]['type'] === 'T_COMMENT' && strpos( $tokens[ $stackPtr ]['content'], '// language=' ) === 0 ) {
+		$currentToken = $tokens[ $stackPtr ];
+
+		if ( $currentToken['type'] === 'T_COMMENT' && strpos( $currentToken['content'], '// language=' ) === 0 ) {
 			// Block 'Inline comments must end in full-stops, exclamation marks, or question marks' error.
-			$phpcsFile->tokenizer->ignoredLines[ $tokens[ $stackPtr ]['line'] ] = [ 'Squiz.Commenting.InlineComment.InvalidEndChar' => true ];
+			$phpcsFile->tokenizer->ignoredLines[ $currentToken['line'] ] = [
+				'Squiz.Commenting.InlineComment.InvalidEndChar' => true,
+				'Squiz.Commenting.InlineComment.SpacingBefore' => true,
+			];
 
 			return;
 		}
 
 		if (
-			isset( $tokens[ $stackPtr ]['comment_closer'] ) === false
+			isset( $currentToken['comment_closer'] ) === false
 			|| (
-				$tokens[ $tokens[ $stackPtr ]['comment_closer'] ]['content'] === ''
-				&& $tokens[ $stackPtr ]['comment_closer'] === ( $phpcsFile->numTokens - 1 )
+				$tokens[ $currentToken['comment_closer'] ]['content'] === ''
+				&& $currentToken['comment_closer'] === ( $phpcsFile->numTokens - 1 )
 			)
 		) {
 			return; // Don't process an unfinished comment during live coding.
 		}
 
-		$commentEnd = $tokens[ $stackPtr ]['comment_closer'];
+		$commentEnd = $currentToken['comment_closer'];
 
 		$empty = [
 			T_DOC_COMMENT_WHITESPACE,

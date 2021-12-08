@@ -2,7 +2,7 @@
 <ruleset name="WPForms Tested CS">
 	<description>WPForms Tested CS.</description>
 
-	<config name="installed_paths" value="../../../vendor/wp-coding-standards/wpcs" />
-
-	<rule ref="WordPress" />
+	<rule ref="Squiz.Commenting.InlineComment.InvalidEndChar" />
+	<rule ref="Squiz.Commenting.InlineComment.SpacingBefore" />
+	<rule ref="Generic.Commenting.DocComment.MissingShort" />
 </ruleset>
