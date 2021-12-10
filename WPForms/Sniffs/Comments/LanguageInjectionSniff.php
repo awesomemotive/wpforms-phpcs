@@ -45,7 +45,7 @@ class LanguageInjectionSniff extends BaseSniff implements Sniff {
 		// Allow `// language=` language injection comment.
 		$currentToken = $tokens[ $stackPtr ];
 
-		if ( $currentToken['type'] === 'T_COMMENT' && strpos( $currentToken['content'], '// language=' ) === 0 ) {
+		if ( $currentToken['code'] === T_COMMENT && strpos( $currentToken['content'], '// language=' ) === 0 ) {
 			// Block 'Inline comments must end in full-stops, exclamation marks, or question marks' error.
 			$phpcsFile->tokenizer->ignoredLines[ $currentToken['line'] ] = [
 				'Squiz.Commenting.InlineComment.InvalidEndChar' => true,
@@ -56,7 +56,7 @@ class LanguageInjectionSniff extends BaseSniff implements Sniff {
 		}
 
 		if (
-			isset( $currentToken['comment_closer'] ) === false
+			! isset( $currentToken['comment_closer'] )
 			|| (
 				$tokens[ $currentToken['comment_closer'] ]['content'] === ''
 				&& $currentToken['comment_closer'] === ( $phpcsFile->numTokens - 1 )
