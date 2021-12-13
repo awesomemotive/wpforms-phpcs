@@ -64,13 +64,44 @@
 	<rule ref="Squiz.Commenting.FunctionComment.ParamCommentNotCapital">
 		<severity>5</severity>
 	</rule>
+
 	<rule ref="Squiz.Commenting.FunctionComment.SpacingAfterParamName">
 		<severity>5</severity>
 	</rule>
+
 	<rule ref="Generic.Commenting.DocComment.NonParamGroup">
 		<severity>5</severity>
 	</rule>
+
 	<rule ref="Generic.Arrays.DisallowLongArraySyntax.Found"/>
+
+	<rule ref="WordPress.Security.ValidatedSanitizedInput">
+		<properties>
+			<property name="customSanitizingFunctions" type="array">
+				<element value="wpforms_sanitize_richtext_field"/>
+			</property>
+		</properties>
+	</rule>
+
+	<rule ref="WordPress.Security.EscapeOutput">
+		<properties>
+			<property name="customEscapingFunctions" type="array">
+				<element value="wpforms_esc_richtext_field"/>
+				<element value="wpforms_sanitize_amount"/>
+				<element value="wpforms_sanitize_array_combine"/>
+				<element value="wpforms_sanitize_classes"/>
+				<element value="wpforms_sanitize_error"/>
+				<element value="wpforms_sanitize_hex_color"/>
+				<element value="wpforms_sanitize_key"/>
+				<element value="wpforms_sanitize_textarea_field"/>
+				<element value="wpforms_sanitize_text_deeply"/>
+				<!-- Safe functions -->
+				<element value="wpforms_format_amount"/>
+				<element value="wpforms_html_attributes"/>
+				<element value="wpforms_panel_field"/>
+			</property>
+		</properties>
+	</rule>
 
 	<rule ref="Generic.Metrics.CyclomaticComplexity">
 		<properties>
@@ -83,5 +114,46 @@
 		<properties>
 			<property name="absoluteNestingLevel" value="3"/>
 		</properties>
+	</rule>
+
+	<!-- Coding standards for tests -->
+	<rule ref="Squiz.Commenting.FunctionComment.EmptyThrows">
+		<exclude-pattern>\.codeception/_support/*</exclude-pattern>
+		<exclude-pattern>*/tests/*</exclude-pattern>
+	</rule>
+	<rule ref="PSR2.Methods.MethodDeclaration.Underscore">
+		<exclude-pattern>\.codeception/_support/*</exclude-pattern>
+		<exclude-pattern>*/tests/*</exclude-pattern>
+	</rule>
+	<rule ref="WordPress.NamingConventions.ValidFunctionName.MethodNameInvalid">
+		<exclude-pattern>\.codeception/_support/*</exclude-pattern>
+		<exclude-pattern>*/tests/acceptance/*</exclude-pattern>
+	</rule>
+	<rule ref="WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase">
+		<exclude-pattern>\.codeception/_support/*</exclude-pattern>
+		<exclude-pattern>*/tests/acceptance/*</exclude-pattern>
+	</rule>
+	<rule ref="WordPress.NamingConventions.ValidVariableName.VariableNotSnakeCase">
+		<exclude-pattern>\.codeception/_support/*</exclude-pattern>
+		<exclude-pattern>*/tests/acceptance/*</exclude-pattern>
+	</rule>
+	<rule ref="WordPress.NamingConventions.ValidVariableName.PropertyNotSnakeCase">
+		<exclude-pattern>\.codeception/_support/*</exclude-pattern>
+		<exclude-pattern>*/tests/acceptance/*</exclude-pattern>
+	</rule>
+
+	<rule ref="WPForms.Comments.SinceTag.MissingSince">
+		<exclude-pattern>\.codeception/_support/*</exclude-pattern>
+		<exclude-pattern>*/tests/acceptance/*</exclude-pattern>
+	</rule>
+	<rule ref="WPForms.Comments.SinceTagProperty.MissingPhpDoc">
+		<exclude-pattern>\.codeception/_support/*</exclude-pattern>
+		<exclude-pattern>*/tests/acceptance/*</exclude-pattern>
+	</rule>
+
+	<rule ref="Squiz.NamingConventions.ValidVariableName">
+		<exclude name="Squiz.NamingConventions.ValidVariableName.PrivateNoUnderscore"/>
+		<include-pattern>\.codeception/_support/*</include-pattern>
+		<include-pattern>*/tests/acceptance/*</include-pattern>
 	</rule>
 </ruleset>
