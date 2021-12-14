@@ -4,6 +4,7 @@
 	<exclude-pattern>\.packages/*</exclude-pattern>
 	<exclude-pattern>\.vendor/*</exclude-pattern>
 	<exclude-pattern>\.codeception/*</exclude-pattern>
+	<exclude-pattern>vendor/*</exclude-pattern>
 	<exclude-pattern>wpforms/libs/*</exclude-pattern>
 	<arg name="colors"/>
 	<arg name="parallel" value="100"/>
