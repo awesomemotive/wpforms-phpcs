@@ -102,7 +102,7 @@ class TestCase extends \PHPUnit\Framework\TestCase {
 	 *
 	 * @return string
 	 */
-	private function normalizeFilename( $filename ) {
+	protected function normalizeFilename( $filename ) {
 
 		return str_replace( '/', DIRECTORY_SEPARATOR, $filename );
 	}

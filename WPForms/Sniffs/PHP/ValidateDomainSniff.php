@@ -156,7 +156,7 @@ class ValidateDomainSniff extends BaseSniff implements Sniff {
 	 */
 	private function getExpectedDomain( $phpcsFile ) {
 
-		$filePath = $this->getRelatedPath( $phpcsFile );
+		$filePath = $this->getRelativePath( $phpcsFile );
 		$root     = $this->getRootDirectory( $phpcsFile );
 
 		if ( ! empty( $this->domains ) ) {

@@ -67,7 +67,7 @@ abstract class BaseSniff {
 	}
 
 	/**
-	 * Get project root directory.
+	 * Get relative path from project root directory.
 	 *
 	 * @since 1.0.0
 	 *
@@ -75,10 +75,31 @@ abstract class BaseSniff {
 	 *
 	 * @return string
 	 */
-	protected function getRelatedPath( $phpcsFile ) {
+	protected function getRelativePath( $phpcsFile ) {
 
 		$filePath = realpath( $phpcsFile->path );
 		$root     = $this->getRootDirectory( $phpcsFile );
+
+		$csFolder = 'php_codesniffertemp_folder';
+
+		if ( stripos( $filePath, $csFolder ) !== false ) {
+			// Special case for processing temp file in the PhpStorm temp folder.
+			$filePath = preg_replace( '#.+[/\\\]' . $csFolder . '\d+[/\\\]#i', '', $filePath );
+
+			$rootArr = array_filter( explode( DIRECTORY_SEPARATOR, $root ) );
+
+			$count = count( $rootArr );
+
+			for ( $i = 0; $i < $count; $i++ ) {
+				$rootPart = implode( DIRECTORY_SEPARATOR, array_slice( $rootArr, $i ) );
+
+				if ( strpos( $filePath, $rootPart ) === 0 ) {
+					return str_replace( $rootPart, '', $filePath );
+				}
+			}
+
+			return $filePath;
+		}
 
 		return str_replace( $root, '', $filePath );
 	}
