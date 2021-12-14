@@ -175,3 +175,8 @@ do_action(
 		'entry'     => $this->entry,
 	]
 );
+
+// The next case generated the endless loop in the \WPForms\Sniffs\Comments\ParamTagHooksSniff::countArguments.
+
+/** This action is documented in some-class.php. */
+do_action( 'wpforms_display_submit_after', $this->displaysubmit_after_action );
