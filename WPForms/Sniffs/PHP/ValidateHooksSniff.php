@@ -2,7 +2,6 @@
 
 namespace WPForms\Sniffs\PHP;
 
-use PHP_CodeSniffer\Config;
 use WPForms\Sniffs\BaseSniff;
 use PHP_CodeSniffer\Files\File;
 use PHP_CodeSniffer\Sniffs\Sniff;
@@ -60,9 +59,9 @@ class ValidateHooksSniff extends BaseSniff implements Sniff {
 
 		$hookNamePtr  = $phpcsFile->findNext( T_CONSTANT_ENCAPSED_STRING, $stackPtr + 1 );
 		$hookName     = trim( $tokens[ $hookNamePtr ]['content'], '"\'' );
-		$expectedName = $this->getExpectedHookName( $phpcsFile );
+		$expectedName = $this->getFullyQualifiedClassName( $phpcsFile );
 
-		if ( 0 === strpos( $hookName, $expectedName ) ) {
+		if ( ! $expectedName || 0 === strpos( $hookName, $expectedName ) ) {
 			return;
 		}
 
@@ -78,7 +77,7 @@ class ValidateHooksSniff extends BaseSniff implements Sniff {
 	}
 
 	/**
-	 * Get Expected hook name.
+	 * Get fully qualified class name.
 	 *
 	 * @since 1.0.0
 	 *
@@ -86,33 +85,36 @@ class ValidateHooksSniff extends BaseSniff implements Sniff {
 	 *
 	 * @return string
 	 */
-	private function getExpectedHookName( $phpcsFile ) {
+	private function getFullyQualifiedClassName( $phpcsFile ) {
 
-		if (
-			empty( $phpcsFile->ruleset ) ||
-			empty( $phpcsFile->ruleset->paths[0] )
-		) {
-			return '';
+		$namespace    = '';
+		$class        = '';
+		$stackPtr     = 0;
+		$namespacePtr = $phpcsFile->findNext( T_NAMESPACE, $stackPtr );
+
+		if ( $namespacePtr !== false ) {
+			$nsEnd = $phpcsFile->findNext(
+				[ T_NS_SEPARATOR, T_STRING, T_WHITESPACE ],
+				$namespacePtr + 1,
+				null,
+				true
+			);
+
+			$namespace = trim( $phpcsFile->getTokensAsString( ( $namespacePtr + 1 ), ( $nsEnd - $namespacePtr - 1 ) ) );
+			$stackPtr  = $nsEnd;
 		}
 
-		$filePath   = $this->getRelativePath( $phpcsFile );
-		$hookPieces = array_filter(
-			explode(
-				DIRECTORY_SEPARATOR,
-				strtolower(
-					sprintf(
-						'%s_%s',
-						pathinfo( $filePath, PATHINFO_DIRNAME ),
-						pathinfo( $filePath, PATHINFO_FILENAME )
-					)
-				)
-			)
-		);
+		$classPtr = $phpcsFile->findNext( T_CLASS, $stackPtr );
 
-		if ( Config::getConfigData( 'multi_domains' ) ) {
-			array_shift( $hookPieces );
+		if ( $classPtr !== false ) {
+			$classEnd = $phpcsFile->findNext(
+				[ T_EXTENDS, T_IMPLEMENTS, 'PHPCS_T_OPEN_CURLY_BRACKET' ],
+				$classPtr + 1
+			);
+
+			$class = trim( $phpcsFile->getTokensAsString( ( $classPtr + 1 ), ( $classEnd - $classPtr - 1 ) ) );
 		}
 
-		return implode( '_', $hookPieces );
+		return strtolower( str_replace( '\\', '_', $namespace ? $namespace . '\\' . $class : $class ) );
 	}
 }
