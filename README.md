@@ -22,7 +22,7 @@ Create the `.phpcs.xml` or `phpcs.xml` file at the root of your project:
 ```xml
 <?xml version="1.0"?>
 <ruleset name="WPForms CS">
-	<description>The code standard for WPForms.</description>
+	<description>The WPForms coding standard.</description>
 
 	<exclude-pattern>\vendor/*</exclude-pattern>
 	<exclude-pattern>\.github/*</exclude-pattern>
