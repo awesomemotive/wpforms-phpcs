@@ -2,6 +2,7 @@
 
 namespace WPForms\Tests;
 
+use PHP_CodeSniffer\Exceptions\DeepExitException;
 use ReflectionClass;
 use RuntimeException;
 use PHP_CodeSniffer\Config;
@@ -15,6 +16,23 @@ use PHP_CodeSniffer\Files\LocalFile;
  * @since 1.0.0
  */
 class TestCase extends \PHPUnit\Framework\TestCase {
+
+	/**
+	 * Set up test.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @return void
+	 * @throws DeepExitException DeepExitException.
+	 */
+	public function setUp() {
+
+		parent::setUp();
+
+		$config = new Config();
+
+		$config::setConfigData( 'multi_domains', null );
+	}
 
 	/**
 	 * Process file with exact sniff.
