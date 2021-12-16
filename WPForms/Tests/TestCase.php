@@ -2,6 +2,7 @@
 
 namespace WPForms\Tests;
 
+// phpcs:ignore WPForms.PHP.UseStatement.UnusedUseStatement
 use PHP_CodeSniffer\Exceptions\DeepExitException;
 use ReflectionClass;
 use RuntimeException;
