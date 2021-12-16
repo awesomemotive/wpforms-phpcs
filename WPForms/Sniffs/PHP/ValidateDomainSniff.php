@@ -187,6 +187,7 @@ class ValidateDomainSniff extends BaseSniff implements Sniff {
 	 */
 	private function findDomainByProperty( $filePath ) {
 
+		$filePath      = ltrim( $filePath, DIRECTORY_SEPARATOR );
 		$currentDomain = '';
 		$currentPath   = '';
 
