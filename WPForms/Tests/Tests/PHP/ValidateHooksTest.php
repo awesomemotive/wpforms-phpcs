@@ -23,16 +23,4 @@ class ValidateHooksTest extends TestCase {
 
 		$this->fileHasErrors( $phpcsFile, 'InvalidHookName', [ 16, 17, 18, 19, 21, 22 ] );
 	}
-
-	/**
-	 * Test process with multi domains.
-	 *
-	 * @since               1.0.0
-	 */
-	public function testProcessWithMultiDomains() {
-
-		$phpcsFile = $this->process( new ValidateHooksSniff(), 'MultiDomains' );
-
-		$this->fileHasErrors( $phpcsFile, 'InvalidHookName', [ 3, 4, 5, 6, 13, 14 ] );
-	}
 }
