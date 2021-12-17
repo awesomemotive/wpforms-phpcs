@@ -29,4 +29,20 @@ _n( 'Invalid', 'Invalid', 10, 'wpforms' );
 _ex( 'Invalid', 'Invalid', 'wpforms' );
 _nx( 'Invalid', 'Invalid', 10, 'Invalid', 'wpforms' );
 
+
+// Additional two cases of valid syntax when text domain is not specified.
+esc_html__( 'Valid' );
+
+// Not a string as the last argument.
+$bulk_counts['read'] = 25;
+_n( '%d entry.', '%d entries.', $bulk_counts['read'] );
+
+// Nested parenthesis with domain specified as the last argument.
+_n(
+	'Found <strong>%s entry</strong>',
+	'Found <strong>%s entries</strong>',
+	absint( count( $this->entries->items ) ),
+	'wpforms'
+);
+
 // phpcs:enable WordPress.Security.EscapeOutput.UnsafePrintingFunction

@@ -100,7 +100,7 @@ class ValidateHooksSniff extends BaseSniff implements Sniff {
 				true
 			);
 
-			$namespace = trim( $phpcsFile->getTokensAsString( ( $namespacePtr + 1 ), ( $nsEnd - $namespacePtr - 1 ) ) );
+			$namespace = trim( $phpcsFile->getTokensAsString( $namespacePtr + 1, $nsEnd - $namespacePtr - 1 ) );
 			$stackPtr  = $nsEnd;
 		}
 
@@ -112,7 +112,7 @@ class ValidateHooksSniff extends BaseSniff implements Sniff {
 				$classPtr + 1
 			);
 
-			$class = trim( $phpcsFile->getTokensAsString( ( $classPtr + 1 ), ( $classEnd - $classPtr - 1 ) ) );
+			$class = trim( $phpcsFile->getTokensAsString( $classPtr + 1, $classEnd - $classPtr - 1 ) );
 		}
 
 		return strtolower( str_replace( '\\', '_', $namespace ? $namespace . '\\' . $class : $class ) );

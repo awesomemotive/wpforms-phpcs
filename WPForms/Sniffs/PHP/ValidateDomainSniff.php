@@ -100,7 +100,7 @@ class ValidateDomainSniff extends BaseSniff implements Sniff {
 			return;
 		}
 
-		$currentDomain  = $this->getCurrentDomains( $phpcsFile, $stackPtr );
+		$currentDomain  = $this->getCurrentDomain( $phpcsFile, $stackPtr );
 		$expectedDomain = $this->getExpectedDomain( $phpcsFile );
 
 		if ( ! $expectedDomain ) {
@@ -113,7 +113,7 @@ class ValidateDomainSniff extends BaseSniff implements Sniff {
 
 		$phpcsFile->addError(
 			sprintf(
-				'You are using invalid domain name. Use %s instead of %s',
+				"You are using invalid domain name. Use '%s' instead of '%s'",
 				$expectedDomain,
 				$currentDomain
 			),
@@ -132,13 +132,30 @@ class ValidateDomainSniff extends BaseSniff implements Sniff {
 	 *
 	 * @return string
 	 */
-	private function getCurrentDomains( $phpcsFile, $stackPtr ) {
+	private function getCurrentDomain( $phpcsFile, $stackPtr ) {
 
-		$tokens       = $phpcsFile->getTokens();
-		$lastArgument = $phpcsFile->findPrevious(
-			T_CONSTANT_ENCAPSED_STRING,
-			$phpcsFile->findNext( T_CLOSE_PARENTHESIS, $stackPtr )
-		);
+		$tokens   = $phpcsFile->getTokens();
+		$openPtr  = $phpcsFile->findNext( T_OPEN_PARENTHESIS, $stackPtr );
+		$closePtr = $tokens[ $openPtr ]['parenthesis_closer'];
+		$commaPtr = $phpcsFile->findPrevious( T_COMMA, $closePtr, $stackPtr );
+
+		if ( ! $commaPtr ) {
+			return '';
+		}
+
+		// Find anything except string and whitespace.
+		$lastArgument = $phpcsFile->findNext( [ T_CONSTANT_ENCAPSED_STRING, T_WHITESPACE ], $commaPtr + 1, $closePtr, true );
+
+		// Last argument is not a string, but something else.
+		if ( $lastArgument ) {
+			return '';
+		}
+
+		$lastArgument = $phpcsFile->findNext( T_CONSTANT_ENCAPSED_STRING, $commaPtr + 1, $closePtr );
+
+		if ( ! $lastArgument ) {
+			return '';
+		}
 
 		return strtolower(
 			preg_replace( '/[\'\"]/', '', $tokens [ $lastArgument ]['content'] )
