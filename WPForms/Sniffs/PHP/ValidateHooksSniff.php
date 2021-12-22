@@ -87,8 +87,6 @@ class ValidateHooksSniff extends BaseSniff implements Sniff {
 	 */
 	private function getFullyQualifiedClassName( $phpcsFile ) {
 
-		static $snakeClassNames = [];
-
 		$namespace    = '';
 		$class        = '';
 		$stackPtr     = 0;
@@ -115,21 +113,7 @@ class ValidateHooksSniff extends BaseSniff implements Sniff {
 			);
 
 			$class = trim( $phpcsFile->getTokensAsString( $classPtr + 1, $classEnd - $classPtr - 1 ) );
-
-			$snakeClassName = $this->convertClassName( $class );
-
-			if ( ! in_array( $snakeClassName, $snakeClassNames, true ) && strtolower( $snakeClassName ) !== strtolower( $class ) ) {
-				$phpcsFile->addError(
-					sprintf(
-						'The class name `%s` is converted to snake case.',
-						$class
-					),
-					$classPtr,
-					'CamelCase'
-				);
-				$snakeClassNames[] = $snakeClassName;
-				$class             = $snakeClassName;
-			}
+			$class = $this->convertClassName( $class );
 		}
 
 		return strtolower( str_replace( '\\', '_', $namespace ? $namespace . '\\' . $class : $class ) );
