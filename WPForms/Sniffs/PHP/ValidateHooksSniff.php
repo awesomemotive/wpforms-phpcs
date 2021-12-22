@@ -67,7 +67,7 @@ class ValidateHooksSniff extends BaseSniff implements Sniff {
 
 		$phpcsFile->addError(
 			sprintf(
-				'The %s is invalid hook name. The hook name should start with %s.',
+				'The `%s` is invalid hook name. The hook name should start with `%s`.',
 				$hookName,
 				$expectedName
 			),
@@ -86,6 +86,8 @@ class ValidateHooksSniff extends BaseSniff implements Sniff {
 	 * @return string
 	 */
 	private function getFullyQualifiedClassName( $phpcsFile ) {
+
+		static $snakeClassNames = [];
 
 		$namespace    = '';
 		$class        = '';
@@ -113,8 +115,55 @@ class ValidateHooksSniff extends BaseSniff implements Sniff {
 			);
 
 			$class = trim( $phpcsFile->getTokensAsString( $classPtr + 1, $classEnd - $classPtr - 1 ) );
+
+			$snakeClassName = $this->convertClassName( $class );
+
+			if ( ! in_array( $snakeClassName, $snakeClassNames, true ) && strtolower( $snakeClassName ) !== strtolower( $class ) ) {
+				$phpcsFile->addError(
+					sprintf(
+						'The class name `%s` is converted to snake case.',
+						$class
+					),
+					$classPtr,
+					'CamelCase'
+				);
+				$snakeClassNames[] = $snakeClassName;
+				$class             = $snakeClassName;
+			}
 		}
 
 		return strtolower( str_replace( '\\', '_', $namespace ? $namespace . '\\' . $class : $class ) );
+	}
+
+	/**
+	 * Convert class name to snake case.
+	 *
+	 * @since {VERSION}
+	 *
+	 * @param string $class Class name.
+	 *
+	 * @return string
+	 */
+	private function convertClassName( $class ) {
+
+		if ( strpos( $class, '_' ) !== false ) {
+			return $class;
+		}
+
+		return $this->camelToSnake( $class );
+	}
+
+	/**
+	 * Convert string from CamelCase to snake_case.
+	 *
+	 * @since {VERSION}
+	 *
+	 * @param string $string A string.
+	 *
+	 * @return string
+	 */
+	private function camelToSnake( $string ) {
+
+		return strtolower( preg_replace( [ '/([a-z\d])([A-Z])/', '/([^_])([A-Z][a-z])/' ], '$1_$2', $string ) );
 	}
 }
