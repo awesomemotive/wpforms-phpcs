@@ -2,7 +2,6 @@
 
 // phpcs:disable Generic.Files.OneObjectStructurePerFile.MultipleFound
 // phpcs:disable Generic.CodeAnalysis.UselessOverridingMethod.Found
-// phpcs:disable WPForms.PHP.UseStatement.UnusedUseStatement
 
 namespace WPForms\Tests;
 
