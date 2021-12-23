@@ -59,9 +59,8 @@ class PHPDocHooksSniff extends BaseSniff implements Sniff {
 			return;
 		}
 
-		$hookNamePtr = $phpcsFile->findNext( T_CONSTANT_ENCAPSED_STRING, $stackPtr + 1 );
-		$hookName    = trim( $tokens[ $hookNamePtr ]['content'], '"\'' );
-		$commentEnd  = $phpcsFile->findPrevious( T_DOC_COMMENT_CLOSE_TAG, $stackPtr - 1 );
+		$hookName   = $this->getFirstArgument( $phpcsFile, $stackPtr );
+		$commentEnd = $phpcsFile->findPrevious( T_DOC_COMMENT_CLOSE_TAG, $stackPtr - 1 );
 
 		if ( ! $commentEnd || $tokens[ $commentEnd ]['line'] !== $tokens[ $stackPtr ]['line'] - 1 ) {
 			$phpcsFile->addError(

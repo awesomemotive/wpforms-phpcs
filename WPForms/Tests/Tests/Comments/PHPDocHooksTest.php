@@ -21,6 +21,6 @@ class PHPDocHooksTest extends TestCase {
 
 		$phpcsFile = $this->process( new PHPDocHooksSniff() );
 
-		$this->fileHasErrors( $phpcsFile, 'RequiredHookDocumentation', [ 69, 82 ] );
+		$this->fileHasErrors( $phpcsFile, 'RequiredHookDocumentation', [ 69, 82, 95 ] );
 	}
 }

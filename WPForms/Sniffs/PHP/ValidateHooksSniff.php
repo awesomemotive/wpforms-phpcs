@@ -76,39 +76,6 @@ class ValidateHooksSniff extends BaseSniff implements Sniff {
 	}
 
 	/**
-	 * Get first argument of a function.
-	 *
-	 * @since 1.0.0
-	 *
-	 * @param File $phpcsFile The PHP_CodeSniffer file where the token was found.
-	 * @param int  $stackPtr  The position in the PHP_CodeSniffer file's token stack where the token was found.
-	 *
-	 * @return string
-	 */
-	private function getFirstArgument( $phpcsFile, $stackPtr ) {
-
-		$blankTokens = [ T_WHITESPACE, T_COMMENT, T_PHPCS_IGNORE ];
-
-		$tokens   = $phpcsFile->getTokens();
-		$openPtr  = $phpcsFile->findNext( T_OPEN_PARENTHESIS, $stackPtr );
-		$closePtr = $tokens[ $openPtr ]['parenthesis_closer'];
-		$commaPtr = $phpcsFile->findNext( T_COMMA, $openPtr, $closePtr );
-
-		if ( $commaPtr ) {
-			$closePtr = $commaPtr;
-		}
-
-		$openPtr  = $phpcsFile->findNext( $blankTokens, $openPtr + 1, $closePtr, true );
-		$closePtr = $phpcsFile->findPrevious( $blankTokens, $closePtr - 1, $openPtr, true );
-
-		$firstArgument = trim( $phpcsFile->getTokensAsString( $openPtr, $closePtr - $openPtr + 1 ) );
-
-		return strtolower(
-			preg_replace( '/[\'\"]/', '', $firstArgument )
-		);
-	}
-
-	/**
 	 * Get fully qualified class name.
 	 *
 	 * @since 1.0.0

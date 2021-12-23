@@ -91,3 +91,5 @@ $test = apply_filters(
 		'entry'     => $this->entry,
 	]
 );
+
+$test2 = apply_filters( "wpforms_importer_forms_{$provider}", $this->importers[ $provider ]->get_forms() );
