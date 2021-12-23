@@ -131,6 +131,10 @@ class UseStatementSniff extends BaseSniff implements Sniff {
 			return false;
 		}
 
+		if ( $this->findInThrows( $phpcsFile, $entityName, $nextElement ) ) {
+			return true;
+		}
+
 		if ( $tokens[ $nextElement ]['content'] !== '@param' ) {
 			return $this->findInParamsDescription( $phpcsFile, $entityName, $nextElement );
 		}
@@ -146,5 +150,32 @@ class UseStatementSniff extends BaseSniff implements Sniff {
 		}
 
 		return $this->findInParamsDescription( $phpcsFile, $entityName, $nextElement );
+	}
+
+	/**
+	 * Find function/objects/class in the PHPDoc @throws.
+	 *
+	 * @since {VERSION}
+	 *
+	 * @param File   $phpcsFile  The PHP_CodeSniffer file where the token was found.
+	 * @param string $entityName Function/objects/class name.
+	 * @param int    $stackPtr   Current search position.
+	 *
+	 * @return bool
+	 */
+	private function findInThrows( $phpcsFile, $entityName, $stackPtr ) {
+
+		$tokens = $phpcsFile->getTokens();
+
+		if ( $tokens[ $stackPtr ]['content'] === '@throws' ) {
+			$closePtr   = $phpcsFile->findNext( T_DOC_COMMENT_CLOSE_TAG, $stackPtr + 1 );
+			$commentPtr = $phpcsFile->findNext( T_DOC_COMMENT_STRING, $stackPtr + 1, $closePtr );
+
+			if ( $commentPtr && $entityName === explode( ' ', $tokens[ $commentPtr ]['content'] )[0] ) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 }

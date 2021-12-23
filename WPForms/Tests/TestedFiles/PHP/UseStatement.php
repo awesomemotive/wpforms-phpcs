@@ -9,6 +9,7 @@ use Some\Name\Space\Type;
 use Some\Name\Space\Type2;
 use Some\Name\Space\Type3;
 use Some\Name\Space\Type4;
+use Some\Name\Space\Type5;
 use Unused\Name\Space\Example3;
 use Unused\Name\Space\Example4;
 
@@ -45,6 +46,7 @@ class A {
 
 	/**
 	 * @return Type4
+	 * @throws Type5 Type5.
 	 */
 	public function test2() {}
 }
