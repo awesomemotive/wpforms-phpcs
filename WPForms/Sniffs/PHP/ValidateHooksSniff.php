@@ -57,8 +57,7 @@ class ValidateHooksSniff extends BaseSniff implements Sniff {
 			return;
 		}
 
-		$hookNamePtr  = $phpcsFile->findNext( T_CONSTANT_ENCAPSED_STRING, $stackPtr + 1 );
-		$hookName     = trim( $tokens[ $hookNamePtr ]['content'], '"\'' );
+		$hookName     = $this->getFirstArgument( $phpcsFile, $stackPtr );
 		$expectedName = $this->getFullyQualifiedClassName( $phpcsFile );
 
 		if ( ! $expectedName || 0 === strpos( $hookName, $expectedName ) ) {
@@ -71,8 +70,36 @@ class ValidateHooksSniff extends BaseSniff implements Sniff {
 				$hookName,
 				$expectedName
 			),
-			$hookNamePtr,
+			$stackPtr,
 			'InvalidHookName'
+		);
+	}
+
+	/**
+	 * Get first argument of a function.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param File $phpcsFile The PHP_CodeSniffer file where the token was found.
+	 * @param int  $stackPtr  The position in the PHP_CodeSniffer file's token stack where the token was found.
+	 *
+	 * @return string
+	 */
+	private function getFirstArgument( $phpcsFile, $stackPtr ) {
+
+		$tokens   = $phpcsFile->getTokens();
+		$openPtr  = $phpcsFile->findNext( T_OPEN_PARENTHESIS, $stackPtr );
+		$closePtr = $tokens[ $openPtr ]['parenthesis_closer'];
+		$commaPtr = $phpcsFile->findNext( T_COMMA, $openPtr, $closePtr );
+
+		if ( $commaPtr ) {
+			$closePtr = $commaPtr;
+		}
+
+		$firstArgument = trim( $phpcsFile->getTokensAsString( $openPtr + 1, $closePtr - $openPtr - 1 ) );
+
+		return strtolower(
+			preg_replace( '/[\'\"]/', '', $firstArgument )
 		);
 	}
 
