@@ -21,6 +21,6 @@ class ValidateHooksTest extends TestCase {
 
 		$phpcsFile = $this->process( new ValidateHooksSniff() );
 
-		$this->fileHasErrors( $phpcsFile, 'InvalidHookName', [ 21, 22, 23, 24, 26, 27 ] );
+		$this->fileHasErrors( $phpcsFile, 'InvalidHookName', [ 26, 27, 28, 29, 31, 32 ] );
 	}
 }

@@ -87,6 +87,8 @@ class ValidateHooksSniff extends BaseSniff implements Sniff {
 	 */
 	private function getFirstArgument( $phpcsFile, $stackPtr ) {
 
+		$blankTokens = [ T_WHITESPACE, T_COMMENT, T_PHPCS_IGNORE ];
+
 		$tokens   = $phpcsFile->getTokens();
 		$openPtr  = $phpcsFile->findNext( T_OPEN_PARENTHESIS, $stackPtr );
 		$closePtr = $tokens[ $openPtr ]['parenthesis_closer'];
@@ -96,7 +98,10 @@ class ValidateHooksSniff extends BaseSniff implements Sniff {
 			$closePtr = $commaPtr;
 		}
 
-		$firstArgument = trim( $phpcsFile->getTokensAsString( $openPtr + 1, $closePtr - $openPtr - 1 ) );
+		$openPtr  = $phpcsFile->findNext( $blankTokens, $openPtr + 1, $closePtr, true );
+		$closePtr = $phpcsFile->findPrevious( $blankTokens, $closePtr - 1, $openPtr, true );
+
+		$firstArgument = trim( $phpcsFile->getTokensAsString( $openPtr, $closePtr - $openPtr + 1 ) );
 
 		return strtolower(
 			preg_replace( '/[\'\"]/', '', $firstArgument )
