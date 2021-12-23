@@ -50,7 +50,10 @@ class EmptyLineBeforeReturnSniff extends BaseSniff implements Sniff {
 			$tokens[ $previous ]['code'] === T_OPEN_CURLY_BRACKET &&
 			! in_array( $tokens[ $statement ]['code'], $importantLineAfter, true )
 		) {
-			if ( $tokens[ $stackPtr ]['line'] - $tokens[ $previous ]['line'] > 1 ) {
+			$linesBeforeReturn = $phpcsFile->getTokensAsString( $previous + 1, $stackPtr - $previous - 1 );
+			$count             = count( array_filter( array_map( 'trim', explode( "\n", $linesBeforeReturn ) ) ) );
+
+			if ( $tokens[ $stackPtr ]['line'] - $tokens[ $previous ]['line'] - $count > 1 ) {
 				$phpcsFile->addError(
 					sprintf(
 						'Remove empty line before return statement in %d line.',

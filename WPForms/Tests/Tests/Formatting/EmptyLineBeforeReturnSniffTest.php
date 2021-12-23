@@ -21,7 +21,7 @@ class EmptyLineBeforeReturnSniffTest extends TestCase {
 
 		$phpcsFile = $this->process( new EmptyLineBeforeReturnSniff() );
 
-		$this->fileHasErrors( $phpcsFile, 'AddEmptyLineBeforeReturnStatement', [ 99, 112, 131, 136, 143 ] );
-		$this->fileHasErrors( $phpcsFile, 'RemoveEmptyLineBeforeReturnStatement', [ 126, 141 ] );
+		$this->fileHasErrors( $phpcsFile, 'AddEmptyLineBeforeReturnStatement', [ 108, 121, 140, 145, 152 ] );
+		$this->fileHasErrors( $phpcsFile, 'RemoveEmptyLineBeforeReturnStatement', [ 135, 150, 161 ] );
 	}
 }

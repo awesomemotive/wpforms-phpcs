@@ -54,6 +54,15 @@ function valid_function_3() {
 		return true;
 	}
 
+	while ( $b ) {
+		// Comment line.
+		// Comment line 2.
+		/**
+		 * Some more comments.
+		 */
+		return true;
+	}
+
 	return true;
 }
 
@@ -141,5 +150,15 @@ function invalid_function_3() {
 		return true;
 	}
 	return true;
+
+	while ( $b ) {
+		// Comment line.
+		// Comment line 2.
+
+		/**
+		 * Some more comments.
+		 */
+		return true;
+	}
 }
 
