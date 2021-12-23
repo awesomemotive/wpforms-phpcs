@@ -71,6 +71,6 @@ class ConditionsYodaDisableSniff extends BaseSniff implements Sniff {
 			return;
 		}
 
-		$phpcsFile->addError( 'Remove Yoda Condition this annoying us.', $stackPtr, 'YodaRemove' );
+		$phpcsFile->addError( 'Remove Yoda Condition, it is annoying us.', $stackPtr, 'YodaRemove' );
 	}
 }

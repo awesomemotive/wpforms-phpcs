@@ -21,7 +21,7 @@ class SinceTagDefineTest extends TestCase {
 
 		$phpcsFile = $this->process( new SinceTagDefineSniff() );
 
-		$this->fileHasErrors( $phpcsFile, 'MissSinceTag', [ 15 ] );
+		$this->fileHasErrors( $phpcsFile, 'MissingSinceTag', [ 15 ] );
 		$this->fileHasErrors( $phpcsFile, 'MissingSinceVersion', [ 20 ] );
 		$this->fileHasErrors( $phpcsFile, 'InvalidSinceVersion', [ 27 ] );
 		$this->fileHasErrors( $phpcsFile, 'EmptyLineAfterSince', [ 34 ] );

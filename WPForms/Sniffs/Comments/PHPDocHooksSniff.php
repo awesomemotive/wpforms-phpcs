@@ -66,7 +66,7 @@ class PHPDocHooksSniff extends BaseSniff implements Sniff {
 		if ( ! $commentEnd || $tokens[ $commentEnd ]['line'] !== $tokens[ $stackPtr ]['line'] - 1 ) {
 			$phpcsFile->addError(
 				sprintf(
-					'Miss PHPDoc for the %s hook',
+					'Missing PHPDoc for the %s hook',
 					$hookName
 				),
 				$stackPtr,

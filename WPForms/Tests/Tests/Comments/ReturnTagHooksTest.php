@@ -23,7 +23,7 @@ class ReturnTagHooksTest extends TestCase {
 
 		$this->fileHasErrors( $phpcsFile, 'UnnecessaryReturnTag', [ 80 ] );
 		$this->fileHasErrors( $phpcsFile, 'AddReturnTag', [ 106 ] );
-		$this->fileHasErrors( $phpcsFile, 'MissReturnType', [ 130 ] );
+		$this->fileHasErrors( $phpcsFile, 'MissingReturnType', [ 130 ] );
 		$this->fileHasErrors( $phpcsFile, 'InvalidReturnTagPosition', [ 148 ] );
 	}
 }

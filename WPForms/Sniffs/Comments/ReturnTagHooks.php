@@ -149,9 +149,9 @@ class ReturnTagHooks extends BaseSniff implements Sniff {
 
 		if ( empty( $returnType ) ) {
 			$phpcsFile->addError(
-				'Miss return type',
+				'Missing return type',
 				$returnTag['tag'],
-				'MissReturnType'
+				'MissingReturnType'
 			);
 
 			return;

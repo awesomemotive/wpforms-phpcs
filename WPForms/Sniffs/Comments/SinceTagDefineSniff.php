@@ -63,9 +63,9 @@ class SinceTagDefineSniff extends BaseSniff implements Sniff {
 
 		if ( empty( $since ) ) {
 			$phpcsFile->addError(
-				'Miss the @since tag for the define function',
+				'Missing @since tag for the define function',
 				$stackPtr,
-				'MissSinceTag'
+				'MissingSinceTag'
 			);
 
 			return;

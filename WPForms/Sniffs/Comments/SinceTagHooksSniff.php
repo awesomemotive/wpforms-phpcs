@@ -78,11 +78,11 @@ class SinceTagHooksSniff extends BaseSniff implements Sniff {
 		if ( empty( $since ) ) {
 			$phpcsFile->addError(
 				sprintf(
-					'Miss the @since tag for the %s hook',
+					'Missing @since tag for the %s hook',
 					$hookName
 				),
 				$stackPtr,
-				'MissSinceTag'
+				'MissingSinceTag'
 			);
 
 			return;

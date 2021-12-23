@@ -21,7 +21,7 @@ class SinceTagHooksTest extends TestCase {
 
 		$phpcsFile = $this->process( new SinceTagHooksSniff() );
 
-		$this->fileHasErrors( $phpcsFile, 'MissSinceTag', [ 77, 99 ] );
+		$this->fileHasErrors( $phpcsFile, 'MissingSinceTag', [ 77, 99 ] );
 		$this->fileHasErrors( $phpcsFile, 'MissingSinceVersion', [ 115 ] );
 		$this->fileHasErrors( $phpcsFile, 'InvalidSinceVersion', [ 139 ] );
 		$this->fileHasErrors( $phpcsFile, 'EmptyLineBetweenSinceAndDeprecated', [ 163, 189 ] );
