@@ -40,17 +40,17 @@ class TestCase extends \PHPUnit\Framework\TestCase {
 	 * @since 1.0.0
 	 *
 	 * @param Sniff  $className   Class name.
-	 * @param string $rulesetName Ruleset name from the Tests/TestedRulesets directory.
+	 * @param string $rulesetName Ruleset name from the Tests/TestRulesets directory.
 	 *
 	 * @return LocalFile
 	 *
-	 * @throws RuntimeException Tested file doesn't exist.
+	 * @throws RuntimeException Test file doesn't exist.
 	 */
 	protected function process( Sniff $className, $rulesetName = '' ) {
 
 		$class         = new ReflectionClass( $className );
 		$classFileName = $this->normalizeFilename( $class->getFileName() );
-		$localFile     = WPFORMS_TESTED_FILES_PATH . str_replace( 'Sniff.php', '.php', str_replace( WPFORMS_SNIFFS_PATH, '', $classFileName ) );
+		$localFile     = WPFORMS_TEST_FILES_PATH . str_replace( 'Sniff.php', '.php', str_replace( WPFORMS_SNIFFS_PATH, '', $classFileName ) );
 
 		if ( ! file_exists( $localFile ) ) {
 			throw new RuntimeException(
@@ -61,7 +61,7 @@ class TestCase extends \PHPUnit\Framework\TestCase {
 			);
 		}
 
-		$rulesetName = $rulesetName ? 'TestedRulesets/' . $rulesetName . '/ruleset.xml' : 'TestedRulesets/Default/ruleset.xml';
+		$rulesetName = $rulesetName ? 'TestRulesets/' . $rulesetName . '/ruleset.xml' : 'TestRulesets/Default/ruleset.xml';
 		$rulesetName = realpath( $this->normalizeFilename( WPFORMS_TESTS_PATH . $rulesetName ) );
 		$config      = new Config( [ '--standard=' . $rulesetName ] );
 		$ruleset     = new Ruleset( $config );
@@ -84,11 +84,11 @@ class TestCase extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * Tested files has exact sniff error in lines.
+	 * Test files has exact sniff error in lines.
 	 *
 	 * @since 1.0.0
 	 *
-	 * @param LocalFile $phpcsFile Tested file.
+	 * @param LocalFile $phpcsFile Test file.
 	 * @param string    $name      Sniff error name.
 	 * @param array     $lines     List of expected lines with error.
 	 */

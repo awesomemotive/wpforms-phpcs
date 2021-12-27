@@ -12,5 +12,5 @@ assignees: ''
 <!--- the relevant information: why it's needed, who will use it etc. -->
 <!--- Be as concise and descriptive as possible. -->
 
-## Tested code
-<!-- Provide any examples code for testing. Examples you can see at /WPForms/Tests/TestedFiles/ -->
+## Test code
+<!-- Provide any examples code for testing. Examples you can see at /WPForms/Tests/TestFiles/ -->

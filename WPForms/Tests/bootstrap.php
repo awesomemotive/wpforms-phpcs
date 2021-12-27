@@ -29,7 +29,7 @@ define( 'WPFORMS_SNIFFS_PATH', str_replace( '/', DIRECTORY_SEPARATOR, dirname( _
  *
  * @since 1.0.0
  */
-define( 'WPFORMS_TESTED_FILES_PATH', str_replace( '/', DIRECTORY_SEPARATOR, __DIR__ . '/TestedFiles/' ) );
+define( 'WPFORMS_TEST_FILES_PATH', str_replace( '/', DIRECTORY_SEPARATOR, __DIR__ . '/TestFiles/' ) );
 
 require_once __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../../vendor/squizlabs/php_codesniffer/tests/bootstrap.php';

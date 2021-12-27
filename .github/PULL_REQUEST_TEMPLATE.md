@@ -9,5 +9,5 @@
 
 
 ## Testing procedure
-- [ ] I added a test file to WPForms/Tests/TestedFiles/
+- [ ] I added a test file to WPForms/Tests/TestFiles/
 - [ ] I added a unit tests

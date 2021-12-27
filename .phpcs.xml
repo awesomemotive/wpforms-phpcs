@@ -2,7 +2,7 @@
 <ruleset name="WPForms Coding Standards package rules">
 	<description>The rules for WPForms Coding Standards package.</description>
 
-	<exclude-pattern>WPForms/Tests/TestedFiles/*</exclude-pattern>
+	<exclude-pattern>WPForms/Tests/TestFiles/*</exclude-pattern>
 
 	<arg value="sp"/><!-- Show sniff and progress -->
 	<arg name="basepath" value="./"/><!-- Strip the file paths down to the relevant bit -->

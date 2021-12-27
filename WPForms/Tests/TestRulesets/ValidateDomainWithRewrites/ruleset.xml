@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="WPForms Tested CS">
-	<description>WPForms Tested CS.</description>
+<ruleset name="WPForms Test CS">
+	<description>WPForms Test CS.</description>
 	<config name="multi_domains" value="true"/>
 	<rule ref="WPForms.PHP.ValidateDomain">
 		<properties>

@@ -55,7 +55,7 @@ class BaseSniffTest extends TestCase {
 		$classFileName = $this->normalizeFilename( $class->getFileName() );
 
 		$rulesetName = '';
-		$rulesetName = $rulesetName ? 'TestedRulesets/' . $rulesetName . '/ruleset.xml' : 'TestedRulesets/Default/ruleset.xml';
+		$rulesetName = $rulesetName ? 'TestRulesets/' . $rulesetName . '/ruleset.xml' : 'TestRulesets/Default/ruleset.xml';
 		$rulesetName = realpath( $this->normalizeFilename( WPFORMS_TESTS_PATH . $rulesetName ) );
 		$config      = new Config( [ '--standard=' . $rulesetName ] );
 		$ruleset     = new Ruleset( $config );
