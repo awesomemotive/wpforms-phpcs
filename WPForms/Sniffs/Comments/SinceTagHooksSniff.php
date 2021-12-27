@@ -65,7 +65,7 @@ class SinceTagHooksSniff extends BaseSniff implements Sniff {
 		}
 
 		$commentEnd   = $phpcsFile->findPrevious( T_DOC_COMMENT_CLOSE_TAG, $stackPtr - 1 );
-		$commentStart = $phpcsFile->findPrevious( T_DOC_COMMENT_OPEN_TAG, $commentEnd );
+		$commentStart = $phpcsFile->findPrevious( T_DOC_COMMENT_OPEN_TAG, (int) $commentEnd );
 
 		if ( $this->isDuplicateHook( $commentStart, $tokens ) ) {
 			return;
