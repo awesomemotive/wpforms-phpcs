@@ -10,7 +10,6 @@
 	<exclude-pattern>wpforms/libs/*</exclude-pattern>
 
 	<!-- How to scan -->
-	<arg value="sp"/><!-- Show sniff and progress -->
 	<arg name="colors"/>
 	<arg name="parallel" value="100"/>
 	<arg name="extensions" value="php"/>
