@@ -27,9 +27,9 @@ Create the `.phpcs.xml` or `phpcs.xml` file at the root of your project:
 	<exclude-pattern>\vendor/*</exclude-pattern>
 	<exclude-pattern>\.github/*</exclude-pattern>
 
-	<config name="testVersion" value="5.5-"/>
+	<config name="testVersion" value="5.6-"/>
 	<config name="multi_domains" value="true"/>
-	<config name="minimum_supported_wp_version" value="4.9"/>
+	<config name="minimum_supported_wp_version" value="5.2"/>
     
 	<rule ref="WPForms"/>
 
