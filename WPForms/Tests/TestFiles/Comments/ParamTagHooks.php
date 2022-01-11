@@ -180,3 +180,6 @@ do_action(
 
 /** This action is documented in some-class.php. */
 do_action( 'wpforms_display_submit_after', $this->displaysubmit_after_action );
+
+// This case generated 'You should have 39 @param tags' (39 as an example).
+do_action( 'hook_without_args' );

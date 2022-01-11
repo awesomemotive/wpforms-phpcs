@@ -112,7 +112,13 @@ class ParamTagHooksSniff extends BaseSniff implements Sniff {
 		$tokens          = $phpcsFile->getTokens();
 		$openParenthesis = $phpcsFile->findNext( [ T_OPEN_PARENTHESIS ], $stackPtr + 1 );
 		$lastPosition    = $tokens[ $openParenthesis ]['parenthesis_closer'] - 1;
-		$currentPosition = $phpcsFile->findNext( T_COMMA, $stackPtr + 1 ) + 1;
+		$commaPtr        = $phpcsFile->findNext( T_COMMA, $stackPtr + 1 );
+
+		if ( $commaPtr === false ) {
+			return 0;
+		}
+
+		$currentPosition = $commaPtr + 1;
 		$quantity        = 0;
 
 		while ( $currentPosition < $lastPosition ) {
