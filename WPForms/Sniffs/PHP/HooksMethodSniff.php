@@ -64,7 +64,17 @@ class HooksMethodSniff extends BaseSniff implements Sniff {
 			return;
 		}
 
-		$function = $phpcsFile->findNext( T_STRING, $phpcsFile->findPrevious( T_FUNCTION, $stackPtr ) );
+		$previous = $phpcsFile->findPrevious( T_FUNCTION, $stackPtr );
+
+		if ( $previous === false ) {
+			return;
+		}
+
+		$function = $phpcsFile->findNext( T_STRING, $previous );
+
+		if ( $function === false ) {
+			return;
+		}
 
 		if ( $tokens[ $function ]['content'] === self::METHOD_NAME ) {
 			return;
