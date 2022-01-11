@@ -210,6 +210,8 @@ class ValidateDomainSniff extends BaseSniff implements Sniff {
 
 		foreach ( $this->domains as $domain => $paths ) {
 			foreach ( $paths as $path ) {
+				$path = rtrim( $path, DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR;
+
 				if (
 					strpos( $filePath, $path ) === 0 &&
 					strlen( $path ) > strlen( $currentPath )
