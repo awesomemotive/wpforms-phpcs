@@ -150,4 +150,80 @@ abstract class BaseSniff {
 			preg_replace( '/[\'\"]/', '', $firstArgument )
 		);
 	}
+
+	/**
+	 * Get fully qualified class name.
+	 *
+	 * @since 1.0.0
+	 *
+	 * @param File $phpcsFile The PHP_CodeSniffer file where the token was found.
+	 *
+	 * @return string
+	 */
+	protected function getFullyQualifiedClassName( $phpcsFile ) {
+
+		$namespace    = '';
+		$stackPtr     = 0;
+		$namespacePtr = $phpcsFile->findNext( T_NAMESPACE, $stackPtr );
+
+		if ( $namespacePtr !== false ) {
+			$nsEnd = $phpcsFile->findNext(
+				[ T_NS_SEPARATOR, T_STRING, T_WHITESPACE ],
+				$namespacePtr + 1,
+				null,
+				true
+			);
+
+			$namespace = trim( $phpcsFile->getTokensAsString( $namespacePtr + 1, $nsEnd - $namespacePtr - 1 ) );
+			$stackPtr  = $nsEnd;
+		}
+
+		$classPtr = $phpcsFile->findNext( T_CLASS, $stackPtr );
+
+		if ( $classPtr === false ) {
+			return '';
+		}
+
+		$classEnd = $phpcsFile->findNext(
+			[ T_EXTENDS, T_IMPLEMENTS, 'PHPCS_T_OPEN_CURLY_BRACKET' ],
+			$classPtr + 1
+		);
+
+		$class = trim( $phpcsFile->getTokensAsString( $classPtr + 1, $classEnd - $classPtr - 1 ) );
+		$class = $this->convertClassName( $class );
+
+		return strtolower( str_replace( '\\', '_', $namespace ? $namespace . '\\' . $class : $class ) );
+	}
+
+	/**
+	 * Convert class name to snake case.
+	 *
+	 * @since {VERSION}
+	 *
+	 * @param string $class Class name.
+	 *
+	 * @return string
+	 */
+	private function convertClassName( $class ) {
+
+		if ( strpos( $class, '_' ) !== false ) {
+			return $class;
+		}
+
+		return $this->camelToSnake( $class );
+	}
+
+	/**
+	 * Convert string from CamelCase to snake_case.
+	 *
+	 * @since {VERSION}
+	 *
+	 * @param string $string A string.
+	 *
+	 * @return string
+	 */
+	private function camelToSnake( $string ) {
+
+		return strtolower( preg_replace( [ '/([a-z\d])([A-Z])/', '/([^_])([A-Z][a-z])/' ], '$1_$2', $string ) );
+	}
 }

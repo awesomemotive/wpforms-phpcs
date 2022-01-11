@@ -64,6 +64,12 @@ class HooksMethodSniff extends BaseSniff implements Sniff {
 			return;
 		}
 
+		$classname = $this->getFullyQualifiedClassName( $phpcsFile );
+
+		if ( ! $classname ) {
+			return;
+		}
+
 		$previous = $phpcsFile->findPrevious( T_FUNCTION, $stackPtr );
 
 		if ( $previous === false ) {
