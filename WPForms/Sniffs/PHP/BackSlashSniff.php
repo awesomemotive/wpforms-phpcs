@@ -71,7 +71,22 @@ class BackSlashSniff extends BaseSniff implements Sniff {
 			return;
 		}
 
-		if ( $tokens[ $stackPtr - 2 ]['code'] !== T_STRING ) {
+		$startPtr = $phpcsFile->findPrevious( [ T_STRING, T_NS_SEPARATOR ], $stackPtr - 1, null, true );
+
+		if ( $startPtr === false ) {
+			return;
+		}
+
+		$startPtr ++;
+
+		if ( $tokens[ $startPtr ]['code'] !== T_NS_SEPARATOR ) {
+			return;
+		}
+
+		$name  = $phpcsFile->getTokensAsString( $startPtr, $stackPtr - $startPtr + 1 );
+		$count = substr_count( $name, '\\' );
+
+		if ( $count === 1 ) {
 			$this->removeBackslashMessage( $phpcsFile, $stackPtr );
 
 			return;
@@ -135,7 +150,7 @@ class BackSlashSniff extends BaseSniff implements Sniff {
 	private function useShortSyntaxMessage( $phpcsFile, $stackPtr ) {
 
 		$phpcsFile->addError(
-			'We prefer imports with `use` statement instead of FQDN',
+			'We prefer imports with `use` statement instead of fully qualified names.',
 			$stackPtr,
 			'UseShortSyntax'
 		);
