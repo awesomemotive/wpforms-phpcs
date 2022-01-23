@@ -1,13 +1,13 @@
 # WPForms Coding Standards
 
-Maintainers: WPForms team
+Maintainers: The WPForms team
 
-License: GPLv2 or later, at your option  
+License: GPLv2 any later version.<br/>
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-##Description
+## Description
 
-WPForms coding standards help create strict and high-quality code. WPForms coding standards are based on the [WordPress Coding Standards](https://github.com/WordPress/WordPress-Coding-Standards) and the [PHPCompatibility Coding Standards](https://github.com/PHPCompatibility/PHPCompatibility).
+WPForms coding standards are based on the [WordPress Coding Standards](https://github.com/WordPress/WordPress-Coding-Standards) and the [PHPCompatibility Coding Standards](https://github.com/PHPCompatibility/PHPCompatibility) and help create strict and high-quality code.
 
 ## Installation
 
