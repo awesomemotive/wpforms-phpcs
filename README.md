@@ -30,7 +30,7 @@ Create the `.phpcs.xml` or `phpcs.xml` file at the root of your project:
 	<config name="testVersion" value="5.6-"/>
 	<config name="multi_domains" value="true"/>
 	<config name="minimum_supported_wp_version" value="5.2"/>
-    
+
 	<rule ref="WPForms"/>
 
 	<rule ref="WPForms.PHP.ValidateDomain">
