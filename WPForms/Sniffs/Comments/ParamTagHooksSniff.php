@@ -129,23 +129,9 @@ class ParamTagHooksSniff extends BaseSniff implements Sniff {
 
 			$quantity ++;
 
-			if ( ! empty( $tokens[ $currentPosition ]['parenthesis_opener'] ) ) {
-				$currentPosition = $tokens[ $currentPosition ]['parenthesis_closer'] + 1;
-
-				continue;
-			}
-
-			if ( ! empty( $tokens[ $currentPosition ]['bracket_closer'] ) ) {
-				$currentPosition = $tokens[ $currentPosition ]['bracket_closer'] + 2;
-
-				continue;
-			}
-
-			if ( ! empty( $tokens[ $currentPosition ]['scope_closer'] ) ) {
-				$currentPosition = $tokens[ $currentPosition ]['scope_closer'] + 2;
-
-				continue;
-			}
+			$currentPosition = $this->maybeSkip( $phpcsFile, $currentPosition, 'parenthesis_opener', 'parenthesis_closer', 1 );
+			$currentPosition = $this->maybeSkip( $phpcsFile, $currentPosition, 'bracket_closer', 'bracket_closer', 2 );
+			$currentPosition = $this->maybeSkip( $phpcsFile, $currentPosition, 'scope_closer', 'scope_closer', 2 );
 
 			if (
 				$tokens[ $currentPosition ]['code'] !== T_STATIC &&
@@ -178,6 +164,30 @@ class ParamTagHooksSniff extends BaseSniff implements Sniff {
 		}
 
 		return $quantity;
+	}
+
+	/**
+	 * Maybe skip some tokens.
+	 *
+	 * @since 1.0.3
+	 *
+	 * @param File   $phpcsFile       The PHP_CodeSniffer file where the token was found.
+	 * @param int    $currentPosition Current position.
+	 * @param string $startKey        Start key.
+	 * @param string $endKey          End key.
+	 * @param int    $count           Count.
+	 *
+	 * @return mixed
+	 */
+	private function maybeSkip( $phpcsFile, $currentPosition, $startKey, $endKey, $count ) {
+
+		$tokens = $phpcsFile->getTokens();
+
+		if ( ! empty( $tokens[ $currentPosition ][ $startKey ] ) ) {
+			$currentPosition = $tokens[ $currentPosition ][ $endKey ] + $count;
+		}
+
+		return $currentPosition;
 	}
 
 	/**
