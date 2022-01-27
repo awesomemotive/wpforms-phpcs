@@ -129,6 +129,12 @@ class ParamTagHooksSniff extends BaseSniff implements Sniff {
 
 			$quantity ++;
 
+			if ( ! empty( $tokens[ $currentPosition ]['parenthesis_opener'] ) ) {
+				$currentPosition = $tokens[ $currentPosition ]['parenthesis_closer'] + 1;
+
+				continue;
+			}
+
 			if ( ! empty( $tokens[ $currentPosition ]['bracket_closer'] ) ) {
 				$currentPosition = $tokens[ $currentPosition ]['bracket_closer'] + 2;
 

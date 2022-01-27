@@ -183,3 +183,15 @@ do_action( 'wpforms_display_submit_after', $this->displaysubmit_after_action );
 
 // This case generated 'You should have 39 @param tags' (39 as an example).
 do_action( 'hook_without_args' );
+
+// This case generated 'You should have 16 @param tags'.
+$text = (string) apply_filters(
+	'wpforms_frontend_shortcode_amp_text',
+	sprintf( /* translators: %s - URL to a non-amp version of a page with the form. */
+		__( '<a href="%s">Go to the full page</a> to view and submit the form.', 'wpforms-lite' ),
+		esc_url( 'some_url' )
+	),
+	555,
+	'http://site.org/cool-page',
+	[]
+);
