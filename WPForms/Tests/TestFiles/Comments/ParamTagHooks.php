@@ -18,11 +18,11 @@ do_action(
 	$request_args,
 	$contact,
 	$this->connection,
-	[
+	array(
 		'form_data' => $this->form_data,
 		'fields'    => $this->fields,
 		'entry'     => $this->entry,
-	]
+	)
 );
 
 /**

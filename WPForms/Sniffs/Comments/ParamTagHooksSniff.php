@@ -127,67 +127,61 @@ class ParamTagHooksSniff extends BaseSniff implements Sniff {
 				continue;
 			}
 
+			if ( in_array( $tokens[ $currentPosition ]['code'], [ T_ARRAY, T_OPEN_SHORT_ARRAY ], true ) ) {
+				$quantity ++;
+			}
+
+			if ( $this->skip( $phpcsFile, $currentPosition ) ) {
+				continue;
+			}
+
 			$quantity ++;
 
-			$currentPosition = $this->maybeSkip( $phpcsFile, $currentPosition, 'parenthesis_opener', 'parenthesis_closer', 1 );
-			$currentPosition = $this->maybeSkip( $phpcsFile, $currentPosition, 'bracket_closer', 'bracket_closer', 2 );
-			$currentPosition = $this->maybeSkip( $phpcsFile, $currentPosition, 'scope_closer', 'scope_closer', 2 );
+			$currentPosition = $phpcsFile->findNext( T_COMMA, $currentPosition + 1 );
 
-			if (
-				$tokens[ $currentPosition ]['code'] !== T_STATIC &&
-				$tokens[ $currentPosition + 1 ]['code'] !== T_OBJECT_OPERATOR
-			) {
-				$currentPosition ++;
-
-				continue;
+			if ( ! $currentPosition ) {
+				break;
 			}
-
-			if ( $tokens[ $currentPosition + 3 ]['code'] === T_COMMA ) {
-				$currentPosition += 4;
-
-				continue;
-			}
-
-			if ( ! empty( $tokens[ $currentPosition + 3 ]['bracket_closer'] ) ) {
-				$currentPosition = $tokens[ $currentPosition + 3 ]['bracket_closer'] + 1;
-
-				continue;
-			}
-
-			if ( ! empty( $tokens[ $currentPosition + 3 ]['parenthesis_closer'] ) ) {
-				$currentPosition = $tokens[ $currentPosition + 3 ]['parenthesis_closer'] + 1;
-
-				continue;
-			}
-
-			$currentPosition++;
 		}
 
 		return $quantity;
 	}
 
 	/**
-	 * Maybe skip some tokens.
+	 * Skip some tokens.
 	 *
 	 * @since 1.0.3
 	 *
-	 * @param File   $phpcsFile       The PHP_CodeSniffer file where the token was found.
-	 * @param int    $currentPosition Current position.
-	 * @param string $startKey        Start key.
-	 * @param string $endKey          End key.
-	 * @param int    $count           Count.
+	 * @param File $phpcsFile       The PHP_CodeSniffer file where the token was found.
+	 * @param int  $currentPosition Current position.
 	 *
-	 * @return mixed
+	 * @return bool
 	 */
-	private function maybeSkip( $phpcsFile, $currentPosition, $startKey, $endKey, $count ) {
+	private function skip( $phpcsFile, &$currentPosition ) {
+
+		$skipTokens = [
+			'parenthesis',
+			'bracket',
+			'scope',
+		];
+
+		$skip = false;
 
 		$tokens = $phpcsFile->getTokens();
 
-		if ( ! empty( $tokens[ $currentPosition ][ $startKey ] ) ) {
-			$currentPosition = $tokens[ $currentPosition ][ $endKey ] + $count;
+		foreach ( $skipTokens as $skipToken ) {
+			$opener = $skipToken . '_opener';
+			$closer = $skipToken . '_closer';
+
+			if ( isset( $tokens[ $currentPosition ][ $opener ] ) ) {
+				$currentPosition = $tokens[ $currentPosition ][ $closer ] + 1;
+				$skip            = true;
+
+				break;
+			}
 		}
 
-		return $currentPosition;
+		return $skip;
 	}
 
 	/**
