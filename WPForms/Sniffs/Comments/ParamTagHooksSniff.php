@@ -70,7 +70,6 @@ class ParamTagHooksSniff extends BaseSniff implements Sniff {
 			return;
 		}
 
-		$tokens       = $phpcsFile->getTokens();
 		$commentEnd   = $phpcsFile->findPrevious( T_DOC_COMMENT_CLOSE_TAG, $stackPtr );
 		$commentStart = $phpcsFile->findPrevious( T_DOC_COMMENT_OPEN_TAG, $commentEnd );
 

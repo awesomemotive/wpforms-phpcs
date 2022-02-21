@@ -178,7 +178,7 @@ do_action(
 
 // The next case generated the endless loop in the \WPForms\Sniffs\Comments\ParamTagHooksSniff::countArguments.
 
-/** This action is documented in some-class.php. */
+/** This action is documented in some-class.php */
 do_action( 'wpforms_display_submit_after', $this->displaysubmit_after_action );
 
 // This case generated 'You should have 39 @param tags' (39 as an example).
@@ -195,3 +195,11 @@ $text = (string) apply_filters(
 	'http://site.org/cool-page',
 	[]
 );
+
+// These actions/filters should not produce an error.
+
+/** This action is documented in includes/class-frontend.php */
+do_action( 'wpforms_display_submit_after', $this->form_data );
+
+/** This filter is documented in wp-includes/post-template.php */
+$content = apply_filters( 'the_content', $content );

@@ -23,20 +23,31 @@ trait DuplicateHook {
 	 */
 	protected function isDuplicateHook( $commentStart, $tokens ) {
 
+		$commentEnd = isset( $tokens[ $commentStart ]['comment_closer'] ) ? $tokens[ $commentStart ]['comment_closer'] : false;
+
 		$see = $this->findTag( '@see', $commentStart, $tokens );
 
-		if ( ! $see ) {
+		$seeTagFound = $see && $commentEnd && ( $see['tag'] < $commentEnd );
+
+		if ( $seeTagFound ) {
+			$commentStringPtr = $see['tag'] + 2;
+		} else {
+			$commentStringPtr = $commentStart + 2;
+
+			if ( $tokens[ $commentStart ]['line'] !== $tokens[ $commentEnd ]['line'] ) {
+				return false;
+			}
+		}
+
+		$content = $tokens[ $commentStringPtr ]['content'];
+
+		if ( $tokens[ $commentStringPtr ]['code'] !== T_DOC_COMMENT_STRING ) {
 			return false;
 		}
 
-		if ( $tokens[ $see['tag'] + 2 ]['code'] !== T_DOC_COMMENT_STRING ) {
-			return false;
-		}
-
-		if ( 0 === strpos( $tokens[ $see['tag'] + 2 ]['content'], 'This filter is documented in ' ) ) {
-			return true;
-		}
-
-		return 0 === strpos( $tokens[ $see['tag'] + 2 ]['content'], 'This action is documented in ' );
+		return (
+			0 === strpos( $content, 'This action is documented in ' ) ||
+			0 === strpos( $content, 'This filter is documented in ' )
+		);
 	}
 }
