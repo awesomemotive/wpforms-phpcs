@@ -22,9 +22,9 @@ class ParamTagHooksTest extends TestCase {
 		$phpcsFile = $this->process( new ParamTagHooksSniff() );
 
 		$this->fileHasErrors( $phpcsFile, 'InvalidAlign', [ 49, 50, 51, 52, 53 ] );
-		$this->fileHasErrors( $phpcsFile, 'InvalidParamTagsQuantity', [ 75 ] );
-		$this->fileHasErrors( $phpcsFile, 'MissParamInfo', [ 103, 104, 105, 106, 107, 108, 109 ] );
-		$this->fileHasErrors( $phpcsFile, 'AddStopSymbol', [ 133, 134, 138 ] );
-		$this->fileHasErrors( $phpcsFile, 'ExtraSpacesAfterParamTag', [ 160, 161, 162, 163, 164 ] );
+		$this->fileHasErrors( $phpcsFile, 'InvalidParamTagsQuantity', [] );
+		$this->fileHasErrors( $phpcsFile, 'MissParamInfo', [ 111, 112, 113, 114, 115, 116, 117 ] );
+		$this->fileHasErrors( $phpcsFile, 'AddStopSymbol', [ 141, 142, 146 ] );
+		$this->fileHasErrors( $phpcsFile, 'ExtraSpacesAfterParamTag', [ 168, 169, 170, 171, 172 ] );
 	}
 }

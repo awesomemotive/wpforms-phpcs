@@ -66,11 +66,19 @@ do_action(
  *
  * @since 1.3.0
  *
- * @param object $response Response data.
- * @param array $request_args Request arguments.
- * @param array $contact GetResponse contact data.
- * @param array $connection Connection data.
- * @param array $args Additional arguments.
+ * @param object $response     Response data.
+ * @param array  $request_args Request arguments.
+ * @param array  $contact      GetResponse contact data.
+ * @param array  $connection   Connection data.
+ * @param array  $args         Additional arguments.
+ * @param mixed  $arg6         Test argument.
+ * @param mixed  $arg7         Test argument.
+ * @param mixed  $arg8         Test argument.
+ * @param mixed  $arg9         Test argument.
+ * @param mixed  $arg10        Test argument.
+ * @param mixed  $arg11        Test argument.
+ * @param mixed  $arg12        Test argument.
+ * @param mixed  $arg13        Test argument.
  */
 do_action(
 	'wpforms_getresponse_provider_process_task_async_action_subscribe_after',
@@ -78,14 +86,14 @@ do_action(
 	$request_args,
 	$contact,
 	$this->connection,
-	$this->connection[ $test ],
-	$this->connection(),
-	$this->connection( $a, $b, $c ),
 	[
 		'form_data' => $this->form_data,
 		'fields'    => $this->fields,
 		'entry'     => $this->entry,
 	],
+	$this->connection[ $test ],
+	$this->connection(),
+	$this->connection( $a, $b, $c ),
 	function () {
 		return 'true';
 	},
@@ -203,3 +211,27 @@ do_action( 'wpforms_display_submit_after', $this->form_data );
 
 /** This filter is documented in wp-includes/post-template.php */
 $content = apply_filters( 'the_content', $content );
+
+/**
+ * Allow modifying the text or url for the full page on the AMP pages.
+ *
+ * @since 1.4.1.1
+ * @since 1.7.1 Added $form_id, $full_page_url, and $form_data arguments.
+ *
+ * @param int   $form_id   Form id.
+ * @param array $form_data Form data and settings.
+ * @param array $form_data Form data and settings.
+ * @param array $form_data Form data and settings.
+ *
+ * @return string
+ */
+$text = (string) apply_filters(
+	'wpforms_frontend_shortcode_amp_text',
+	sprintf( /* translators: %s - URL to a non-amp version of a page with the form. */
+		__( '<a href="%s">Go to the full page</a> to view and submit the form.', 'wpforms-lite' ),
+		esc_url( $full_page_url )
+	),
+	$form_id,
+	$full_page_url,
+	$form_data
+);
