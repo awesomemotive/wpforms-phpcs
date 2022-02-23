@@ -5,12 +5,12 @@
  *
  * @since 1.3.0
  *
- * @param object $response     Response data.
- * @param array  $request_args Request arguments.
- * @param array  $contact      GetResponse
- *                             contact data.
- * @param array  $connection   Connection data.
- * @param array  $args         Additional arguments.
+ * @param object|string[] $response     Response data.
+ * @param array           $request_args Request arguments.
+ * @param array           $contact      GetResponse
+ *                                  contact data.
+ * @param array           $connection   Connection data.
+ * @param array           $args         Additional arguments.
  */
 do_action(
 	'wpforms_getresponse_provider_process_task_async_action_subscribe_after',

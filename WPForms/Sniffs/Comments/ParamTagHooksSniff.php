@@ -257,7 +257,7 @@ class ParamTagHooksSniff extends BaseSniff implements Sniff {
 			return $param;
 		}
 
-		preg_match( '/([\w\s]+)(\$[\w_]+\s+)(.*)/', $tokens[ $commentString ]['content'], $paramElements );
+		preg_match( '/([\w\s\[\]|]+)(\$[\w_]+\s+)(.*)/', $tokens[ $commentString ]['content'], $paramElements );
 
 		if ( empty( $paramElements[1] ) || empty( $paramElements[2] ) || empty( $paramElements[3] ) ) {
 			$phpcsFile->addError(
