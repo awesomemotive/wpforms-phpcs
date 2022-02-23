@@ -119,9 +119,17 @@ class ParamTagHooksSniff extends BaseSniff implements Sniff {
 
 		$currentPosition = $commaPtr + 1;
 		$quantity        = 0;
+		$lookingForComma = false;
 
 		while ( $currentPosition < $lastPosition ) {
-			if ( in_array( $tokens[ $currentPosition ]['code'], [ T_WHITESPACE, T_COMMA ], true ) ) {
+			if ( $tokens[ $currentPosition ]['code'] === T_WHITESPACE ) {
+				$currentPosition ++;
+				continue;
+			}
+
+			if ( $tokens[ $currentPosition ]['code'] === T_COMMA ) {
+				$lookingForComma = false;
+
 				$currentPosition ++;
 				continue;
 			}
@@ -134,13 +142,15 @@ class ParamTagHooksSniff extends BaseSniff implements Sniff {
 				continue;
 			}
 
+			$currentPosition ++;
+
+			if ( $lookingForComma ) {
+				continue;
+			}
+
 			$quantity ++;
 
-			$currentPosition = $phpcsFile->findNext( [ T_COMMA, T_ARRAY, T_OPEN_SHORT_ARRAY, T_OPEN_PARENTHESIS, T_OPEN_SQUARE_BRACKET, T_OPEN_CURLY_BRACKET ], $currentPosition + 1 );
-
-			if ( ! $currentPosition ) {
-				break;
-			}
+			$lookingForComma = true;
 		}
 
 		return $quantity;

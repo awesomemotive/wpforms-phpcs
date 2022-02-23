@@ -212,6 +212,8 @@ do_action( 'wpforms_display_submit_after', $this->form_data );
 /** This filter is documented in wp-includes/post-template.php */
 $content = apply_filters( 'the_content', $content );
 
+// This filter counted args improperly due to presence of the function with parenthesis.
+
 /**
  * Allow modifying the text or url for the full page on the AMP pages.
  *
@@ -235,3 +237,14 @@ $text = (string) apply_filters(
 	$full_page_url,
 	$form_data
 );
+
+// This filter counted args improperly due to expression in the argument.
+
+/**
+ * Allow filtering Rich Text field media cleanup window time.
+ *
+ * @since 1.7.0
+ *
+ * @param int $time Time.
+ */
+$time = (int) apply_filters( 'wpforms_richtext_override_auth_for_ajax_media_calls_time', time() + 1 * DAY_IN_SECONDS );
