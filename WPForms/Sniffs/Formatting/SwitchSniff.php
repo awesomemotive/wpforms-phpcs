@@ -119,7 +119,7 @@ class SwitchSniff extends BaseSniff implements Sniff {
 
 		if (
 			$tokens[ $previousStatement ]['code'] === T_SWITCH &&
-			$tokens[ $previousStatement ]['line'] !== $tokens[ $stackPtr ]['line'] - 1
+			$this->lineDistance( $phpcsFile, $stackPtr, $previousStatement ) !== 1
 		) {
 			$this->removeEmptyLineError( $phpcsFile, $stackPtr );
 
@@ -128,7 +128,7 @@ class SwitchSniff extends BaseSniff implements Sniff {
 
 		if (
 			$tokens[ $previousStatement ]['code'] === T_BREAK &&
-			$tokens[ $stackPtr ]['line'] - $tokens[ $previousStatement ]['line'] === 1
+			$this->lineDistance( $phpcsFile, $stackPtr, $previousStatement ) === 1
 		) {
 			$this->addEmptyLineError( $phpcsFile, $stackPtr );
 
@@ -136,11 +136,29 @@ class SwitchSniff extends BaseSniff implements Sniff {
 		}
 
 		if (
-			$tokens[ $stackPtr ]['line'] - $tokens[ $previousStatement ]['line'] !== 1 &&
+			$this->lineDistance( $phpcsFile, $stackPtr, $previousStatement ) !== 1 &&
 			in_array( $tokens[ $previousStatement ]['code'], [ T_CASE, T_DEFAULT ], true )
 		) {
 			$this->removeEmptyLineError( $phpcsFile, $stackPtr );
 		}
+	}
+
+	/**
+	 * Get distance in lines between tokens, ignoring comment lines.
+	 *
+	 * @since 1.0.4
+	 *
+	 * @param File $phpcsFile The PHP_CodeSniffer file where the token was found.
+	 * @param int  $endPtr    End token.
+	 * @param int  $startPtr  Start token.
+	 *
+	 * @return mixed
+	 */
+	private function lineDistance( File $phpcsFile, $endPtr, $startPtr ) {
+
+		$tokens = $phpcsFile->getTokens();
+
+		return $tokens[ $endPtr ]['line'] - $tokens[ $startPtr ]['line'];
 	}
 
 	/**
