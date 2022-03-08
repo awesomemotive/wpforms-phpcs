@@ -9,13 +9,11 @@ class GoodExample {
 		switch ( $args ) {
 			case 'a':
 				example( $args );
-
 				break;
 
 			case 'b':
 			case 'c':
 				$value = 2;
-
 				break;
 
 			case 'd':
@@ -31,13 +29,11 @@ class GoodExample {
 		switch ( $args ) {
 			case 'a':
 				example( $args );
-
 				break;
 
 			case 'b':
 			case 'c':
 				$value = 2;
-
 				break;
 
 			default:
@@ -65,11 +61,13 @@ class BadExample {
 
 			case 'a':
 				example( $args );
+
 				break;
 			case 'b':
 
 			case 'c':
 				$value = 2;
+
 				break;
 
 			default:
@@ -83,10 +81,12 @@ class BadExample {
 		switch ( $args ) {
 			case 'a':
 				example( $args );
+
 				break;
 			case 'b':
 			case 'c':
 				$value = 2;
+
 				break;
 			default:
 				$value = 3;

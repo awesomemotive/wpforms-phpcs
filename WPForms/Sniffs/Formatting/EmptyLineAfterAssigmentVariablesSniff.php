@@ -62,7 +62,10 @@ class EmptyLineAfterAssigmentVariablesSniff extends BaseSniff implements Sniff {
 			return;
 		}
 
-		if ( in_array( $nextLineTokens[0]['code'], $this->getAllowedTokensAfterAssigment(), true ) ) {
+		if (
+			$this->isBreakInSwitch( $phpcsFile, $nextLineTokens[0] ) ||
+			in_array( $nextLineTokens[0]['code'], $this->getAllowedTokensAfterAssigment(), true )
+		) {
 			return;
 		}
 

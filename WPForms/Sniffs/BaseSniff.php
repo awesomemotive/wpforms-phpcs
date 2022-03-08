@@ -152,6 +152,30 @@ abstract class BaseSniff {
 	}
 
 	/**
+	 * Check whether the token is break in switch statement.
+	 *
+	 * @since 1.0.4
+	 *
+	 * @param File  $phpcsFile The PHP_CodeSniffer file where the token was found.
+	 * @param array $token     First token on the next line.
+	 *
+	 * @return bool
+	 */
+	protected function isBreakInSwitch( $phpcsFile, $token ) {
+
+		$tokens = $phpcsFile->getTokens();
+
+		if ( $token['code'] !== T_BREAK ) {
+			return false;
+		}
+
+		return (
+			isset( $token['scope_condition'] ) &&
+			in_array( $tokens[ $token['scope_condition'] ]['code'], [ T_CASE, T_DEFAULT ], true )
+		);
+	}
+
+	/**
 	 * Get fully qualified class name.
 	 *
 	 * @since 1.0.0

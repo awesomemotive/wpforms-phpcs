@@ -21,7 +21,7 @@ class SwitchTest extends TestCase {
 
 		$phpcsFile = $this->process( new SwitchSniff() );
 
-		$this->fileHasErrors( $phpcsFile, 'AddEmptyLineBefore', [ 64, 68, 69, 73, 86, 87, 90, 91, 94 ] );
-		$this->fileHasErrors( $phpcsFile, 'RemoveEmptyLineBefore', [ 66, 71, 78 ] );
+		$this->fileHasErrors( $phpcsFile, 'AddEmptyLineBefore', [ 60, 66, 86, 91, 94 ] );
+		$this->fileHasErrors( $phpcsFile, 'RemoveEmptyLineBefore', [ 62, 65, 68, 71, 76, 85, 90 ] );
 	}
 }
