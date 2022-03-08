@@ -137,3 +137,34 @@ foreach ( $types as $key => $t ) {
 		unset( $types[ $key ] );
 	}
 }
+
+// Good example.
+switch ( $foo ) {
+	case 'foo':
+		$bar = 1;
+		break;
+
+	case 'bar':
+		echo 1;
+		break;
+
+	case 'baz':
+		$bar = 3;
+		break;
+
+	case 'krya':
+	default:
+		$bar = 4;
+		break;
+}
+
+// Good example.
+foreach ( $rays as $ray ) {
+	if ( $ray === 1 ) {
+		$a = 2;
+
+		break;
+	}
+
+	$c = 3;
+}
