@@ -6,11 +6,13 @@ class GoodExample {
 
 		$this->get_value();
 
+		// Switch comment.
 		switch ( $args ) {
 			case 'a':
 				example( $args );
 				break;
 
+			// Case comment.
 			case 'b':
 			case 'c':
 				$value = 2;
@@ -19,6 +21,7 @@ class GoodExample {
 			case 'd':
 				break;
 
+			// Default comment.
 			default:
 				$value = 3;
 		}

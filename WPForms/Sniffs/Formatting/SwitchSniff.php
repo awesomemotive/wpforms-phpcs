@@ -68,9 +68,9 @@ class SwitchSniff extends BaseSniff implements Sniff {
 	private function processSwitch( File $phpcsFile, $stackPtr ) {
 
 		$tokens   = $phpcsFile->getTokens();
-		$previous = $phpcsFile->findPrevious( T_WHITESPACE, $stackPtr - 1, null, true );
+		$previous = $phpcsFile->findPrevious( [ T_WHITESPACE, T_COMMENT ], $stackPtr - 1, null, true );
 
-		if ( $previous === false ) {
+		if ( $previous === false || $tokens[ $previous ]['code'] === T_COMMENT ) {
 			return;
 		}
 
@@ -108,11 +108,16 @@ class SwitchSniff extends BaseSniff implements Sniff {
 	private function processCase( File $phpcsFile, $stackPtr ) {
 
 		$tokens            = $phpcsFile->getTokens();
-		$previous          = $phpcsFile->findPrevious( T_WHITESPACE, $stackPtr - 1, null, true );
+		$previous          = $phpcsFile->findPrevious( [ T_WHITESPACE, T_COMMENT ], $stackPtr - 1, null, true );
 		$previousStatement = $phpcsFile->findFirstOnLine( [ T_SWITCH, T_CASE, T_DEFAULT, T_BREAK ], $previous );
 
+		if ( $previousStatement === false ) {
+			$this->addEmptyLineError( $phpcsFile, $stackPtr );
+
+			return;
+		}
+
 		if (
-			! empty( $previousStatement ) &&
 			$tokens[ $previousStatement ]['code'] === T_SWITCH &&
 			$tokens[ $previousStatement ]['line'] !== $tokens[ $stackPtr ]['line'] - 1
 		) {
@@ -122,11 +127,8 @@ class SwitchSniff extends BaseSniff implements Sniff {
 		}
 
 		if (
-			empty( $previousStatement ) ||
-			(
-				$tokens[ $previousStatement ]['code'] === T_BREAK &&
-				$tokens[ $stackPtr ]['line'] - $tokens[ $previousStatement ]['line'] === 1
-			)
+			$tokens[ $previousStatement ]['code'] === T_BREAK &&
+			$tokens[ $stackPtr ]['line'] - $tokens[ $previousStatement ]['line'] === 1
 		) {
 			$this->addEmptyLineError( $phpcsFile, $stackPtr );
 
