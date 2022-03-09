@@ -74,13 +74,13 @@ class SwitchSniff extends BaseSniff implements Sniff {
 			return;
 		}
 
-		if ( $tokens[ $stackPtr ]['line'] - $tokens[ $previous ]['line'] === 1 ) {
+		if ( $this->lineDistance( $phpcsFile, $stackPtr, $previous ) === 1 ) {
 			$this->addEmptyLineError( $phpcsFile, $stackPtr );
 		}
 
 		$beforeClose = $phpcsFile->findPrevious( T_WHITESPACE, $tokens[ $stackPtr ]['scope_closer'] - 1, null, true );
 
-		if ( $tokens[ $tokens[ $stackPtr ]['scope_closer'] ]['line'] - $tokens[ $beforeClose ]['line'] !== 1 ) {
+		if ( $this->lineDistance( $phpcsFile, $tokens[ $stackPtr ]['scope_closer'], $beforeClose ) !== 1 ) {
 			$this->removeEmptyLineError( $phpcsFile, $tokens[ $stackPtr ]['scope_closer'] );
 		}
 
@@ -90,7 +90,7 @@ class SwitchSniff extends BaseSniff implements Sniff {
 			return;
 		}
 
-		if ( $tokens[ $next ]['line'] - $tokens[ $tokens[ $stackPtr ]['scope_closer'] ]['line'] > 1 ) {
+		if ( $this->lineDistance( $phpcsFile, $next, $tokens[ $stackPtr ]['scope_closer'] ) > 1 ) {
 			return;
 		}
 
@@ -158,7 +158,25 @@ class SwitchSniff extends BaseSniff implements Sniff {
 
 		$tokens = $phpcsFile->getTokens();
 
-		return $tokens[ $endPtr ]['line'] - $tokens[ $startPtr ]['line'];
+		$ptr = $startPtr + 1;
+
+		$commentLines = [];
+
+		while ( $ptr < $endPtr ) {
+			if (
+				$tokens[ $ptr ]['code'] === T_COMMENT &&
+				$phpcsFile->findFirstOnLine( [ T_WHITESPACE, T_COMMENT ], $ptr, true ) === false
+			) {
+				$commentLines[] = $tokens[ $ptr ]['line'];
+			}
+
+			$ptr ++;
+		}
+
+		return max(
+			0,
+			$tokens[ $endPtr ]['line'] - $tokens[ $startPtr ]['line'] - count( array_unique( $commentLines ) )
+		);
 	}
 
 	/**

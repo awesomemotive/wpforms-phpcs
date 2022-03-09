@@ -8,6 +8,7 @@ class GoodExample {
 
 		// Switch comment.
 		switch ( $args ) {
+			// Case comment.
 			case 'a':
 				example( $args );
 				break;
