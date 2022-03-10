@@ -8,7 +8,13 @@ class GoodExample {
 
 		// Switch comment.
 		switch ( $args ) {
-			// Case comment.
+			/*
+			 * Simple multiline comment.
+			 */
+			/**
+			 * PHPDoc comment.
+			 */
+			// Inline comment.
 			case 'a':
 				example( $args );
 				break;
@@ -52,6 +58,27 @@ class GoodExample {
 			if ( $tokens[ $i ]['line'] > $nextLine ) {
 				break;
 			}
+		}
+	}
+
+	public function good_example_4( $suffix, $value ) {
+
+		switch ( strtoupper( $suffix ) ) {
+			case 'P':
+				$value *= 1024;
+
+			case 'T':
+				$value *= 1024;
+
+			case 'G':
+				$value *= 1024;
+
+			case 'M':
+				$value *= 1024;
+
+			case 'K':
+				$value *= 1024;
+				break;
 		}
 	}
 }

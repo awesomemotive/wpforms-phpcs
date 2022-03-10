@@ -108,20 +108,27 @@ class SwitchSniff extends BaseSniff implements Sniff {
 	private function processCase( File $phpcsFile, $stackPtr ) {
 
 		$tokens            = $phpcsFile->getTokens();
-		$previous          = $phpcsFile->findPrevious( [ T_WHITESPACE, T_COMMENT ], $stackPtr - 1, null, true );
+		$previous          = $phpcsFile->findPrevious(
+			[
+				T_WHITESPACE,
+				T_COMMENT,
+				T_DOC_COMMENT_OPEN_TAG,
+				T_DOC_COMMENT_WHITESPACE,
+				T_DOC_COMMENT_STAR,
+				T_DOC_COMMENT_STRING,
+				T_DOC_COMMENT_CLOSE_TAG,
+			],
+			$stackPtr - 1,
+			null,
+			true
+		);
 		$previousStatement = $phpcsFile->findFirstOnLine( [ T_SWITCH, T_CASE, T_DEFAULT, T_BREAK ], $previous );
 
-		if ( $previousStatement === false ) {
-			$this->addEmptyLineError( $phpcsFile, $stackPtr );
-
-			return;
-		}
-
 		if (
-			$tokens[ $previousStatement ]['code'] === T_SWITCH &&
-			$this->lineDistance( $phpcsFile, $stackPtr, $previousStatement ) !== 1
+			$previousStatement === false &&
+			$this->lineDistance( $phpcsFile, $stackPtr, $previous ) === 1
 		) {
-			$this->removeEmptyLineError( $phpcsFile, $stackPtr );
+			$this->addEmptyLineError( $phpcsFile, $stackPtr );
 
 			return;
 		}
@@ -136,8 +143,8 @@ class SwitchSniff extends BaseSniff implements Sniff {
 		}
 
 		if (
-			$this->lineDistance( $phpcsFile, $stackPtr, $previousStatement ) !== 1 &&
-			in_array( $tokens[ $previousStatement ]['code'], [ T_CASE, T_DEFAULT ], true )
+			in_array( $tokens[ $previousStatement ]['code'], [ T_SWITCH, T_CASE, T_DEFAULT ], true ) &&
+			$this->lineDistance( $phpcsFile, $stackPtr, $previousStatement ) !== 1
 		) {
 			$this->removeEmptyLineError( $phpcsFile, $stackPtr );
 		}
@@ -164,8 +171,19 @@ class SwitchSniff extends BaseSniff implements Sniff {
 
 		while ( $ptr < $endPtr ) {
 			if (
-				$tokens[ $ptr ]['code'] === T_COMMENT &&
-				$phpcsFile->findFirstOnLine( [ T_WHITESPACE, T_COMMENT ], $ptr, true ) === false
+				in_array(
+					$tokens[ $ptr ]['code'],
+					[
+						T_DOC_COMMENT_OPEN_TAG,
+						T_DOC_COMMENT_WHITESPACE,
+						T_DOC_COMMENT_STAR,
+						T_DOC_COMMENT_STRING,
+						T_DOC_COMMENT_CLOSE_TAG,
+					],
+					true
+				) ||
+				( $tokens[ $ptr ]['code'] === T_COMMENT &&
+				  $phpcsFile->findFirstOnLine( [ T_WHITESPACE, T_COMMENT ], $ptr, true ) === false )
 			) {
 				$commentLines[] = $tokens[ $ptr ]['line'];
 			}
