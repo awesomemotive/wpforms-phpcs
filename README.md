@@ -12,7 +12,8 @@ WPForms coding standards are based on the [WordPress Coding Standards](https://g
 ## Installation
 
 ```
-composer require wpforms-phpcs --dev
+composer config repositories.repo-name vcs https://github.com/awesomemotive/wpforms-phpcs.git
+composer require awesomemotive/wpforms-phpcs --dev
 ```
 
 ## Configuration
