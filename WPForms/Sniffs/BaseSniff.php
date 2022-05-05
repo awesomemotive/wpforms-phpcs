@@ -216,7 +216,18 @@ abstract class BaseSniff {
 		$class = trim( $phpcsFile->getTokensAsString( $classPtr + 1, $classEnd - $classPtr - 1 ) );
 		$class = $this->convertClassName( $class );
 
-		return strtolower( str_replace( '\\', '_', $namespace ? $namespace . '\\' . $class : $class ) );
+		$fqcn = $this->camelToSnake( str_replace( '\\', '', $namespace ) ) . '_' . $class;
+		$fqcn = str_replace(
+			[
+				'wp_forms',
+			],
+			[
+				'wpforms',
+			],
+			$fqcn
+		);
+
+		return $fqcn;
 	}
 
 	/**
