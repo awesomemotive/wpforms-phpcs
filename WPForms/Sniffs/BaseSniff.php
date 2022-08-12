@@ -216,7 +216,24 @@ abstract class BaseSniff {
 		$class = trim( $phpcsFile->getTokensAsString( $classPtr + 1, $classEnd - $classPtr - 1 ) );
 		$class = $this->convertClassName( $class );
 
-		return strtolower( str_replace( '\\', '_', $namespace ? $namespace . '\\' . $class : $class ) );
+		$fqcn = $this->camelToSnake( str_replace( '\\', '', $namespace ) ) . '_' . $class;
+
+		$fqcn = str_replace( 'wp_forms', 'wpforms', $fqcn );
+
+		$fqcnArr = explode( '_', $fqcn );
+
+		$prevItem = '';
+
+		// Remove repetitions.
+		foreach ( $fqcnArr as $key => $item ) {
+			if ( $prevItem === $item ) {
+				unset( $fqcnArr[ $key ] );
+			}
+
+			$prevItem = $item;
+		}
+
+		return implode( '_', $fqcnArr );
 	}
 
 	/**
@@ -231,7 +248,7 @@ abstract class BaseSniff {
 	private function convertClassName( $class ) {
 
 		if ( strpos( $class, '_' ) !== false ) {
-			return $class;
+			return strtolower( $class );
 		}
 
 		return $this->camelToSnake( $class );
