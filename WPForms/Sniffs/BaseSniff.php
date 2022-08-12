@@ -218,7 +218,22 @@ abstract class BaseSniff {
 
 		$fqcn = $this->camelToSnake( str_replace( '\\', '', $namespace ) ) . '_' . $class;
 
-		return str_replace( 'wp_forms', 'wpforms', $fqcn );
+		$fqcn = str_replace( 'wp_forms', 'wpforms', $fqcn );
+
+		$fqcnArr = explode( '_', $fqcn );
+
+		$prevItem = '';
+
+		// Remove repetitions.
+		foreach ( $fqcnArr as $key => $item ) {
+			if ( $prevItem === $item ) {
+				unset( $fqcnArr[ $key ] );
+			}
+
+			$prevItem = $item;
+		}
+
+		return implode( '_', $fqcnArr );
 	}
 
 	/**
