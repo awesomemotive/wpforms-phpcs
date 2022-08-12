@@ -248,7 +248,7 @@ abstract class BaseSniff {
 	private function convertClassName( $class ) {
 
 		if ( strpos( $class, '_' ) !== false ) {
-			return $class;
+			return strtolower( $class );
 		}
 
 		return $this->camelToSnake( $class );
