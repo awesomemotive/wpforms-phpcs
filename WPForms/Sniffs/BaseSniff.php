@@ -239,7 +239,7 @@ abstract class BaseSniff {
 	/**
 	 * Convert class name to snake case.
 	 *
-	 * @since {VERSION}
+	 * @since 1.0.2
 	 *
 	 * @param string $class Class name.
 	 *
@@ -257,7 +257,7 @@ abstract class BaseSniff {
 	/**
 	 * Convert string from CamelCase to snake_case.
 	 *
-	 * @since {VERSION}
+	 * @since 1.0.2
 	 *
 	 * @param string $string A string.
 	 *

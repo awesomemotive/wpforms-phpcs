@@ -155,7 +155,7 @@ class UseStatementSniff extends BaseSniff implements Sniff {
 	/**
 	 * Find function/objects/class in the PHPDoc @throws.
 	 *
-	 * @since {VERSION}
+	 * @since 1.0.0
 	 *
 	 * @param File   $phpcsFile  The PHP_CodeSniffer file where the token was found.
 	 * @param string $entityName Function/objects/class name.
