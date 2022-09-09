@@ -184,13 +184,16 @@ class ValidateDomainSniff extends BaseSniff implements Sniff {
 			return strtolower( $currentDomain );
 		}
 
+		$basename = basename( $root );
+
 		if ( ! Config::getConfigData( 'multi_domains' ) ) {
-			return basename( $root );
+			return $basename;
 		}
 
-		preg_match( '/([\w.-]+)/', $filePath, $domain );
+		$relativeDir = str_replace( [ '\\', '/', '.' ], [ '-', '-', '' ], dirname( $filePath ) );
+		$relativeDir = strtolower( trim( $relativeDir, '-' ) );
 
-		return ! empty( $domain[0] ) ? strtolower( $domain[0] ) : '';
+		return $relativeDir ? $relativeDir : $basename;
 	}
 
 	/**
