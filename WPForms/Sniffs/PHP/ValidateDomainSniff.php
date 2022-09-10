@@ -170,6 +170,8 @@ class ValidateDomainSniff extends BaseSniff implements Sniff {
 	 * @param File $phpcsFile The PHP_CodeSniffer file where the token was found.
 	 *
 	 * @return string
+	 * @noinspection PhpTernaryExpressionCanBeReducedToShortVersionInspection
+	 * @noinspection ElvisOperatorCanBeUsedInspection
 	 */
 	private function getExpectedDomain( $phpcsFile ) {
 
@@ -207,16 +209,16 @@ class ValidateDomainSniff extends BaseSniff implements Sniff {
 	 */
 	private function findDomainByProperty( $filePath ) {
 
-		$filePath      = ltrim( $filePath, DIRECTORY_SEPARATOR );
+		$fileDir       = dirname( $filePath );
 		$currentDomain = '';
 		$currentPath   = '';
 
 		foreach ( $this->domains as $domain => $paths ) {
 			foreach ( $paths as $path ) {
-				$path = rtrim( $path, DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR;
+				$pathDir = $this->normalizePath( $path );
 
 				if (
-					strpos( $filePath, $path ) === 0 &&
+					0 === strpos( $fileDir, $pathDir ) &&
 					strlen( $path ) > strlen( $currentPath )
 				) {
 					$currentDomain = $domain;
@@ -226,5 +228,38 @@ class ValidateDomainSniff extends BaseSniff implements Sniff {
 		}
 
 		return $currentDomain;
+	}
+
+	/**
+	 * Get normalized path, like realpath() for non-existing path or file.
+	 *
+	 * @since 1.0.5
+	 *
+	 * @param string $path Path to be normalized.
+	 *
+	 * @return string
+	 */
+	private function normalizePath( $path ) {
+
+		return (string) array_reduce(
+			explode( DIRECTORY_SEPARATOR, $path ),
+			static function ( $a, $b ) {
+				if ( $a === null ) {
+					$a = DIRECTORY_SEPARATOR;
+				}
+				if ( $b === '' || $b === '.' ) {
+					return $a;
+				}
+				if ( $b === '..' ) {
+					return dirname( $a );
+				}
+
+				$sep     = DIRECTORY_SEPARATOR;
+				$escSep  = '\\' . $sep;
+				$pattern = "/$escSep+/";
+
+				return (string) preg_replace( $pattern, DIRECTORY_SEPARATOR, "$a$sep$b" );
+			}
+		);
 	}
 }
