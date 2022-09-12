@@ -103,7 +103,17 @@ class ValidateDomainSniff extends BaseSniff implements Sniff {
 		$currentDomain  = $this->getCurrentDomain( $phpcsFile, $stackPtr );
 		$expectedDomain = $this->getExpectedDomain( $phpcsFile );
 
-		if ( ! $expectedDomain ) {
+		if ( $currentDomain === false ) {
+			$phpcsFile->addError(
+				'Domain name must be string.',
+				$stackPtr,
+				'NotStringDomain'
+			);
+
+			return;
+		}
+
+		if ( ! $currentDomain || ! $expectedDomain ) {
 			return;
 		}
 
@@ -113,7 +123,7 @@ class ValidateDomainSniff extends BaseSniff implements Sniff {
 
 		$phpcsFile->addError(
 			sprintf(
-				"You are using invalid domain name. Use '%s' instead of '%s'",
+				"You are using invalid domain name. Use '%s' instead of '%s'.",
 				$expectedDomain,
 				$currentDomain
 			),
@@ -130,7 +140,7 @@ class ValidateDomainSniff extends BaseSniff implements Sniff {
 	 * @param File $phpcsFile The PHP_CodeSniffer file where the token was found.
 	 * @param int  $stackPtr  The position in the PHP_CodeSniffer file's token stack where the token was found.
 	 *
-	 * @return string
+	 * @return string|false
 	 */
 	private function getCurrentDomain( $phpcsFile, $stackPtr ) {
 
@@ -148,7 +158,7 @@ class ValidateDomainSniff extends BaseSniff implements Sniff {
 
 		// Last argument is not a string, but something else.
 		if ( $lastArgument ) {
-			return '';
+			return false;
 		}
 
 		$lastArgument = $phpcsFile->findNext( T_CONSTANT_ENCAPSED_STRING, $commaPtr + 1, $closePtr );
@@ -192,10 +202,9 @@ class ValidateDomainSniff extends BaseSniff implements Sniff {
 			return $basename;
 		}
 
-		$relativeDir = str_replace( [ '\\', '/', '.' ], [ '-', '-', '' ], dirname( $filePath ) );
-		$relativeDir = strtolower( trim( $relativeDir, '-' ) );
+		preg_match( '/[\w.-]+/', dirname( $filePath ), $domain );
 
-		return $relativeDir ? $relativeDir : $basename;
+		return ! empty( $domain[0] ) ? strtolower( $domain[0] ) : $basename;
 	}
 
 	/**
@@ -209,7 +218,7 @@ class ValidateDomainSniff extends BaseSniff implements Sniff {
 	 */
 	private function findDomainByProperty( $filePath ) {
 
-		$fileDir       = dirname( $filePath );
+		$fileDir       = DIRECTORY_SEPARATOR . ltrim( dirname( $filePath ), DIRECTORY_SEPARATOR );
 		$currentDomain = '';
 		$currentPath   = '';
 

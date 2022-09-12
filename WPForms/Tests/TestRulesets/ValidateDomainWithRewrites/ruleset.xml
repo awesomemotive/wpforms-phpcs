@@ -4,7 +4,7 @@
 	<config name="multi_domains" value="true"/>
 	<rule ref="WPForms.PHP.ValidateDomain">
 		<properties>
-			<property name="wpforms-lite" value="WPForms/"/>
+			<property name="wpforms-lite" value="WPForms"/>
 		</properties>
 	</rule>
 </ruleset>

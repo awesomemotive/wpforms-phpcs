@@ -18,31 +18,29 @@ _nx( 'Valid', 'Valid', 10, 'Valid', 'wpforms-phpcs' );
 
 __( 'Invalid', 'wpforms' );
 _e( 'Invalid', 'wpforms-geolocation' );
-_x( 'Invalid', 'context', 'wpforms-lite' );
-esc_html__( 'Invalid', 'wpforms-lite' );
-esc_html_e( 'Invalid', 'wpforms-lite' );
-esc_html_x( 'Invalid', 'context', 'wpforms-lite' );
-esc_attr__( 'Invalid', 'wpforms-lite' );
-esc_attr_e( 'Invalid', 'wpforms-lite' );
+_x( 'Valid for lite only', 'context', 'wpforms-lite' );
+esc_html__( 'Valid for lite only', 'wpforms-lite' );
+esc_html_e( 'Valid for lite only', 'wpforms-lite' );
+esc_html_x( 'Valid for lite only', 'context', 'wpforms-lite' );
+esc_attr__( 'Valid for lite only', 'wpforms-lite' );
+esc_attr_e( 'Valid for lite only', 'wpforms-lite' );
 esc_attr_x( 'Invalid', 'context', 'wpforms' );
 _n( 'Invalid', 'Invalid', 10, 'wpforms' );
 _ex( 'Invalid', 'Invalid', 'wpforms' );
 _nx( 'Invalid', 'Invalid', 10, 'Invalid', 'wpforms' );
 
 
-// Additional two cases of valid syntax when text domain is not specified.
+// Valid syntax when the text domain is not specified.
 esc_html__( 'Valid' );
 
-// Not a string as the last argument.
+// Invalid - not a string as the last argument.
 $bulk_counts['read'] = 25;
 _n( '%d entry.', '%d entries.', $bulk_counts['read'] );
 
-// Nested parenthesis with domain specified as the last argument.
+// Invalid - nested parenthesis inside the gettext function with domain specified as the last argument.
 _n(
 	'Found <strong>%s entry</strong>',
 	'Found <strong>%s entries</strong>',
 	absint( count( $this->entries->items ) ),
 	'wpforms'
 );
-
-// phpcs:enable WordPress.Security.EscapeOutput.UnsafePrintingFunction
