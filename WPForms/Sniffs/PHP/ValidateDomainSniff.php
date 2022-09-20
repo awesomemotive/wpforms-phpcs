@@ -218,13 +218,13 @@ class ValidateDomainSniff extends BaseSniff implements Sniff {
 	 */
 	private function findDomainByProperty( $filePath ) {
 
-		$fileDir       = DIRECTORY_SEPARATOR . ltrim( dirname( $filePath ), DIRECTORY_SEPARATOR );
+		$fileDir       = DIRECTORY_SEPARATOR . trim( dirname( $filePath ), DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR;
 		$currentDomain = '';
 		$currentPath   = '';
 
 		foreach ( $this->domains as $domain => $paths ) {
 			foreach ( $paths as $path ) {
-				$pathDir = $this->normalizePath( $path );
+				$pathDir = DIRECTORY_SEPARATOR . trim( $this->normalizePath( $path ), DIRECTORY_SEPARATOR ) . DIRECTORY_SEPARATOR;
 
 				if (
 					0 === strpos( $fileDir, $pathDir ) &&
