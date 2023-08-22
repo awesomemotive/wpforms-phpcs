@@ -57,13 +57,16 @@
 		<exclude name="WordPress.WP.EnqueuedResourceParameters.MissingVersion"/>
 		<!-- Database specific rules. -->
 		<exclude name="WordPress.DB.DirectDatabaseQuery.DirectQuery"/>
-		<!-- PSR4 yo. -->
+		<!-- Rules to follow PSR4 -->
 		<exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
 		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
 		<!-- Misc. -->
 		<exclude name="WordPress.WP.AlternativeFunctions.file_get_contents_file_get_contents"/>
 		<exclude name="WordPress.PHP.YodaConditions.NotYoda"/>
-		<exclude name="Generic.Arrays.DisallowShortArraySyntax.Found"/>
+		<!-- WPCS 3.0 -->
+		<exclude name="Generic.CodeAnalysis.UnusedFunctionParameter.Found"/>
+		<exclude name="Generic.CodeAnalysis.UnusedFunctionParameter.FoundAfterLastUsed"/>
+		<exclude name="Universal.Arrays.DisallowShortArraySyntax.Found"/>
 	</rule>
 
 	<!-- Re-enable certain sniffs that were disabled by WordPress* standards. -->
