@@ -1,17 +1,14 @@
 <?xml version="1.0"?>
-<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         bootstrap="./bootstrap.php"
-         colors="true"
-         xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/7.5/phpunit.xsd">
-    <filter>
-        <whitelist>
-            <directory suffix=".php">../Sniffs</directory>
-            <directory suffix=".php">../Traits</directory>
-        </whitelist>
-    </filter>
-    <testsuites>
-        <testsuite name="WPForms-tests">
-            <directory suffix=".php">./Tests/</directory>
-        </testsuite>
-    </testsuites>
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" bootstrap="./bootstrap.php" colors="true" xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/9.3/phpunit.xsd">
+  <coverage>
+    <include>
+      <directory suffix=".php">../Sniffs</directory>
+      <directory suffix=".php">../Traits</directory>
+    </include>
+  </coverage>
+  <testsuites>
+    <testsuite name="WPForms-tests">
+      <directory suffix=".php">./Tests/</directory>
+    </testsuite>
+  </testsuites>
 </phpunit>
