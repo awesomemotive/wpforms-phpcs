@@ -25,7 +25,7 @@ class TestCase extends \PHPUnit\Framework\TestCase {
 	 * @return void
 	 * @throws DeepExitException DeepExitException.
 	 */
-	public function setUp() {
+	public function setUp(): void {
 
 		parent::setUp();
 
