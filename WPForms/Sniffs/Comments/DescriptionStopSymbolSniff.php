@@ -56,7 +56,7 @@ class DescriptionStopSymbolSniff extends BaseSniff implements Sniff {
 		}
 
 		$firstDescriptionLine = $this->findFirstDescriptionLine( $phpcsFile, $commentStart );
-		$entity               = $this->getEntityName( $phpcsFile, $stackPtr, $tokens );
+		$entity               = $this->getEntityFullName( $phpcsFile, $stackPtr, $tokens );
 
 		if ( $tokens[ $commentStart ]['line'] - $tokens[ $firstDescriptionLine ]['line'] === 0 ) {
 			$phpcsFile->addError(

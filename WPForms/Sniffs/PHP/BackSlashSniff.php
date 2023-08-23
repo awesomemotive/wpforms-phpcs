@@ -77,7 +77,7 @@ class BackSlashSniff extends BaseSniff implements Sniff {
 			return;
 		}
 
-		$startPtr ++;
+		++$startPtr;
 
 		if ( $tokens[ $startPtr ]['code'] !== T_NS_SEPARATOR ) {
 			return;

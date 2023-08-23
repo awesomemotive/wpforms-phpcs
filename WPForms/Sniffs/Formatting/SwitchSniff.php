@@ -182,13 +182,15 @@ class SwitchSniff extends BaseSniff implements Sniff {
 					],
 					true
 				) ||
-				( $tokens[ $ptr ]['code'] === T_COMMENT &&
-				  $phpcsFile->findFirstOnLine( [ T_WHITESPACE, T_COMMENT ], $ptr, true ) === false )
+				(
+					$tokens[ $ptr ]['code'] === T_COMMENT &&
+					$phpcsFile->findFirstOnLine( [ T_WHITESPACE, T_COMMENT ], $ptr, true ) === false
+				)
 			) {
 				$commentLines[] = $tokens[ $ptr ]['line'];
 			}
 
-			$ptr ++;
+			++$ptr;
 		}
 
 		return max(

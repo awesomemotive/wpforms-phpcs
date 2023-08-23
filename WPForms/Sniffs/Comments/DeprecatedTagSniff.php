@@ -91,7 +91,7 @@ class DeprecatedTagSniff extends BaseSniff implements Sniff {
 			$phpcsFile->addError(
 				sprintf(
 					'Add empty line after @deprecated tag for %s.',
-					$this->getEntityName( $phpcsFile, $stackPtr, $tokens )
+					$this->getEntityFullName( $phpcsFile, $stackPtr, $tokens )
 				),
 				$deprecated['tag'],
 				'MissingEmptyLineAfterDeprecated'

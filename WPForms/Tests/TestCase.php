@@ -25,7 +25,7 @@ class TestCase extends \PHPUnit\Framework\TestCase {
 	 * @return void
 	 * @throws DeepExitException DeepExitException.
 	 */
-	public function setUp() {
+	public function setUp(): void {
 
 		parent::setUp();
 
@@ -56,6 +56,7 @@ class TestCase extends \PHPUnit\Framework\TestCase {
 			throw new RuntimeException(
 				sprintf(
 					'The %s file does not exist',
+					// phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
 					$localFile
 				)
 			);

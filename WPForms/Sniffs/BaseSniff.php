@@ -241,17 +241,17 @@ abstract class BaseSniff {
 	 *
 	 * @since 1.0.2
 	 *
-	 * @param string $class Class name.
+	 * @param string $className Class name.
 	 *
 	 * @return string
 	 */
-	private function convertClassName( $class ) {
+	private function convertClassName( $className ) {
 
-		if ( strpos( $class, '_' ) !== false ) {
-			return strtolower( $class );
+		if ( strpos( $className, '_' ) !== false ) {
+			return strtolower( $className );
 		}
 
-		return $this->camelToSnake( $class );
+		return $this->camelToSnake( $className );
 	}
 
 	/**
@@ -259,12 +259,12 @@ abstract class BaseSniff {
 	 *
 	 * @since 1.0.2
 	 *
-	 * @param string $string A string.
+	 * @param string $s A string.
 	 *
 	 * @return string
 	 */
-	private function camelToSnake( $string ) {
+	private function camelToSnake( $s ) {
 
-		return strtolower( preg_replace( [ '/([a-z\d])([A-Z])/', '/([^_])([A-Z][a-z])/' ], '$1_$2', $string ) );
+		return strtolower( preg_replace( [ '/([a-z\d])([A-Z])/', '/([^_])([A-Z][a-z])/' ], '$1_$2', $s ) );
 	}
 }

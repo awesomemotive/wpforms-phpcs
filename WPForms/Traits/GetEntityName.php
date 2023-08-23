@@ -22,7 +22,7 @@ trait GetEntityName {
 	 *
 	 * @return string
 	 */
-	protected function getEntityName( $phpcsFile, $stackPtr, $tokens ) {
+	protected function getEntityFullName( $phpcsFile, $stackPtr, $tokens ) {
 
 		$suffix = $this->getSuffix( $tokens[ $stackPtr ]['code'] );
 

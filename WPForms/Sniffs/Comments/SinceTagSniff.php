@@ -58,7 +58,7 @@ class SinceTagSniff extends BaseSniff implements Sniff {
 		}
 
 		$since  = $this->findTag( '@since', $commentStart, $tokens );
-		$entity = $this->getEntityName( $phpcsFile, $stackPtr, $tokens );
+		$entity = $this->getEntityFullName( $phpcsFile, $stackPtr, $tokens );
 
 		/*
 		 * @since is required.
@@ -122,7 +122,7 @@ class SinceTagSniff extends BaseSniff implements Sniff {
 	private function lineBetweenTags( $phpcsFile, $stackPtr, $since ) {
 
 		$tokens         = $phpcsFile->getTokens();
-		$entity         = $this->getEntityName( $phpcsFile, $stackPtr, $tokens );
+		$entity         = $this->getEntityFullName( $phpcsFile, $stackPtr, $tokens );
 		$nextAnnotation = $phpcsFile->findNext( T_DOC_COMMENT_TAG, $since['tag'] + 1 );
 		$commentEnd     = $phpcsFile->findPrevious( T_DOC_COMMENT_CLOSE_TAG, $stackPtr );
 		$nextAnnotation = $nextAnnotation && $tokens[ $commentEnd ]['line'] > $tokens[ $nextAnnotation ]['line'] ? $nextAnnotation : false;
