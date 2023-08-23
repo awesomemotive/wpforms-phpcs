@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file and formatted via [this recommendation](https://keepachangelog.com/).
 
+## [1.0.7] - 2023-08-23
+### Added
+- Support of WP Coding Standard 3.0.
+
 ## [1.0.6] - 2022-09-20
 ### Fixed
 - Validation of text domains in addons.
