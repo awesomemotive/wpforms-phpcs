@@ -74,6 +74,7 @@ class BaseSniffTest extends TestCase {
 		$classFileName = sys_get_temp_dir() . DIRECTORY_SEPARATOR . 'PHP_CodeSniffertemp_folder0000' . DIRECTORY_SEPARATOR . $relativePath;
 
 		if ( file_exists( $classFileName ) ) {
+			// phpcs:ignore WordPress.WP.AlternativeFunctions.unlink_unlink
 			unlink( $classFileName );
 		}
 
@@ -110,8 +111,10 @@ class BaseSniffTest extends TestCase {
 			}
 
 			if ( $dir !== '' && ! is_dir( $dir ) && strpos( $dir, '.' ) === false ) {
+				// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_mkdir
 				mkdir( $dir );
 			} elseif ( ! file_exists( $dir ) && strpos( $dir, '.' ) !== false ) {
+				// phpcs:ignore WordPress.WP.AlternativeFunctions.file_system_operations_touch
 				touch( $dir );
 			}
 		}

@@ -111,7 +111,7 @@ class EmptyLineAfterAssigmentVariablesSniff extends BaseSniff implements Sniff {
 		$nextLineTokens = [];
 		$count          = count( $tokens );
 
-		for ( $i = $semicolon; $i < $count; $i ++ ) {
+		for ( $i = $semicolon; $i < $count; $i++ ) {
 			if ( $tokens[ $i ]['line'] > $nextLine ) {
 				break;
 			}
