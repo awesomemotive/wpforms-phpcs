@@ -18,7 +18,7 @@
   },
   "require-dev": {
     "roave/security-advisories": "dev-latest",
-    "phpunit/phpunit": "6.5 - 9.5"
+    "phpunit/phpunit": "6.5 - 9.6"
   },
   "autoload-dev": {
     "psr-4": {
