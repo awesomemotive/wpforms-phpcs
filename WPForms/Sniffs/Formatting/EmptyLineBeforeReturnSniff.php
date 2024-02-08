@@ -42,7 +42,7 @@ class EmptyLineBeforeReturnSniff extends BaseSniff implements Sniff {
 
 		$tokens             = $phpcsFile->getTokens();
 		$previous           = $phpcsFile->findPrevious( Tokens::$emptyTokens, $stackPtr - 1, null, true );
-		$statement          = $phpcsFile->findStartOfStatement( $previous - 1 );
+		$statement          = $phpcsFile->findStartOfStatement( $previous - 1, T_COLON );
 		$importantLineAfter = array_merge( [ T_FUNCTION, T_STATIC ], Tokens::$scopeModifiers );
 
 		// Don't allow empty line for statements with only return in a body.
