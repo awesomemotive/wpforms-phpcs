@@ -25,7 +25,7 @@ class TestCase extends \PHPUnit\Framework\TestCase {
 	 * @return void
 	 * @throws DeepExitException DeepExitException.
 	 */
-	public function setUp(): void {
+	public function setUp(): void { // phpcs:ignore PHPCompatibility.FunctionDeclarations.NewReturnTypeDeclarations.voidFound
 
 		parent::setUp();
 

@@ -11,8 +11,10 @@
 
 	<!-- How to scan -->
 	<arg name="colors"/>
-	<arg name="parallel" value="100"/>
+	<arg name="parallel" value="12"/>
 	<arg name="extensions" value="php"/>
+
+	<config name="testVersion" value="7.0-"/>
 
 	<!-- Rules: Check PHP version compatibility. -->
 	<rule ref="PHPCompatibility">
