@@ -47,7 +47,7 @@ class HooksMethodSniff extends BaseSniff implements Sniff {
 	}
 
 	/**
-	 * Processes this test, when one of its tokens is encountered.
+	 * Process this test when one of its tokens is encountered.
 	 *
 	 * @since 1.0.0
 	 *
@@ -64,9 +64,7 @@ class HooksMethodSniff extends BaseSniff implements Sniff {
 			return;
 		}
 
-		$classname = $this->getFullyQualifiedClassName( $phpcsFile );
-
-		if ( ! $classname ) {
+		if ( ! $this->getFullyQualifiedClassName( $phpcsFile ) ) {
 			return;
 		}
 

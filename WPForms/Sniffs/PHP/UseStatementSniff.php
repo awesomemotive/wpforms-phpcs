@@ -28,7 +28,7 @@ class UseStatementSniff extends BaseSniff implements Sniff {
 	}
 
 	/**
-	 * Processes this test, when one of its tokens is encountered.
+	 * Process this test when one of its tokens is encountered.
 	 *
 	 * @since 1.0.0
 	 *
@@ -171,7 +171,7 @@ class UseStatementSniff extends BaseSniff implements Sniff {
 			$closePtr   = $phpcsFile->findNext( T_DOC_COMMENT_CLOSE_TAG, $stackPtr + 1 );
 			$commentPtr = $phpcsFile->findNext( T_DOC_COMMENT_STRING, $stackPtr + 1, $closePtr );
 
-			if ( $commentPtr && $entityName === explode( ' ', $tokens[ $commentPtr ]['content'] )[0] ) {
+			if ( $commentPtr && $entityName === explode( ' ', $tokens[ $commentPtr ]['content'], 2 )[0] ) {
 				return true;
 			}
 		}

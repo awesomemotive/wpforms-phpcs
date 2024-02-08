@@ -18,7 +18,7 @@ class SinceTagPropertySniff extends PropertyBaseSniff {
 	use CommentTag;
 
 	/**
-	 * Called to process class member vars.
+	 * Process class member vars.
 	 *
 	 * @since 1.0.0
 	 *

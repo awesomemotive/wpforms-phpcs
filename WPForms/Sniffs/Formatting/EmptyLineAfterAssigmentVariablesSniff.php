@@ -27,7 +27,7 @@ class EmptyLineAfterAssigmentVariablesSniff extends BaseSniff implements Sniff {
 	}
 
 	/**
-	 * Processes this test, when one of its tokens is encountered.
+	 * Process this test when one of its tokens is encountered.
 	 *
 	 * @since 1.0.0
 	 *
@@ -46,7 +46,7 @@ class EmptyLineAfterAssigmentVariablesSniff extends BaseSniff implements Sniff {
 			return;
 		}
 
-		// Detect the last ";" for detect end of this operation for multiline expressions.
+		// Detect the last ";" for detect the end of this operation for multiline expressions.
 		$semicolon          = $phpcsFile->findNext( [ T_SEMICOLON ], $stackPtr + 1 );
 		$nextAfterSemicolon = $phpcsFile->findNext( Tokens::$emptyTokens, $semicolon + 1, null, true );
 
@@ -57,7 +57,7 @@ class EmptyLineAfterAssigmentVariablesSniff extends BaseSniff implements Sniff {
 
 		$nextLineTokens = $this->getTokenNextLine( $phpcsFile, $semicolon );
 
-		// If next line is empty line.
+		// If the next line is an empty line.
 		if ( empty( $nextLineTokens ) ) {
 			return;
 		}
@@ -77,7 +77,7 @@ class EmptyLineAfterAssigmentVariablesSniff extends BaseSniff implements Sniff {
 	}
 
 	/**
-	 * Get list of tokens that allowed in next line after assigment.
+	 * Get the list of tokens that allowed in the next line after assigment.
 	 *
 	 * @since 1.0.0
 	 *
@@ -95,7 +95,7 @@ class EmptyLineAfterAssigmentVariablesSniff extends BaseSniff implements Sniff {
 	}
 
 	/**
-	 * Get tokens in last line.
+	 * Get tokens in the last line.
 	 *
 	 * @since 1.0.0
 	 *
@@ -127,7 +127,7 @@ class EmptyLineAfterAssigmentVariablesSniff extends BaseSniff implements Sniff {
 				break;
 			}
 
-			// Skip if the next line is also assignment statement.
+			// Skip if the next line is also an assignment statement.
 			if ( in_array( $tokens[ $i ]['code'], Tokens::$assignmentTokens, true ) ) {
 				return [];
 			}

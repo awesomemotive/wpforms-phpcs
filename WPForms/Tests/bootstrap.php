@@ -8,7 +8,7 @@
  *
  * @since 1.0.0
  */
-define( 'WPFORMS_ROOT_PATH', str_replace( '/', DIRECTORY_SEPARATOR, dirname( dirname( __DIR__ ) ) . '/' ) );
+define( 'WPFORMS_ROOT_PATH', str_replace( '/', DIRECTORY_SEPARATOR, dirname( __DIR__, 2 ) . '/' ) );
 
 /**
  * Path to tests.
@@ -18,7 +18,7 @@ define( 'WPFORMS_ROOT_PATH', str_replace( '/', DIRECTORY_SEPARATOR, dirname( dir
 define( 'WPFORMS_TESTS_PATH', str_replace( '/', DIRECTORY_SEPARATOR, __DIR__ . '/' ) );
 
 /**
- * Path to sniffs.
+ * Path to the sniffs.
  *
  * @since 1.0.0
  */

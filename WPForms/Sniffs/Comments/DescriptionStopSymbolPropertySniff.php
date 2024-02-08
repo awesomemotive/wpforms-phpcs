@@ -18,7 +18,7 @@ class DescriptionStopSymbolPropertySniff extends PropertyBaseSniff {
 	use Description;
 
 	/**
-	 * Called to process class member vars.
+	 * Process Process this test when one of its tokens is encountered..
 	 *
 	 * @since 1.0.0
 	 *

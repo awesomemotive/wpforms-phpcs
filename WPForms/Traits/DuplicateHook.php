@@ -23,13 +23,11 @@ trait DuplicateHook {
 	 */
 	protected function isDuplicateHook( $commentStart, $tokens ) {
 
-		$commentEnd = isset( $tokens[ $commentStart ]['comment_closer'] ) ? $tokens[ $commentStart ]['comment_closer'] : false;
+		$commentEnd = $tokens[ $commentStart ]['comment_closer'] ?? false;
 
 		$see = $this->findTag( '@see', $commentStart, $tokens );
 
-		$seeTagFound = $see && $commentEnd && ( $see['tag'] < $commentEnd );
-
-		if ( $seeTagFound ) {
+		if ( $see && $commentEnd && ( $see['tag'] < $commentEnd ) ) {
 			$commentStringPtr = $see['tag'] + 2;
 		} else {
 			$commentStringPtr = $commentStart + 2;

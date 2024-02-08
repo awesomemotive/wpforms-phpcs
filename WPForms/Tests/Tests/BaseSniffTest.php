@@ -20,7 +20,7 @@ use PHP_CodeSniffer\Files\File;
 class BaseSniffTestInstance extends BaseSniff {
 
 	/**
-	 * Get relative path from project root directory.
+	 * Get a relative path from project root directory.
 	 *
 	 * @since 1.0.0
 	 *

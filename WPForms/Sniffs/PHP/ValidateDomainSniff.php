@@ -83,7 +83,7 @@ class ValidateDomainSniff extends BaseSniff implements Sniff {
 	}
 
 	/**
-	 * Processes this test, when one of its tokens is encountered.
+	 * Process this test when one of its tokens is encountered.
 	 *
 	 * @since 1.0.0
 	 *
@@ -156,7 +156,7 @@ class ValidateDomainSniff extends BaseSniff implements Sniff {
 		// Find anything except string and whitespace.
 		$lastArgument = $phpcsFile->findNext( [ T_CONSTANT_ENCAPSED_STRING, T_WHITESPACE ], $commaPtr + 1, $closePtr, true );
 
-		// Last argument is not a string, but something else.
+		// The last argument is not a string, but something else.
 		if ( $lastArgument ) {
 			return false;
 		}
@@ -173,15 +173,13 @@ class ValidateDomainSniff extends BaseSniff implements Sniff {
 	}
 
 	/**
-	 * Get domain that should be use for the file.
+	 * Get domain that should be used for the file.
 	 *
 	 * @since 1.0.0
 	 *
 	 * @param File $phpcsFile The PHP_CodeSniffer file where the token was found.
 	 *
 	 * @return string
-	 * @noinspection PhpTernaryExpressionCanBeReducedToShortVersionInspection
-	 * @noinspection ElvisOperatorCanBeUsedInspection
 	 */
 	private function getExpectedDomain( $phpcsFile ) {
 
@@ -240,7 +238,7 @@ class ValidateDomainSniff extends BaseSniff implements Sniff {
 	}
 
 	/**
-	 * Get normalized path, like realpath() for non-existing path or file.
+	 * Get the normalized path, like realpath() for a non-existing path or file.
 	 *
 	 * @since 1.0.5
 	 *
