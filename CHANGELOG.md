@@ -1,7 +1,7 @@
 # Changelog
 All notable changes to this project will be documented in this file and formatted via [this recommendation](https://keepachangelog.com/).
 
-## [1.1.1] - 2024-02-08
+## [1.2.0] - 2024-02-08
 ### Fixed
 - Function return type broke WPForms.Formatting.EmptyLineBeforeReturn sniff.
 - The phpcs did not work locally with PHP 8+.
