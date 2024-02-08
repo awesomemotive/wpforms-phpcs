@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file and formatted via [this recommendation](https://keepachangelog.com/).
 
+## [1.1.1] - 2024-XX-XX
+### Fixed
+- Function return type broke WPForms.Formatting.EmptyLineBeforeReturn sniff.
+
 ## [1.1.0] - 2023-09-07
 ### Fixed
 - Extract _plugin from hook name for main plugin class like Plugin.php.
