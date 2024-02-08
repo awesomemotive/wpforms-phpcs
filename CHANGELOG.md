@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file and formatte
 ## [1.1.1] - 2024-XX-XX
 ### Fixed
 - Function return type broke WPForms.Formatting.EmptyLineBeforeReturn sniff.
+- The phpcs did not work locally with PHP 8+.
 
 ## [1.1.0] - 2023-09-07
 ### Fixed
