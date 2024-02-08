@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file and formatted via [this recommendation](https://keepachangelog.com/).
 
+## [1.1.0] - 2023-09-07
+### Fixed
+- Extract _plugin from hook name for main plugin class like Plugin.php.
+
 ## [1.0.7] - 2023-08-23
 ### Added
 - Support of WP Coding Standard 3.0.

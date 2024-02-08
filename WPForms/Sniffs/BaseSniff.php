@@ -218,7 +218,9 @@ abstract class BaseSniff {
 
 		$fqcn = $this->camelToSnake( str_replace( '\\', '', $namespace ) ) . '_' . $class;
 
-		$fqcn = str_replace( 'wp_forms', 'wpforms', $fqcn );
+		// Fix WPForms.
+		// Remove _plugin for main plugin class, which is usually Plugin.
+		$fqcn = str_replace( [ 'wp_forms', '_plugin' ], [ 'wpforms', '' ], $fqcn );
 
 		$fqcnArr = explode( '_', $fqcn );
 
