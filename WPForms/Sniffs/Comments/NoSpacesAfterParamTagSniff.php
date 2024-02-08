@@ -40,7 +40,7 @@ class NoSpacesAfterParamTagSniff extends BaseSniff implements Sniff {
 	}
 
 	/**
-	 * Processes this test, when one of its tokens is encountered.
+	 * Process this test when one of its tokens is encountered.
 	 *
 	 * @since 1.0.0
 	 *
@@ -59,7 +59,7 @@ class NoSpacesAfterParamTagSniff extends BaseSniff implements Sniff {
 			return;
 		}
 
-		// More than 1 spaces.
+		// More than one space.
 		if ( $tokens[ $tag['tag'] + 1 ]['length'] > 1 ) {
 			$phpcsFile->addError(
 				sprintf(

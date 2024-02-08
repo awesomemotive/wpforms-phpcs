@@ -13,7 +13,7 @@ use PHP_CodeSniffer\Sniffs\AbstractVariableSniff;
 abstract class PropertyBaseSniff extends AbstractVariableSniff {
 
 	/**
-	 * Called to process normal member vars.
+	 * Process normal member vars.
 	 *
 	 * @since 1.0.0
 	 *

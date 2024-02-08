@@ -1186,12 +1186,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Roave/SecurityAdvisories.git",
-                "reference": "b5487e145d10e6d9a19b59c8dac2a058f5dfe63d"
+                "reference": "4b114c23632bc3580a1688f3a92f81d3c05bcd19"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/b5487e145d10e6d9a19b59c8dac2a058f5dfe63d",
-                "reference": "b5487e145d10e6d9a19b59c8dac2a058f5dfe63d",
+                "url": "https://api.github.com/repos/Roave/SecurityAdvisories/zipball/4b114c23632bc3580a1688f3a92f81d3c05bcd19",
+                "reference": "4b114c23632bc3580a1688f3a92f81d3c05bcd19",
                 "shasum": ""
             },
             "conflict": {
@@ -1273,7 +1273,7 @@
                 "codeigniter4/framework": "<=4.4.2",
                 "codeigniter4/shield": "<1.0.0.0-beta8",
                 "codiad/codiad": "<=2.8.4",
-                "composer/composer": "<1.10.27|>=2,<2.2.22|>=2.3,<2.6.4",
+                "composer/composer": "<1.10.27|>=2,<2.2.23|>=2.3,<2.7",
                 "concrete5/concrete5": "<9.2.3",
                 "concrete5/core": "<8.5.8|>=9,<9.1",
                 "contao-components/mediaelement": ">=2.14.2,<2.21.1",
@@ -1914,7 +1914,7 @@
                     "type": "tidelift"
                 }
             ],
-            "time": "2024-02-08T00:13:48+00:00"
+            "time": "2024-02-08T16:04:40+00:00"
         },
         {
             "name": "sebastian/cli-parser",

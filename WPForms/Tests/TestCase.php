@@ -1,5 +1,10 @@
 <?php
 
+// phpcs:disable Generic.Commenting.DocComment.MissingShort
+/** @noinspection PhpLanguageLevelInspection */
+/** @noinspection PhpUndefinedClassInspection */
+// phpcs:enable Generic.Commenting.DocComment.MissingShort
+
 namespace WPForms\Tests;
 
 use PHP_CodeSniffer\Exceptions\DeepExitException;
@@ -25,7 +30,7 @@ class TestCase extends \PHPUnit\Framework\TestCase {
 	 * @return void
 	 * @throws DeepExitException DeepExitException.
 	 */
-	public function setUp(): void {
+	public function setUp(): void { // phpcs:ignore PHPCompatibility.FunctionDeclarations.NewReturnTypeDeclarations.voidFound
 
 		parent::setUp();
 
@@ -85,7 +90,7 @@ class TestCase extends \PHPUnit\Framework\TestCase {
 	}
 
 	/**
-	 * Test files has exact sniff error in lines.
+	 * Test that a file has sniff errors in relevant lines.
 	 *
 	 * @since 1.0.0
 	 *

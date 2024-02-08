@@ -47,7 +47,7 @@ class ParamTagHooksSniff extends BaseSniff implements Sniff {
 	}
 
 	/**
-	 * Processes this test, when one of its tokens is encountered.
+	 * Process this test when one of its tokens is encountered.
 	 *
 	 * @since 1.0.0
 	 *
@@ -55,6 +55,7 @@ class ParamTagHooksSniff extends BaseSniff implements Sniff {
 	 * @param int  $stackPtr  The position in the PHP_CodeSniffer file's token stack where the token was found.
 	 *
 	 * @return void
+	 * @noinspection UnusedFunctionResultInspection
 	 */
 	public function process( File $phpcsFile, $stackPtr ) {
 

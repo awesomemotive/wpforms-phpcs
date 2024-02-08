@@ -58,7 +58,7 @@ trait Description {
 	}
 
 	/**
-	 * Line has a stop symbol.
+	 * The line has a stop symbol.
 	 *
 	 * @since 1.0.0
 	 *

@@ -29,7 +29,7 @@ class BackSlashSniff extends BaseSniff implements Sniff {
 	}
 
 	/**
-	 * Processes this test, when one of its tokens is encountered.
+	 * Process this test when one of its tokens is encountered.
 	 *
 	 * @since 1.0.0
 	 *
@@ -123,7 +123,7 @@ class BackSlashSniff extends BaseSniff implements Sniff {
 	}
 
 	/**
-	 * Remove backslash message.
+	 * Remove the backslash message.
 	 *
 	 * @since 1.0.0
 	 *

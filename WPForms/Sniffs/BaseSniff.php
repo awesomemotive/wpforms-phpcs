@@ -67,7 +67,7 @@ abstract class BaseSniff {
 	}
 
 	/**
-	 * Get relative path from project root directory.
+	 * Get a relative path from project root directory.
 	 *
 	 * @since 1.0.0
 	 *
@@ -119,7 +119,7 @@ abstract class BaseSniff {
 	}
 
 	/**
-	 * Get first argument of a function.
+	 * Get the first argument of a function.
 	 *
 	 * @since 1.0.0
 	 *
@@ -152,7 +152,7 @@ abstract class BaseSniff {
 	}
 
 	/**
-	 * Check whether the token is break in switch statement.
+	 * Check whether the token is break in the switch statement.
 	 *
 	 * @since 1.0.4
 	 *
@@ -176,7 +176,7 @@ abstract class BaseSniff {
 	}
 
 	/**
-	 * Get fully qualified class name.
+	 * Get a fully qualified class name.
 	 *
 	 * @since 1.0.0
 	 *
@@ -219,7 +219,7 @@ abstract class BaseSniff {
 		$fqcn = $this->camelToSnake( str_replace( '\\', '', $namespace ) ) . '_' . $class;
 
 		// Fix WPForms.
-		// Remove _plugin for main plugin class, which is usually Plugin.
+		// Remove _plugin for the main plugin class, which is usually Plugin.
 		$fqcn = str_replace( [ 'wp_forms', '_plugin' ], [ 'wpforms', '' ], $fqcn );
 
 		$fqcnArr = explode( '_', $fqcn );
