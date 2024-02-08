@@ -7,7 +7,7 @@
 	<exclude-pattern>\.packages/*</exclude-pattern>
 	<exclude-pattern>\.vendor/*</exclude-pattern>
 	<exclude-pattern>vendor/*</exclude-pattern>
-	<exclude-pattern>wpforms/libs/*</exclude-pattern>
+	<exclude-pattern>vendor_prefixed/*</exclude-pattern>
 
 	<!-- How to scan -->
 	<arg name="colors"/>
