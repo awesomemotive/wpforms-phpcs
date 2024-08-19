@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file and formatted via [this recommendation](https://keepachangelog.com/).
 
+## [1.2.1] - 2024-08-19
+### Added
+- Support of WP Coding Standard 3.1.0.
+
 ## [1.2.0] - 2024-02-08
 ### Fixed
 - Function return type broke WPForms.Formatting.EmptyLineBeforeReturn sniff.
