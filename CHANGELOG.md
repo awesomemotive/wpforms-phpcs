@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file and formatted via [this recommendation](https://keepachangelog.com/).
 
+## [1.2.2] - 2024-08-22
+### Changed
+- Rule WordPress.WP.EnqueuedResourceParameters.NotInFooter is not suppressed anymore as it is required now by the Plugin Check Plugin.
+
 ## [1.2.1] - 2024-08-19
 ### Added
 - Support of WP Coding Standard 3.1.0.
