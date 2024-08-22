@@ -55,7 +55,6 @@
 		<exclude name="Squiz.Commenting.FileComment.WrongStyle"/>
 		<!-- Less strict enqueueing rules. -->
 		<exclude name="WordPress.WP.EnqueuedResourceParameters.NoExplicitVersion"/>
-		<exclude name="WordPress.WP.EnqueuedResourceParameters.NotInFooter"/>
 		<exclude name="WordPress.WP.EnqueuedResourceParameters.MissingVersion"/>
 		<!-- Database specific rules. -->
 		<exclude name="WordPress.DB.DirectDatabaseQuery.DirectQuery"/>
