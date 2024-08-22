@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file and formatte
 ## [1.2.2] - 2024-08-22
 ### Changed
 - Rule WordPress.WP.EnqueuedResourceParameters.NotInFooter is not suppressed anymore as it is required now by the Plugin Check Plugin.
+- Rule WordPress.DB.DirectDatabaseQuery.DirectQuery is not suppressed anymore as it is required now by the Plugin Check Plugin.
 
 ## [1.2.1] - 2024-08-19
 ### Added
