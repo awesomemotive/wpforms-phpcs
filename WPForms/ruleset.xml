@@ -53,9 +53,6 @@
 		<exclude name="Squiz.Commenting.FileComment.MissingPackageTag"/>
 		<exclude name="Squiz.Commenting.FileComment.SpacingAfterComment"/>
 		<exclude name="Squiz.Commenting.FileComment.WrongStyle"/>
-		<!-- Less strict enqueueing rules. -->
-		<exclude name="WordPress.WP.EnqueuedResourceParameters.NoExplicitVersion"/>
-		<exclude name="WordPress.WP.EnqueuedResourceParameters.MissingVersion"/>
 		<!-- Rules to follow PSR4 -->
 		<exclude name="WordPress.Files.FileName.InvalidClassFileName"/>
 		<exclude name="WordPress.Files.FileName.NotHyphenatedLowercase"/>
