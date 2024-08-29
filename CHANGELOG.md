@@ -1,10 +1,15 @@
 # Changelog
 All notable changes to this project will be documented in this file and formatted via [this recommendation](https://keepachangelog.com/).
 
+## [1.2.3] - 2024-08-29
+- Rule "WordPressVIPMinimum.Performance.WPQueryParams" is added as required by Plugin Check Plugin.
+- Rule "WordPress.DB.DirectDatabaseQuery.DirectQuery" is not suppressed anymore as required by the Plugin Check Plugin.
+- Rule "WordPress.WP.EnqueuedResourceParameters.MissingVersion" is not suppressed anymore as required by Plugin Check Plugin.
+- Rule "WordPress.WP.EnqueuedResourceParameters.NoExplicitVersion" is not suppressed anymore as required by Plugin Check Plugin.
+
 ## [1.2.2] - 2024-08-22
 ### Changed
 - Rule WordPress.WP.EnqueuedResourceParameters.NotInFooter is not suppressed anymore as it is required now by the Plugin Check Plugin.
-- Rule WordPress.DB.DirectDatabaseQuery.DirectQuery is not suppressed anymore as it is required now by the Plugin Check Plugin.
 
 ## [1.2.1] - 2024-08-19
 ### Added
