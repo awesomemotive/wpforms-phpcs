@@ -63,6 +63,8 @@
 		<exclude name="Universal.Arrays.DisallowShortArraySyntax.Found"/>
 	</rule>
 
+	<rule ref="WordPressVIPMinimum.Performance.WPQueryParams"/>
+
 	<!-- Re-enable certain sniffs that were disabled by WordPress* standards. -->
 	<rule ref="Squiz.Commenting.FunctionComment.ParamCommentNotCapital">
 		<severity>5</severity>
