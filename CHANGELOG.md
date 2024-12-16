@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file and formatted via [this recommendation](https://keepachangelog.com/).
 
+## [1.3.0] - 2024-12-16
+### Changed
+- The minimum supported PHP version is now 7.1.
+
+### Fixed
+- Return tag hook sniff did not work.
+
 ## [1.2.3] - 2024-08-29
 - Rule "WordPressVIPMinimum.Performance.WPQueryParams" is added as required by Plugin Check Plugin.
 - Rule "WordPress.DB.DirectDatabaseQuery.DirectQuery" is not suppressed anymore as required by the Plugin Check Plugin.

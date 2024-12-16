@@ -12,7 +12,7 @@ use PHP_CodeSniffer\Sniffs\Sniff;
  *
  * @since 1.0.0
  */
-class ReturnTagHooks extends BaseSniff implements Sniff {
+class ReturnTagHooksSniff extends BaseSniff implements Sniff {
 
 	use CommentTag;
 

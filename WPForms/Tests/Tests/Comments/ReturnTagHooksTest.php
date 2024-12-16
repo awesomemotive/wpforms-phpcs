@@ -3,7 +3,7 @@
 namespace WPForms\Tests\Comments;
 
 use WPForms\Tests\TestCase;
-use WPForms\Sniffs\Comments\ReturnTagHooks;
+use WPForms\Sniffs\Comments\ReturnTagHooksSniff;
 
 /**
  * Class ReturnTagHooksTest.
@@ -19,7 +19,7 @@ class ReturnTagHooksTest extends TestCase {
 	 */
 	public function testProcess() {
 
-		$phpcsFile = $this->process( new ReturnTagHooks() );
+		$phpcsFile = $this->process( new ReturnTagHooksSniff() );
 
 		$this->fileHasErrors( $phpcsFile, 'UnnecessaryReturnTag', [ 80 ] );
 		$this->fileHasErrors( $phpcsFile, 'AddReturnTag', [ 106 ] );
