@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file and formatted via [this recommendation](https://keepachangelog.com/).
 
+## [1.5.0] - 2025-03-28
+### Changed
+- The minimum supported PHP version is now 7.2.
+
 ## [1.4.0] - 2024-12-20
 ### Changed
 - ReturnTagHooksSniff is removed.
