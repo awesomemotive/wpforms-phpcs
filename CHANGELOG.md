@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file and formatted via [this recommendation](https://keepachangelog.com/).
 
+## [1.5.1] - 2025-09-30
+### Added
+- Support for WP Coding Standard 3.2.0.
+
 ## [1.5.0] - 2025-03-28
 ### Changed
 - The minimum supported PHP version is now 7.2.

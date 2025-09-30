@@ -14,6 +14,9 @@
 	<arg name="parallel" value="12"/>
 	<arg name="extensions" value="php"/>
 
+	<!-- Rules: Check PHP version compatibility -->
+	<config name="testVersion" value="7.2-"/>
+
 	<!-- Rules: Check PHP version compatibility. -->
 	<rule ref="PHPCompatibility">
 		<!-- Rules: WordPress polyfills. -->
