@@ -21,7 +21,7 @@ class ValidateDomainTest extends TestCase {
 
 		$phpcsFile = $this->process( new ValidateDomainSniff() );
 
-		$this->fileHasErrors( $phpcsFile, 'InvalidDomain', [ 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 41 ] );
+		$this->fileHasErrors( $phpcsFile, 'InvalidDomain', [ 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 34, 41 ] );
 		$this->fileHasErrors( $phpcsFile, 'NotStringDomain', [ 38 ] );
 	}
 
