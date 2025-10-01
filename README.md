@@ -12,7 +12,6 @@ WPForms coding standards are based on the [WordPress Coding Standards](https://g
 ## Installation
 
 ```
-composer config repositories.repo-name vcs https://github.com/awesomemotive/wpforms-phpcs.git
 composer require awesomemotive/wpforms-phpcs --dev
 ```
 
@@ -28,9 +27,9 @@ Create the `.phpcs.xml` or `phpcs.xml` file at the root of your project:
 	<exclude-pattern>\vendor/*</exclude-pattern>
 	<exclude-pattern>\.github/*</exclude-pattern>
 
-	<config name="testVersion" value="5.6-"/>
+	<config name="testVersion" value="7.2-"/>
 	<config name="multi_domains" value="true"/>
-	<config name="minimum_supported_wp_version" value="5.2"/>
+	<config name="minimum_supported_wp_version" value="5.5"/>
 
 	<rule ref="WPForms"/>
 
