@@ -1,6 +1,11 @@
 # Changelog
 All notable changes to this project will be documented in this file and formatted via [this recommendation](https://keepachangelog.com/).
 
+## [1.6.0] - 2025-10-01
+### Fixed
+- Inability to redefine testVersion in users' projects.
+- Do not allow the current domain name to be empty.
+
 ## [1.5.1] - 2025-09-30
 ### Added
 - Support for WP Coding Standard 3.2.0.
