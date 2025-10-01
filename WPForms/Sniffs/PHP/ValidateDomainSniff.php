@@ -113,7 +113,20 @@ class ValidateDomainSniff extends BaseSniff implements Sniff {
 			return;
 		}
 
-		if ( ! $currentDomain || ! $expectedDomain ) {
+		if ( ! $currentDomain ) {
+			$phpcsFile->addError(
+				sprintf(
+					"Domain name is not set. You should be using '%s'.",
+					$expectedDomain
+				),
+				$stackPtr,
+				'InvalidDomain'
+			);
+
+			return;
+		}
+
+		if ( ! $expectedDomain ) {
 			return;
 		}
 

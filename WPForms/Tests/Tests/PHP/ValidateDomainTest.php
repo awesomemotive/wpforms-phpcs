@@ -21,7 +21,7 @@ class ValidateDomainTest extends TestCase {
 
 		$phpcsFile = $this->process( new ValidateDomainSniff() );
 
-		$this->fileHasErrors( $phpcsFile, 'InvalidDomain', [ 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 41 ] );
+		$this->fileHasErrors( $phpcsFile, 'InvalidDomain', [ 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 34, 41 ] );
 		$this->fileHasErrors( $phpcsFile, 'NotStringDomain', [ 38 ] );
 	}
 
@@ -34,7 +34,7 @@ class ValidateDomainTest extends TestCase {
 
 		$phpcsFile = $this->process( new ValidateDomainSniff(), 'MultiDomains' );
 
-		$this->fileHasErrors( $phpcsFile, 'InvalidDomain', [ 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 20, 21, 22, 23, 24, 25, 26 ] );
+		$this->fileHasErrors( $phpcsFile, 'InvalidDomain', [ 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 20, 21, 22, 23, 24, 25, 26, 34 ] );
 	}
 
 	/**
@@ -46,6 +46,6 @@ class ValidateDomainTest extends TestCase {
 
 		$phpcsFile = $this->process( new ValidateDomainSniff(), 'ValidateDomainWithRewrites' );
 
-		$this->fileHasErrors( $phpcsFile, 'InvalidDomain', [ 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 19, 20, 27, 28, 29, 30, 41 ] );
+		$this->fileHasErrors( $phpcsFile, 'InvalidDomain', [ 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 19, 20, 27, 28, 29, 30, 34, 41 ] );
 	}
 }
