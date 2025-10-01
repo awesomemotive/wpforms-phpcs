@@ -46,6 +46,6 @@ class ValidateDomainTest extends TestCase {
 
 		$phpcsFile = $this->process( new ValidateDomainSniff(), 'ValidateDomainWithRewrites' );
 
-		$this->fileHasErrors( $phpcsFile, 'InvalidDomain', [ 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 19, 20, 27, 28, 29, 30, 41 ] );
+		$this->fileHasErrors( $phpcsFile, 'InvalidDomain', [ 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 19, 20, 27, 28, 29, 30, 34, 41 ] );
 	}
 }
