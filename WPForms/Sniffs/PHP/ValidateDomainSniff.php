@@ -122,6 +122,7 @@ class ValidateDomainSniff extends BaseSniff implements Sniff {
 				$stackPtr,
 				'InvalidDomain'
 			);
+
 			return;
 		}
 
