@@ -30,8 +30,8 @@ _ex( 'Invalid', 'Invalid', 'wpforms' );
 _nx( 'Invalid', 'Invalid', 10, 'Invalid', 'wpforms' );
 
 
-// Valid syntax when the text domain is not specified.
-esc_html__( 'Valid' );
+// Invalid syntax when the text domain is not specified.
+esc_html__( 'Invalid' );
 
 // Invalid - not a string as the last argument.
 $bulk_counts['read'] = 25;
