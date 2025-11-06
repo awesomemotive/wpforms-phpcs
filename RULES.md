@@ -333,9 +333,42 @@ __( 'Some text' );
 
 ## Comment & Documentation Rules
 
-### @since Tag
+### PHPDoc Descriptions
 
-**Rule 1:** All functions, classes, interfaces, traits, and constants **must** have `@since` tag.
+**Rule 1:** PHPDoc descriptions must end with punctuation (`.`, `!`, `?`).
+
+```php
+// ✅ CORRECT
+/**
+ * Process user data.
+ *
+ * @since 1.5.0
+ */
+
+// ❌ WRONG - Missing punctuation
+/**
+ * Process user data
+ *
+ * @since 1.5.0
+ */
+```
+
+**Rule 2:** PHPDoc description must start on the line after `/**`, not on the same line.
+
+```php
+// ✅ CORRECT
+/**
+ * Process user data.
+ */
+
+// ❌ WRONG - Description on same line as opening
+/** Process user data.
+ */
+```
+
+### `@since` Tag
+
+**Rule 1:** All functions, classes, interfaces, traits, constants, **class properties**, and `define()` calls **must** have `@since` tag.
 
 ```php
 // ✅ CORRECT
@@ -405,16 +438,18 @@ public function process( $data ) { }
 
 **Rule 2:** Add empty line after `@deprecated` tag (unless it's the last tag).
 
-### @param Tag Spacing
+### @param and @return Tag Spacing
 
-**Rule:** Only one space after `@param` tag.
+**Rule:** Only one space after `@param` and `@return` tags.
 
 ```php
 // ✅ CORRECT
 @param string $name The name.
+@return bool Success status.
 
 // ❌ WRONG - Multiple spaces
 @param  string $name The name.
+@return  bool Success status.
 ```
 
 ### Translator Comments
@@ -450,7 +485,7 @@ printf( __( 'Hello, %s!', 'wpforms' ), $name );
 
 ### Hook Documentation
 
-**Rule:** All `do_action()` and `apply_filters()` calls **must** have PHPDoc comment directly above them.
+**Rule 1:** All `do_action()` and `apply_filters()` calls **must** have PHPDoc comment directly above them (on the line immediately before).
 
 ```php
 // ✅ CORRECT
@@ -472,6 +507,147 @@ do_action( 'wpforms_settings_saved', $settings );
  */
 
 do_action( 'wpforms_settings_saved', $settings );
+```
+
+**Rule 2:** Hook PHPDoc **must** have a short description ending with punctuation.
+
+```php
+// ✅ CORRECT
+/**
+ * Fires after settings are saved.
+ *
+ * @since 1.5.0
+ */
+do_action( 'wpforms_settings_saved' );
+
+// ❌ WRONG - Missing description
+/**
+ * @since 1.5.0
+ */
+do_action( 'wpforms_settings_saved' );
+
+// ❌ WRONG - Missing punctuation
+/**
+ * Fires after settings are saved
+ *
+ * @since 1.5.0
+ */
+do_action( 'wpforms_settings_saved' );
+```
+
+**Rule 3:** Hook PHPDoc **must** have `@since` tag with valid version.
+
+**Rule 4:** Hook PHPDoc **must** have `@param` tags matching the number of arguments passed to the hook (excluding the hook name itself).
+
+```php
+// ✅ CORRECT - 2 arguments, 2 @param tags
+/**
+ * Filters the settings data.
+ *
+ * @since 1.5.0
+ *
+ * @param array $settings The settings data.
+ * @param int   $user_id  The user ID.
+ */
+apply_filters( 'wpforms_settings', $settings, $user_id );
+
+// ❌ WRONG - 2 arguments but only 1 @param tag
+/**
+ * Filters the settings data.
+ *
+ * @since 1.5.0
+ *
+ * @param array $settings The settings data.
+ */
+apply_filters( 'wpforms_settings', $settings, $user_id );
+```
+
+**Rule 5:** Hook `@param` tags must be aligned (types, variable names, and descriptions should line up).
+
+```php
+// ✅ CORRECT - Properly aligned
+/**
+ * @param array  $settings  The settings data.
+ * @param int    $user_id   The user ID.
+ * @param string $context   The context string.
+ */
+
+// ❌ WRONG - Not aligned
+/**
+ * @param array $settings The settings data.
+ * @param int $user_id The user ID.
+ * @param string $context The context string.
+ */
+```
+
+**Rule 6:** Hook `@param` descriptions must end with punctuation.
+
+**Rule 7:** For deprecated hooks, use `do_action_deprecated()` or `apply_filters_deprecated()` and include `@deprecated` tag.
+
+```php
+// ✅ CORRECT
+/**
+ * Fires when user is processed.
+ *
+ * @since 1.0.0
+ * @deprecated 2.0.0 Use wpforms_user_process_v2 instead.
+ *
+ * @param int $user_id User ID.
+ */
+do_action_deprecated( 'wpforms_user_process', [ $user_id ], '2.0.0', 'wpforms_user_process_v2' );
+
+// ❌ WRONG - Using regular do_action for deprecated hook
+/**
+ * @since 1.0.0
+ * @deprecated 2.0.0
+ */
+do_action( 'wpforms_user_process', $user_id );
+
+// ❌ WRONG - Using do_action_deprecated without @deprecated tag
+/**
+ * @since 1.0.0
+ */
+do_action_deprecated( 'wpforms_user_process', [ $user_id ], '2.0.0' );
+```
+
+### Define Constants Documentation
+
+**Rule 1:** All `define()` calls **must** have PHPDoc comment directly above them.
+
+**Rule 2:** `define()` PHPDoc must have a short description ending with punctuation.
+
+**Rule 3:** `define()` PHPDoc must have `@since` tag with valid version.
+
+**Rule 4:** No empty line should appear after `@since` tag in `define()` PHPDoc (different from functions/classes).
+
+```php
+// ✅ CORRECT
+/**
+ * The plugin version number.
+ *
+ * @since 1.0.0
+ */
+define( 'WPFORMS_VERSION', '1.8.0' );
+
+// ❌ WRONG - Missing PHPDoc
+define( 'WPFORMS_VERSION', '1.8.0' );
+
+// ❌ WRONG - Missing punctuation
+/**
+ * The plugin version number
+ *
+ * @since 1.0.0
+ */
+define( 'WPFORMS_VERSION', '1.8.0' );
+
+// ❌ WRONG - Empty line after @since
+/**
+ * The plugin version number.
+ *
+ * @since 1.0.0
+ *
+ */
+define( 'WPFORMS_VERSION', '1.8.0' );
 ```
 
 ### Language Injection Comments
@@ -496,27 +672,56 @@ $sql = "SELECT * FROM users";
 
 ### Most Important Rules for Daily Coding
 
+#### Formatting
 1. **Empty lines:**
    - After function opening brace
    - Before return statement (unless it's the only statement)
    - After assignments (with exceptions)
    - Before/after switch statements
    - Before case statements after break
+   - No empty line before break in switch
 
 2. **No Yoda conditions** - Write naturally: `$var === 'value'`
 
 3. **Short array syntax** - Use `[]` not `array()`
 
-4. **@since tag required** on all functions/classes with valid version
+#### Documentation
+4. **@since tag required** on:
+   - All functions, classes, interfaces, traits
+   - Class properties
+   - Constants and `define()` calls
+   - All hooks (do_action/apply_filters)
 
-5. **Hooks in hooks() method** - Don't add hooks elsewhere in classes
+5. **PHPDoc descriptions must:**
+   - End with punctuation (`.`, `!`, `?`)
+   - Start on line after `/**` opening
+   - Not be on same line as `/**`
 
-6. **Text domain required** - Always specify domain in i18n functions
+6. **Hook documentation:**
+   - PHPDoc required directly above all hooks
+   - Must have description with punctuation
+   - Must have `@since` tag
+   - Must have `@param` tags matching argument count
+   - `@param` tags must be aligned
+   - Use `*_deprecated()` functions with `@deprecated` tag for old hooks
 
-7. **Use statements over fully qualified names**
+7. **Define constants:**
+   - Must have PHPDoc with description
+   - Must have `@since` tag
+   - No empty line after `@since`
 
-8. **Hook documentation required** - PHPDoc directly above all `do_action()`/`apply_filters()`
+#### Code Organization
+8. **Hooks in hooks() method** - All `add_action()`/`add_filter()` calls must be inside `hooks()` method in classes
 
-9. **Translator comments** - Must have colon, description, and punctuation
+9. **Text domain required** - Always specify domain in i18n functions
 
-10. **Complexity limits** - Keep functions under 6 complexity, 3 nesting levels
+10. **Use statements over fully qualified names** - Import classes at top
+
+11. **Hook names** - Should start with class name in snake_case
+
+#### Quality
+12. **Translator comments** - Must have colon, description, and punctuation
+
+13. **Complexity limits** - Keep functions under 6 complexity, 3 nesting levels
+
+14. **Tag spacing** - Only one space after `@param` and `@return`
