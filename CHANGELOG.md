@@ -1,6 +1,10 @@
 # Changelog
 All notable changes to this project will be documented in this file and formatted via [this recommendation](https://keepachangelog.com/).
 
+## [1.7.0] - 2025-11-11
+### Added
+- RULES.md containing phpcs rules descriptions in human/ai-readable format.
+
 ## [1.6.0] - 2025-10-01
 ### Fixed
 - Inability to redefine testVersion in users' projects.
