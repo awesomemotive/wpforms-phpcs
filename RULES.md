@@ -19,7 +19,7 @@ These WordPress PHPCS rules are **disabled** in WPForms projects:
 ### Spacing & Indentation
 - **`Generic.WhiteSpace.ScopeIndent`** - Less strict indenting allowed
 - **`Generic.Functions.FunctionCallArgumentSpacing`** - Less strict argument spacing
-- **`WordPress.WhiteSpace.PrecisionAlignment`** - Precision alignment not enforced
+- **`WordPress.WhiteSpace.PrecisionAlignment`** - Precision alignment isn't enforced
 
 ### File Naming (PSR-4 Support)
 - **`WordPress.Files.FileName.InvalidClassFileName`** - Allows PSR-4 class file naming
@@ -27,7 +27,7 @@ These WordPress PHPCS rules are **disabled** in WPForms projects:
 
 ### Comments
 - **`Squiz.Commenting.InlineComment.SpacingAfter`** - Less strict inline comment spacing
-- **`Squiz.Commenting.FileComment.*`** - File-level PHPDoc not required
+- **`Squiz.Commenting.FileComment.*`** - File-level PHPDoc isn't required
 
 ### Yoda Conditions
 - **`WordPress.PHP.YodaConditions.NotYoda`** - Yoda conditions are **NOT** required
@@ -535,7 +535,7 @@ do_action( 'wpforms_settings_saved' );
 do_action( 'wpforms_settings_saved' );
 ```
 
-**Rule 3:** Hook PHPDoc **must** have `@since` tag with valid version.
+**Rule 3:** Hook PHPDoc **must** have `@since` tag with a valid version.
 
 **Rule 4:** Hook PHPDoc **must** have `@param` tags matching the number of arguments passed to the hook (excluding the hook name itself).
 
@@ -616,7 +616,7 @@ do_action_deprecated( 'wpforms_user_process', [ $user_id ], '2.0.0' );
 
 **Rule 2:** `define()` PHPDoc must have a short description ending with punctuation.
 
-**Rule 3:** `define()` PHPDoc must have `@since` tag with valid version.
+**Rule 3:** `define()` PHPDoc must have `@since` tag with a valid version.
 
 **Rule 4:** No empty line should appear after `@since` tag in `define()` PHPDoc (different from functions/classes).
 
@@ -681,9 +681,9 @@ $sql = "SELECT * FROM users";
    - Before case statements after break
    - No empty line before break in switch
 
-2. **No Yoda conditions** - Write naturally: `$var === 'value'`
+2. **No Yoda conditions** — Write naturally: `$var === 'value'`
 
-3. **Short array syntax** - Use `[]` not `array()`
+3. **Short array syntax** — Use `[]` not `array()`
 
 #### Documentation
 4. **@since tag required** on:
@@ -694,8 +694,8 @@ $sql = "SELECT * FROM users";
 
 5. **PHPDoc descriptions must:**
    - End with punctuation (`.`, `!`, `?`)
-   - Start on line after `/**` opening
-   - Not be on same line as `/**`
+   - Start on the next line after `/**` opening
+   - Not be on the same line as `/**`
 
 6. **Hook documentation:**
    - PHPDoc required directly above all hooks
@@ -715,13 +715,13 @@ $sql = "SELECT * FROM users";
 
 9. **Text domain required** - Always specify domain in i18n functions
 
-10. **Use statements over fully qualified names** - Import classes at top
+10. **Use statements over fully qualified names** — Import classes at top
 
-11. **Hook names** - Should start with class name in snake_case
+11. **Hook names** - Should start with the class name in snake_case
 
 #### Quality
 12. **Translator comments** - Must have colon, description, and punctuation
 
-13. **Complexity limits** - Keep functions under 6 complexity, 3 nesting levels
+13. **Complexity limits** — Keep functions under 6 complexity, 3 nesting levels
 
-14. **Tag spacing** - Only one space after `@param` and `@return`
+14. **Tag spacing** — Only one space after `@param` and `@return`
